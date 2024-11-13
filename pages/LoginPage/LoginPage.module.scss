@@ -1,0 +1,54 @@
+.loginPage {
+  min-height: 100vh;
+  background-color: #edf1f5;
+  padding-top: 68px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &_formBlock {
+    background-color: white;
+    border-radius: 8px;
+    width: 30%;
+    padding: 50px;
+  }
+  &_title {
+    font-weight: 700;
+    color: gray;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 60px;
+  }
+  &_form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    height: 400px;
+    align-items: center;
+  }
+  &_submit {
+    padding: 10px 25px;
+    color: white;
+    background-color: rgb(77, 202, 255);
+    border-radius: 6px;
+    width: fit-content;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  &_links {
+    text-align: center;
+    font-size: 13px;
+    color: rgb(153, 153, 153);
+    font-weight: 500;
+    transition: 0.25s;
+    &:hover {
+      color: rgb(118, 212, 255);
+    }
+  }
+  &_forgot {
+  }
+  &_signup {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+  }
+}

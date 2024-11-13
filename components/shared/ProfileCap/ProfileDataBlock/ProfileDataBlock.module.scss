@@ -1,0 +1,24 @@
+.wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 230px;
+  display: flex;
+  align-items: flex-end;
+}
+.ProfileDataBlock {
+  &_img {
+    border-radius: 4px 4px 0 0;
+    display: inline-block;
+    max-height: 230px;
+    max-width: 160px;
+    width: 100%;
+  }
+  &_nickname {
+    // display: inline-block;
+    font-weight: 800;
+    color: rgb(243, 243, 243);
+    padding: 22px 25px;
+    font-size: 1.6rem;
+    text-shadow: 1px 1px 2px rgb(0, 0, 0);
+  }
+}

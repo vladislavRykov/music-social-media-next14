@@ -1,0 +1,32 @@
+.field {
+  &_wrapper {
+    padding-top: 5px;
+    position: relative;
+  }
+  &_label {
+    transition: 0.25s;
+    position: absolute;
+    opacity: 0;
+    bottom: 50%;
+    transform: translateX(-50%);
+    transform: scale(1.4);
+    left: 14px;
+    color: gray;
+  }
+
+  &_input {
+    width: 100%;
+    padding: 16px 14px;
+    background-color: #edf1f5;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  &_error {
+  }
+}
+.label_showed {
+  opacity: 1;
+  bottom: 100%;
+  left: 14px;
+  transform: scale(1);
+}

@@ -1,0 +1,23 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+.profileImg {
+  border-radius: 5px;
+  &_arrow {
+    color: #515470;
+    transition: 0.25s;
+
+    &:hover {
+      color: #75788f;
+    }
+  }
+  &_wrapper {
+    position: relative;
+  }
+}
+
+.profileMenu {
+}

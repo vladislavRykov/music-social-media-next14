@@ -1,0 +1,34 @@
+.authorization {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  &_login {
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    padding: 18px 16px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #bcbedc;
+    transition: 0.25s;
+    &:hover {
+      color: rgb(207, 209, 226);
+    }
+  }
+  &_signup {
+    text-decoration: none;
+    letter-spacing: 0.01em;
+    padding: 12px 18px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    transition: 0.25s;
+    background-color: rgb(72, 72, 255);
+    border-radius: 8px;
+    transition: 0.25s;
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0px 0px 7px 4px rgba(74, 74, 255, 0.37);
+    }
+  }
+}
