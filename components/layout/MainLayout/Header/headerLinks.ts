@@ -1,19 +1,21 @@
-export const links = [
+export const getLinks = (username: string|null) => [
   {
     title: 'Главная страница',
     href: '/home',
   },
   {
     title: 'Чат',
-    href: '/chat',
+    href: username && '/chat',
   },
   {
     title: 'Профиль',
-    href: '/user/SuperKiller12345',
+    // href: `/user/${username}`,
+    href: username &&`/user/${username}`,
   },
   {
-    title: 'Моя музыка',
-    href: '/user/SuperKiller12345/music-list',
+    title: 'Библиотека',
+    // href: `/user/${username}/library`,
+    href: username &&`/user/${username}/library`,
   },
   {
     title: 'Поиск',
@@ -27,7 +29,7 @@ export const unAuthorizedLinks = [
   },
 
   {
-    title: 'Музыка',
+    title: 'Поиск',
     href: '/browse',
   },
 ];

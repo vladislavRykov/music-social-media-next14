@@ -1,0 +1,19 @@
+.deafultItem {
+  color: #fafafa;
+  display: flex;
+  cursor:pointer;
+  gap: 20px;
+  align-items: center;
+  padding: 10px 16px;
+  transition: 0.25s;
+  background-color: #464a6b;
+  &:hover {
+    background-color: #616694;
+  }
+  &_icon {
+    color: #bdbdbd;
+    font-size: 22px;
+  }
+  &_title {
+  }
+}

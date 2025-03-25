@@ -1,0 +1,34 @@
+.defaultModal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.64);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transition: 0.25s;
+  align-items: center;
+  &_open {
+    opacity: 1;
+  }
+  &_container {
+    transition: 0.25s;
+    background-color: white;
+    position: relative;
+    border-radius: 4px;
+    padding: 10px;
+    padding-top: 43px;
+    transform: scale(0);
+    &_open {
+      transform: scale(1);
+    }
+  }
+  &_cross {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+  }
+}

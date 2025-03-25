@@ -1,0 +1,41 @@
+.homeHeader{
+    position: relative;
+    height: 400px;
+    &_text{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: #fafafa;
+        width: 40%;
+        font-size: 16px;
+        padding-left: 80px;
+        padding-bottom: 40px;
+        font-style: 'italic';
+        p{
+            margin-bottom: 20px;
+
+        }
+        h2{
+            font-weight: 700;
+            font-size: 88px;
+            letter-spacing: 2px;
+            word-spacing: 5px;
+            margin-bottom: 10px;
+        }
+
+    }
+    &_showEvents{
+        padding: 10px 20px;
+        border-radius: 10px;
+        color: black;
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        background-color: #fafafa;
+        border: 1px solid #fafafa;
+        &:hover{
+            background-color: transparent;
+            color: #fafafa;
+        }
+    }
+}

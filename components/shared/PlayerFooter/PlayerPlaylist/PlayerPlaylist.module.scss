@@ -1,0 +1,17 @@
+.playerPlaylist {
+  &_icon {
+    transition: 0.3s;
+  }
+  &_iconWrap {
+    cursor: pointer;
+    color: #fafafa;
+    padding: 10px;
+    font-size: 42px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &_opened {
+    transform: rotateZ(-180deg);
+  }
+}

@@ -1,0 +1,27 @@
+.option {
+  background-color: #51557d;
+  padding: 10px 24px;
+  display: flex;
+  gap: 10px;
+  font-size: 16px;
+  align-items: center;
+  transition: 0.2s;
+  color: #fafafa;
+  cursor: pointer;
+  &:hover {
+    background-color: #3b3e5c;
+  }
+  &_icon {
+    color: #7a80b4;
+  }
+  &_text {
+  }
+  &_label {
+    margin-bottom: 5px;
+  }
+  &_desc {
+    white-space: nowrap;
+    color: #7a80b4;
+    font-size: 14px;
+  }
+}

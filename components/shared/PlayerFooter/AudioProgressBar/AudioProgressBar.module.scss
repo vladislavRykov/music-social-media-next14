@@ -1,0 +1,81 @@
+.audioProgressBar {
+  position: absolute;
+  z-index: 15;
+  top: -10px;
+  left: 0;
+  right: 0;
+  &_mainLine {
+    width: 100%;
+    position: relative;
+  }
+  &_onHoverTimer {
+    pointer-events: none;
+    position: absolute;
+    z-index: 55;
+    font-size: 13px;
+    background-color: rgba(0, 0, 0, 0.449);
+    text-align: center;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  &_progressLine {
+    // transition: 1ms;
+    // top: 50%;
+    // transform: translateY(-50%);
+    top: 10px;
+    position: absolute;
+    z-index: 14;
+    left: 0;
+    height: 4px;
+    background-color: #3db4f2;
+    width: unset;
+    pointer-events: none;
+    &_thumbWrap {
+      position: relative;
+      height: 4px;
+    }
+    &_thumb {
+      pointer-events: none;
+      transition: 0.25s;
+      right: -6px;
+      top: 50%;
+      transform: translateY(-50%);
+      position: absolute;
+      background-color: #3db4f2;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+  }
+  &_input {
+    cursor: pointer;
+    display: block;
+    height: 24px;
+    background-color: transparent;
+    width: 100%;
+    appearance: none;
+    &::-webkit-slider-thumb {
+      background-color: #3db4f2;
+      appearance: none;
+      height: 1px;
+      width: 1px;
+      opacity: 0;
+    }
+    &_line {
+      top: 10px;
+      z-index: 12;
+      position: absolute;
+      left: 0;
+      height: 4px;
+      background-color: #878888;
+      width: 100%;
+      pointer-events: none;
+    }
+  }
+}
+.input_active {
+  width: 18px;
+  height: 18px;
+  right: -9px;
+}

@@ -22,3 +22,9 @@
 .active_link {
   text-decoration: underline;
 }
+.loading_link{
+  pointer-events: none;
+  color: #717183;
+  &:hover {
+  }
+}

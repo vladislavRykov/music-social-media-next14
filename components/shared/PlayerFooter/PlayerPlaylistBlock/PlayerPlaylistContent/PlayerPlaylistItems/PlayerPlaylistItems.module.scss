@@ -1,0 +1,23 @@
+.playerPlaylistItems {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  overflow: auto;
+  &::-webkit-scrollbar-track {
+    background: #2b2d42;
+    width: 24px;
+  }
+  &::-webkit-scrollbar {
+    width: 24px; /* Ширина скроллбара */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 8px solid #2b2d42;
+    background-color: #1f202f; /* Цвет ползунка */
+    border-radius: 25px; /* Радиус скругления */
+  }
+}
+.dragClass {
+  background-color: white;
+  opacity: 1;
+}

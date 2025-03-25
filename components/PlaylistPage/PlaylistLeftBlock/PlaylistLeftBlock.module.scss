@@ -1,0 +1,51 @@
+.playlistLeftBlock {
+  position: fixed;
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 550px;
+  padding-top: 118px;
+  padding-left: 200px;
+  z-index: 10;
+  &_infoBlock {
+    text-align: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  &_imgBlock {
+    position: relative;
+  }
+
+  &_playlistImg {
+    border-radius: 5px;
+  }
+ 
+  &_title {
+    color: #fafafa;
+    font-size: 20px;
+  }
+  &_author {
+    display: flex;
+    gap: 10px;
+    color: #fafafa;
+    justify-content: center;
+    align-items: center;
+  }
+  &_avatar {
+    border-radius: 50%;
+  }
+  &_authorName {
+    font-size: 13px;
+    color: #fafafa;
+  }
+  &_info {
+    color: #c6c6c6;
+    line-height: 18px;
+  }
+  &_desc {
+    color: #c2c2c275;
+  }
+}

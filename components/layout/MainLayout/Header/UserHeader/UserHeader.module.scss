@@ -1,0 +1,16 @@
+.header {
+  height: 68px;
+  background-color: #2b2d42;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  &_capPage {
+    background-color: #2b2d428e;
+  }
+}
+
+.searchAndProfile {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

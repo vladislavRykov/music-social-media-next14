@@ -1,0 +1,24 @@
+.emojiPickerBlock{
+    position: relative;
+    
+    &_emojiBlock{
+        position: absolute;
+        bottom: 100%;
+        left:0;
+        
+    }
+    &_emojiIcon{
+        transition: 0.25s;
+        color: gray;
+        &:hover{
+        color: #3DB4F2;
+        }
+    }
+    &_emojione{
+        img{
+            width: 1.5rem;
+            height: 1.5rem;
+
+        }
+    }
+}

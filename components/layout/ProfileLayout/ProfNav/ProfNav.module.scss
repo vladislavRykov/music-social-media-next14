@@ -1,0 +1,25 @@
+.profnav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 30px;
+  background-color: var(--secondary-bg-color);
+  color: var(--secondary-text-color);
+  &_items {
+    display: flex;
+    justify-content: space-between;
+    gap: 66px;
+    align-items: center;
+  }
+  &_item {
+    // color: rgb(111, 105, 105);
+    color: var(--secondary-text-color);
+    transition: 0.25s;
+    &:hover {
+      color: var(--profile-text-color);
+    }
+  }
+}
+.selectedLink {
+  color: var(--profile-text-color);
+}

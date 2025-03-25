@@ -1,0 +1,18 @@
+.playlistItemBtns {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 200px;
+  justify-content: flex-end;
+  &_like {
+    font-size: 25px;
+    color: #fafafa;
+  }
+  &_dislike {
+    color: #fafafa;
+    font-size: 25px;
+  }
+  &_popup {
+    margin-right: 20px;
+  }
+}

@@ -1,0 +1,41 @@
+.postCreatePage{
+    padding-top: 68px;
+    min-height: 100vh;
+    width: 40%;
+    margin: 0 auto;
+    background-color: var(--secondary-bg-color);
+    &_title{
+        position: relative;
+        padding: 20px 0px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 20px;
+        color: var(--third-text-color);
+    }
+    &_form{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    &_back{
+        font-size: 14px;
+        font-weight: 400;
+        background-color: var(--profile-text-color);
+        border-radius: 5px;
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        gap: 5px;
+        align-items: center;
+        padding: 5px 10px;
+        color: var(--secondary-bg-color);
+        cursor: pointer;
+        transition: 0.25s;
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+}

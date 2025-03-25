@@ -1,0 +1,32 @@
+.aboutMe {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  &_textarea {
+    width: 100%;
+    background-color: var(--main-bg-color);
+    color: var(--main-text-color);
+    resize: vertical;
+    font-size: 14px;
+    padding: 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    &::placeholder {
+      color: var(--secondary-text-color);
+    }
+  }
+
+  &_btn {
+    width: 130px;
+    padding: 8px 10px;
+    font-size: 13px;
+    transition: 0.25s;
+    color: white;
+    border-radius: 5px;
+    background-color: rgb(81, 226, 255);
+    &:hover {
+      box-shadow: 0px 0px 5px 2px rgb(216, 216, 216);
+    }
+  }
+}

@@ -1,0 +1,21 @@
+.chatUserItem{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 10px;
+    color: var(--secondary-text-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.25s;
+    background-color: transparent;
+    &:hover {
+        background-color: var(--secondary-bg-color);
+        box-shadow: 0px 0px 15px 3px var(--secondary-bg-shadow-color);
+      }
+    &_ava{
+        border-radius: 50%;
+    }
+    &_username{
+
+    }
+}

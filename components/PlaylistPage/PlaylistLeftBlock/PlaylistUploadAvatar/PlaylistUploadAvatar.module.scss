@@ -1,0 +1,28 @@
+.playlistUploadAvatar{
+    position: absolute;
+    bottom: 6%;
+    right: 6%;
+    &_uploadImg{
+        cursor: pointer;
+        font-size: 20px;
+        background-color: #fafafa;
+        border-radius: 50%;
+        padding: 10px;
+        display: flex;
+        color: black;
+        justify-content: center;
+        align-items: center;
+        transition: .25s;
+        &:hover{
+          background-color: #cbcbcb;
+        }
+        &:active{
+            background-color: #999999;
+          
+        }
+        
+    }
+    &_input{
+        display: none;
+    }
+}

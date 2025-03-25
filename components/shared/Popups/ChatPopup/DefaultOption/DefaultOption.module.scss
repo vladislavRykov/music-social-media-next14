@@ -1,0 +1,14 @@
+.defaultOption{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 5px 8px;
+    cursor: pointer;
+    &_icon{
+        color: gray;
+    }
+    &_title{
+        color: black;
+    }
+
+}

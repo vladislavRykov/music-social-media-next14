@@ -1,0 +1,90 @@
+.playerPlaylistItem {
+  transition: 0.25s;
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid #474a69;
+  align-items: center;
+  background-color: #2b2d42;
+  justify-content: space-between;
+  padding: 2px 8px;
+  &:hover .playerPlaylistItem_timer {
+    display: none;
+  }
+  &:hover .playerPlaylistItem_settings {
+    display: block;
+  }
+  &_textAndImg {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  &_imageBlock {
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 5px;
+    position: relative;
+    &:hover .linearMusicItem_overlay {
+      opacity: 1;
+    }
+  }
+  &_image {
+    border-radius: 5px;
+  }
+  &_overlay {
+    opacity: 0;
+    transition: 0.1s;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 30;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.505);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &_shown {
+      opacity: 1;
+    }
+  }
+  &_play {
+    color: white;
+  }
+  &_textBlock {
+    padding: 10px 0px;
+    // width: 100%;
+  }
+  &_title {
+    color: #fafafa;
+    margin-bottom: 10px;
+  }
+  &_timer {
+    display: block;
+  }
+  &_settings {
+    display: none;
+  }
+  &_rightBlock {
+    position: relative;
+    color: #8f8f8f;
+    width: 70px;
+    height: 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  &_authorAndViews {
+    display: flex;
+    gap: 50px;
+    color: #858585;
+  }
+  &_author {
+    color: #8f8f8f;
+  }
+  &_viewsCount {
+  }
+  &_selected {
+    background-color: #454868;
+  }
+}

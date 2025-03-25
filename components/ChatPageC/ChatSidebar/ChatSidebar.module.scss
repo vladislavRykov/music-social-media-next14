@@ -1,0 +1,41 @@
+.chatSidebar {
+  position: relative;
+  width: 360px;
+  height: 100%;
+  background-color: var(--main-bg-color);
+  resize: horizontal;
+  // overflow:auto; /* something other than visible */
+  padding-right: 3px;
+  overflow-y: auto;
+  min-width: 260px;
+  max-width: 560px;
+  &::-webkit-resizer {
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    width: 10px;
+  }
+  &::-webkit-scrollbar {
+    width: 10px; /* Ширина скроллбара */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 2px solid transparent;
+    background-color: #1f202f; /* Цвет ползунка */
+    border-radius: 25px; /* Радиус скругления */
+  }
+  &_main {
+    height: calc(100% - 60px);
+    position: relative;
+  }
+  &_resize {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 3px;
+    cursor: ew-resize;
+    background-color: transparent;
+  }
+}

@@ -1,0 +1,55 @@
+.linearMusicItem {
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid #adc0d2;
+
+  &_imageBlock {
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: relative;
+    &:hover .linearMusicItem_overlay {
+      opacity: 1;
+    }
+  }
+  &_image {
+    border-radius: 5px;
+  }
+  &_overlay {
+    opacity: 0;
+    transition: 0.1s;
+    border-radius: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.505);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &_shown {
+      opacity: 1;
+    }
+  }
+  &_play {
+    color: white;
+  }
+  &_infoBlock {
+    padding: 10px 0px;
+  }
+  &_title {
+    color: var(--main-text-color);
+    margin-bottom: 10px;
+  }
+  &_authorAndViews {
+    display: flex;
+    gap: 50px;
+    color: var(--secondary-text-color)
+  }
+  &_author {
+  }
+  &_viewsCount {
+  }
+}

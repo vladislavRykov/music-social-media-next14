@@ -9,7 +9,7 @@
     opacity: 0;
     bottom: 50%;
     transform: translateX(-50%);
-    transform: scale(1.4);
+    transform: scale(1.2);
     left: 14px;
     color: gray;
   }
@@ -22,6 +22,9 @@
     font-size: 14px;
   }
   &_error {
+    padding: 14px 5px;
+    font-size: 13px;
+    color: red;
   }
 }
 .label_showed {

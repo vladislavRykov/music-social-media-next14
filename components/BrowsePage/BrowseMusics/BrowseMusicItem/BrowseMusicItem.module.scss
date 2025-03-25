@@ -1,0 +1,71 @@
+.browseMusicItem {
+  cursor: pointer;
+  width: 200px;
+  display: block;
+  &_image {
+    border-radius: 5px;
+  }
+  &_title {
+    color: var(--main-text-color);
+    margin-bottom: 10px;
+  }
+  &_author {
+    color: var(--secondary-text-color);
+    // word-break: break-all;
+    // word-wrap: break-word;
+  }
+  &_imageBlock {
+    border-radius: 5px;
+    margin-bottom: 10px;
+    position: relative;
+    &:hover .browseMusicItem_play {
+      transform: scale(1);
+    }
+    &:hover .browseMusicItem_play:hover {
+      transform: scale(1.3);
+    }
+    &:hover .browseMusicItem_overlay {
+      opacity: 1;
+    }
+  }
+  &_overlay {
+    opacity: 0;
+    transition: 0.1s;
+    border-radius: 5px;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    // width: 100%;
+    // box-shadow: 0px 0px 50px 30px rgba(0, 0, 0, 0.505);
+    background-color: rgba(0, 0, 0, 0.449);
+    &_shown {
+      opacity: 1;
+    }
+    &:hover {
+      opacity: 1;
+    }
+  }
+  &_play {
+    transform: scale(0);
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.514);
+    transition: 0.25s;
+    &:hover {
+      background-color: black;
+      transform: scale(1.3);
+    }
+    &_shown {
+      transform: scale(1);
+    }
+  }
+}

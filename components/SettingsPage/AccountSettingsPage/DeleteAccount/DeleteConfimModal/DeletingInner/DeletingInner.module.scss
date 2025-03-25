@@ -1,0 +1,40 @@
+.deletingInner {
+  &_container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+  }
+  &_text {
+    margin-bottom: 10px;
+    color: #3c5876;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+  }
+  &_input {
+    padding: 10px;
+    background: #edf1f5;
+    border-radius: 4px;
+    color: #5c728a;
+    &::placeholder {
+      color: #c0c4cf;
+    }
+  }
+  &_btn {
+    width: fit-content;
+    background-color: red;
+    color: white;
+    border-radius: 4px;
+    align-self: center;
+    padding: 10px 18px;
+    transition: 0.25s;
+    &:disabled {
+      background-color: rgb(157, 157, 157);
+      color: rgb(46, 45, 45);
+    }
+  }
+}

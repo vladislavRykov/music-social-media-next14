@@ -2,6 +2,12 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import MainLayout from '@/components/layout/MainLayout/MainLayout';
+import StoreProvider from './StoreProvider';
+import NextTopLoader from 'nextjs-toploader';
+import { ThemeProvider } from 'next-themes'
+import {Roboto} from 'next/font/google'
+import {TextColorProvider} from '@/context/TextColorProvider'
+
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -27,10 +33,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <MainLayout>
-          {/* <div style={{ backgroundColor: '#EDF1F5' }}>{children}</div> */}
-          {children}
-        </MainLayout>
+        <NextTopLoader showSpinner={false} />
+        <StoreProvider>
+        <ThemeProvider>
+          <TextColorProvider>
+
+          <MainLayout>
+            {/* <div style={{ backgroundColor: '#EDF1F5' }}>{children}</div> */}
+            {children}
+          </MainLayout>
+
+          </TextColorProvider>
+
+        </ThemeProvider>
+        </StoreProvider>
       </body>
     </html>
   );

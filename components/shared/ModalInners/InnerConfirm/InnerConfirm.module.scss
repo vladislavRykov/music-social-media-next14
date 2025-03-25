@@ -1,0 +1,41 @@
+.innerConfirm {
+  width: 100%;
+  text-align: center;
+  &_title {
+    font-size: 16px;
+  }
+  &_desc {
+    margin-top: 10px;
+  }
+  &_text {
+    margin-bottom: 25px;
+  }
+  &_buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+  }
+  &_accept {
+    background-color: white;
+    color: rgb(104, 104, 255);
+    border: 1px solid rgb(104, 104, 255);
+    padding: 10px 16px;
+    transition: 0.25s;
+    &:hover {
+      border: 1px solid transparent;
+    }
+  }
+
+  &_decline {
+    background-color: rgb(58, 58, 196);
+    border: 1px solid transparent;
+    color: white;
+    padding: 10px 16px;
+    transition: 0.25s;
+    &:hover {
+      background-color: white;
+      color: rgb(58, 58, 196);
+    }
+  }
+}

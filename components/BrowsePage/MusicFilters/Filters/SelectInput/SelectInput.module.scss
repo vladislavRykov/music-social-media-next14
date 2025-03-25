@@ -1,0 +1,140 @@
+.filterInput {
+  width: 100px;
+  &_input {
+    width: 100%;
+    background-color: var(--secondary-bg-color);
+    color: var(--main-text-color);
+    &::placeholder {
+      color: var(--secondary-text-color);
+      font-weight: 700;
+    }
+    &_wrapper {
+      height: 42px;
+      cursor: pointer;
+      position: relative;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0px 1px 15px 3px var(--secondary-bg-shadow-color);
+      border-radius: 5px;
+      padding: 10px 18px;
+      background-color: var(--secondary-bg-color);
+    }
+  }
+  &_iconAndInput {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  &_arrow {
+    color: var(--secondary-text-color);
+    transition: 0.25s;
+    &:hover {
+      color: #627688;
+    }
+  }
+  &_cross {
+    color: var(--secondary-text-color);
+    transition: 0.25s;
+    &:hover {
+      color: #627688;
+    }
+  }
+  &_icon {
+    color: var(--secondary-text-color);
+  }
+  &_title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--third-text-color);
+    margin-bottom: 10px;
+  }
+  &_selectBlock {
+    box-shadow: 0px 1px 15px 3px var(--secondary-bg-shadow-color);
+    position: absolute;
+    z-index: 40;
+    top: 125%;
+    width: 100%;
+    left: 0;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: var(--secondary-bg-color);
+  }
+  &_option {
+    display: flex;
+    align-items: center;
+    word-wrap: break-word;
+    word-break: break-all;
+    gap: 10%;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    color: var(--secondary-text-color);
+    padding: 8px 12px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.25s;
+    border-radius: 5px;
+    & span {
+      width: 70%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &:hover {
+      color: #42bfef;
+      background-color: var(--main-bg-color);
+    }
+    // &_selected {
+    //   background-color: red;
+    // }
+  }
+  &_selectedMark {
+    color: #6fc8ff;
+    transform: scale(1.5);
+    &_wrapper {
+      width: 20%;
+    }
+  }
+  &_lastSelectedGendre {
+    background-color:  #6fc8ff;
+    color: white;
+    padding: 10px 12px;
+    width: 60px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  &_selectedGenresCount {
+    border-radius: 5px;
+    width: 40px;
+    padding: 10px 12px;
+    border-radius: 5px;
+    background-color:  #6fc8ff;
+    cursor: pointer;
+  }
+  &_selectedGenres {
+    color: var(--secondary-text-color);
+    font-size: 11px;
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    left: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &_selectedGenre {
+    color: var(--secondary-text-color);
+    &_selected{
+      color: #3db4f3;
+
+    }
+  }
+}

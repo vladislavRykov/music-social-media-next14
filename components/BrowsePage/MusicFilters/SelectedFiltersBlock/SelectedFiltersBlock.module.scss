@@ -1,0 +1,36 @@
+.selectedFiltersBlock {
+  padding: 30px 0px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 13px;
+  &:hover .selectedFiltersBlock_tagClearAll {
+    display: flex;
+  }
+  &_tag {
+    cursor: pointer;
+    background-color: #3db4f2;
+    color: #fffffe;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    &:hover .selectedFiltersBlock_close {
+      display: block;
+    }
+  }
+  &_close {
+    display: none;
+  }
+  &_tagClearAll {
+    cursor: pointer;
+    display: none;
+    background-color: #abc2cf;
+    color: #fffffe;
+    padding: 5px 10px;
+    border-radius: 5px;
+    gap: 6px;
+    align-items: center;
+  }
+}

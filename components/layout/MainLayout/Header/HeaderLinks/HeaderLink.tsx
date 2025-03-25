@@ -7,16 +7,15 @@ import { usePathname } from 'next/navigation';
 
 interface HeaderLinkProps {
   title: string;
-  href: string;
+  href: string|null;
 }
 
 const HeaderLink: React.FC<HeaderLinkProps> = ({ href, title }) => {
   const pathname = usePathname();
   const isLinkActive = pathname === href;
-  console.log(pathname, href);
   return (
     <div className={s.wrapper}>
-      <Link className={cn(s.link, { [s.active_link]: isLinkActive })} href={href}>
+      <Link  className={cn(s.link, { [s.active_link]: isLinkActive,[s.loading_link]: !href})} href={href||''}>
         {title}
       </Link>
     </div>

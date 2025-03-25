@@ -1,0 +1,93 @@
+.messageBlock{
+    padding: 10px 20px;
+    // min-height: 80px;
+    &_content{
+        height: 100%;
+        width: 70%;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        // justify-content: center;
+        gap: 10px;
+    }
+    &_inputWrapper{
+
+        width: 100%;
+        background-color: #fafafa;
+        padding: 22px 20px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        position: relative;
+    }
+  
+    &_textarea{
+        color: black;
+        background-color: #fafafa;
+        resize: none;
+        transition: .5s;
+        width: 100%;
+        
+    }
+    &_defBtn{
+        cursor: pointer;
+        background-color: #fafafa;
+        padding: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover{
+            background-color: #3DB4F2;
+        }
+        &:hover .messageBlock_iconBtn{
+            color: #fafafa;
+        }
+    }
+    &_iconBtn{
+        color: #3DB4F2;
+        transform: scale(0);
+        animation: animateBtnIcon 0.25s ease  forwards;
+    }
+    &_sendIcon{
+        position: relative;
+        left: 3px;
+    }
+    &_recordingTimer{
+position: absolute;
+right: 10px;
+top: 50%;
+transform: translateY(-50%);
+color: black;
+display: flex;
+gap: 10px;
+    }
+    &_redDot{
+       background-color: red;
+       border-radius: 50%; 
+       height: 12px;
+       width: 12px;
+       opacity: 1;
+       animation: animatedDot 1.5s ease-out infinite;
+    }
+  
+}
+@keyframes animateBtnIcon {
+    from{
+        transform: scale(0);
+    }
+    to{
+        transform: scale(1);
+
+    }
+}
+@keyframes animatedDot {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0.3;
+
+    }
+}

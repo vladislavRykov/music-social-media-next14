@@ -1,0 +1,48 @@
+.innerPlaylistActions {
+  padding: 20px 0px;
+  width: 400px;
+  background-color: #3b3e5c;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  &_topBlock {
+    color: #fafafa;
+    font-size: 20px;
+    font-weight: 700;
+    border: 1px solid #4a4e72;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  &_closeIcon {
+    color: #fafafa;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  &_createNewPlaylist {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    background-color: #fafafa;
+    transition: bottom 0.5s, background-color 0.25s;
+    padding: 10px 16px;
+    border-radius: 20px;
+    font-weight: 700;
+    color: black;
+    bottom: -10%;
+    right: 6%;
+    &:hover {
+      background-color: #cccccc;
+    }
+  }
+  &_createIcon {
+    font-size: 18px;
+  }
+  &_btnAnimate {
+    bottom: 6%;
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './Profile.module.scss';
-import ProfileCap from '@/components/shared/ProfileCap/ProfileCap';
+import ProfileCap from '@/components/layout/ProfileLayout/ProfileCap/ProfileCap';
 
 const Profile = () => {
   return (

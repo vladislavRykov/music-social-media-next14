@@ -1,0 +1,36 @@
+.playlistItemsBlock {
+  margin-left: 570px;
+  padding-top: 50px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  &_items {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px;
+  }
+}
+.emptyPlaylist {
+  color: #fafafa;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 600;
+  align-items: center;
+  justify-content: center;
+  &_title {
+  }
+  &_link {
+    background-color: #fafafa;
+    padding: 10px 12px;
+    color: black;
+    border: 10px;
+    transition: 0.25s;
+    &:hover {
+      background-color: #fafafa8e;
+    }
+  }
+}

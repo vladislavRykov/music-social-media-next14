@@ -1,0 +1,29 @@
+.settingNavBar {
+  width: 25%;
+  min-width: 120px;
+  &_container {
+    color: var(--main-text-color);
+  }
+  &_title {
+    margin-bottom: 8px;
+    display: block;
+    font-size: 13px;
+  }
+  &_links {
+    padding-left: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  &_link {
+    padding: 8px 10px;
+    background-color: transparent;
+    border-radius: 5px;
+    color: var(--main-text-color);
+    transition: 0.25s;
+  }
+}
+.active_link {
+  background-color: var(--secondary-bg-color);
+  font-weight: 600;
+}

@@ -1,0 +1,23 @@
+.innerPlaylistItem {
+  transition: 0.1s;
+  display: flex;
+  padding: 5px 20px;
+  gap: 15px;
+  cursor: pointer;
+
+  background-color: #3b3e5c;
+  &:hover {
+    background-color: #4e5178;
+  }
+  &_image {
+  }
+  &_infoBlock {
+    color: #fafafa;
+  }
+  &_title {
+    margin-bottom: 15px;
+  }
+  &_trackCount {
+    color: #989898;
+  }
+}

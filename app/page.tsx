@@ -5,9 +5,9 @@ import { useEffect } from 'react';
 
 const page = () => {
   const router = useRouter();
-  useEffect(() => {
-    router.push('/chat');
-  }, []);
+  // useEffect(() => {
+  //   router.push('/chat');
+  // }, []);
   return <div>page</div>;
 };
 

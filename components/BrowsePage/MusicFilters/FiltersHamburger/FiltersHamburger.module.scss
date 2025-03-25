@@ -1,0 +1,14 @@
+.filtersHamburger {
+  background-color: var(--secondary-bg-color);
+  border-radius: 5px;
+  color: var(--secondary-text-color);
+  transition: 0.5s;
+  padding: 10px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    color: #42bfef;
+  }
+}

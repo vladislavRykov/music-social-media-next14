@@ -1,0 +1,17 @@
+.playlistLeftBlockControls {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  justify-content: center;
+  &_play {
+    padding: 25px;
+    border-radius: 50%;
+    color: black;
+    background-color: #fafafa;
+    cursor: pointer;
+  }
+  &_btn {
+    background-color: rgb(66, 66, 66);
+    border-radius: 50%;
+  }
+}

@@ -1,0 +1,27 @@
+.innerPlaylistItems {
+  padding: 20px 0px;
+  color: #fafafa;
+  border: 1px solid #4a4e72;
+  border-top-width: 0px;
+  &_title {
+    padding: 0px 20px;
+    margin-bottom: 20px;
+  }
+  &_playlists {
+    overflow: auto;
+    max-height: 300px;
+    &::-webkit-scrollbar-track {
+      background: #3b3e5c;
+      width: 24px;
+    }
+    &::-webkit-scrollbar {
+      width: 24px; /* Ширина скроллбара */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border: 8px solid #3b3e5c;
+      background-color: rgb(33, 34, 50); /* Цвет ползунка */
+      border-radius: 25px; /* Радиус скругления */
+    }
+  }
+}

@@ -1,0 +1,32 @@
+.browseMusics {
+  &_settings {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  &_selectTypeBtn {
+    background: var(--main-bg-color);
+    color: var(--secondary-text-color);
+    transition: 0.25s;
+    &:hover {
+      color: #6e7e8b;
+    }
+    &_selected {
+      color: var(--main-text-color);
+    }
+  }
+  &_selectItemsType {
+    display: flex;
+    gap: 10px;
+  }
+  &_blockMusics {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  &_linearMusics {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+  }
+}

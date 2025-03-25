@@ -1,8 +1,9 @@
 import MainLayout from '@/components/layout/MainLayout/MainLayout';
-import ProfileCap from '@/components/shared/ProfileCap/ProfileCap';
-import ProfNav from '@/components/shared/ProfNav/ProfNav';
+import ProfileCap from '@/components/layout/ProfileLayout/ProfileCap/ProfileCap';
+import ProfileLayout from '@/components/layout/ProfileLayout/ProfileLayout';
+import ProfNav from '@/components/layout/ProfileLayout/ProfNav/ProfNav';
 // import { Metadata } from 'next';
-import React from 'react';
+import React, { Suspense } from 'react';
 
 // export const metadata: Metadata = {
 //   title: 'Create Next App',
@@ -14,12 +15,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <>
-      <ProfileCap />
-      <ProfNav />
-      {/* <div style={{ backgroundColor: '#EDF1F5' }}>{children}</div> */}
-      {children}
-    </>
-  );
+  return <ProfileLayout>{children}</ProfileLayout>;
 }

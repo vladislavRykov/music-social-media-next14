@@ -1,0 +1,15 @@
+.playerControls {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 10px;
+
+  &_control {
+    font-size: 25px;
+    cursor: pointer;
+    color: white;
+  }
+  &_centerControl {
+    font-size: 40px;
+  }
+}

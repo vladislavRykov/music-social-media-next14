@@ -1,5 +1,8 @@
 .chat {
   padding-top: 68px;
-  min-height: 100vh;
-  background-color: #edf1f5;
+  max-height: 100vh;
+}
+.flex{
+display: flex;
+height: calc(100vh - 68px);
 }

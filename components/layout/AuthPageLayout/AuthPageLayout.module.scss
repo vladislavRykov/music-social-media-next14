@@ -1,0 +1,22 @@
+.authPage {
+  min-height: 100vh;
+  background-color: #edf1f5;
+  padding: 136px 0px 68px 0px;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  &_formBlock {
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 8px;
+    width: 30%;
+    padding: 50px;
+  }
+  &_title {
+    font-weight: 700;
+    color: gray;
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 60px;
+  }
+}

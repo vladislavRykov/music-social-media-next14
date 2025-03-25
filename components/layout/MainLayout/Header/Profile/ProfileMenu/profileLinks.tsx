@@ -2,10 +2,10 @@ import { FaUser } from 'react-icons/fa';
 import { IoIosNotifications } from 'react-icons/io';
 import { IoMdSettings } from 'react-icons/io';
 
-export const menuLinks = [
+export const getMenuLinks = (userName: string) => [
   {
     title: 'Профиль',
-    href: '/user/SuperKiller12345',
+    href: `/user/${userName}`,
     Icon: FaUser,
   },
   {

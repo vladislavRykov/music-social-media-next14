@@ -1,0 +1,60 @@
+.searchInput {
+  width: 100px;
+  &_input {
+    width: 100%;
+    background-color: var(--secondary-bg-color);
+    color: var(--main-text-color);
+    &::placeholder {
+      color: var(--secondary-text-color);
+      font-weight: 700;
+    }
+    &_wrapper {
+      height: 42px;
+      font-size: 14px;
+      position: relative;
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      justify-content: space-between;
+      // box-shadow: 0px 1px 15px 3px #2b2d42;
+      box-shadow: 0px 1px 15px 3px var(--secondary-bg-shadow-color);
+      border-radius: 5px;
+      padding: 10px 18px;
+      background-color: var(--secondary-bg-color);
+    }
+  }
+  &_iconAndInput {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  &_arrow {
+    color: #c9d7e3;
+    transition: 0.25s;
+    &:hover {
+      color: #627688;
+    }
+  }
+  &_cross {
+    color: var(--secondary-text-color);
+    transition: 0.25s;
+    &:hover {
+      color: #627688;
+    }
+  }
+  &_icon {
+    color: var(--secondary-text-color);
+  }
+  &_title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--third-text-color);
+    margin-bottom: 10px;
+  }
+
+  &_selectedMark {
+    font-size: 13px;
+    color: #6fc8ff;
+    transform: scale(1.5);
+  }
+}

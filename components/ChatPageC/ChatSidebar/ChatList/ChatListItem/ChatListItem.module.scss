@@ -1,0 +1,72 @@
+.chatListItem {
+  position: relative;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s;
+  white-space: nowrap;
+  overflow: hidden;
+  // background-color: #40436344;
+  // background-color: #404363;
+  background-color: transparent;
+  &:hover {
+    background-color: var(--secondary-bg-color);
+    box-shadow: 0px 0px 15px 3px var(--secondary-bg-shadow-color);
+  }
+  &_selected{
+    background-color: #3DB4F2;
+    color: #fafafa;
+    &:hover {
+      background-color: #3DB4F2; // Сохраняем текущий цвет фона
+    }
+  }
+  &
+  &_img {
+    border-radius: 50%;
+  }
+  &_rightBlock {
+    flex-grow: 1;
+    overflow: hidden;
+  }
+
+  &_nameAndTime {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  &_chatname {
+    font-size: 16px;
+    color: var(--third-text-color);
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
+  &_time {
+    font-size: 12px;
+    color: var(--secondary-text-color);
+  }
+  &_lastMessageAndUnread {
+    color: var(--secondary-text-color);
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+  }
+  &_lastMessage {
+    flex-grow: 1;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-right: 5px;
+  }
+  &_unRead {
+    padding: 5px;
+    border-radius: 50%;
+    background-color: var(--secondary-bg-color);
+    color: var(--main-text-color);
+  }
+}
+
+

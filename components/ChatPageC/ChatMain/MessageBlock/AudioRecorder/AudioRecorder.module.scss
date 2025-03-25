@@ -1,0 +1,70 @@
+.audioRecorder{
+
+    &_btn{
+        cursor: pointer;
+        padding: 20px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &_recordBtn{
+        background-color: #fafafa;
+        &:hover{
+            background-color: #3DB4F2;
+        }
+        &:hover .audioRecorder_recordIcon{
+            color: #fafafa;
+        }
+    }
+    &_recordIcon{
+        color: #3DB4F2;
+        transform: scale(0);
+        animation: animateBtnIcon 0.25s ease  forwards;
+    }
+    &_sendIcon{
+        color: #3DB4F2;
+        transform: scale(0);
+        animation: animateBtnIcon 0.25s ease  forwards;
+        position: relative;
+        left: 3px;
+    }
+    &_cancelIcon{
+        color: red;
+        transform: scale(0);
+        animation: animateBtnIcon 0.25s ease  forwards;
+    }
+    &_sendBtn{
+        background-color: #fafafa;
+        &:hover{
+            background-color: #3DB4F2;
+        }
+        &:hover .audioRecorder_sendIcon{
+            color: #fafafa;
+        }
+    }
+    &_cancelBtn{
+        background-color: #fafafa;
+        color: red;
+        &:hover{
+            background-color: red;
+        }
+        &:hover .audioRecorder_cancelIcon{
+            color: #fafafa;
+        }
+    }
+    &_recordingBtns{
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
+@keyframes animateBtnIcon {
+    from{
+        transform: scale(0);
+    }
+    to{
+        transform: scale(1);
+
+    }
+}

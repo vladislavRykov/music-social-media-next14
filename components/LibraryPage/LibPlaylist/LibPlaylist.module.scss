@@ -1,0 +1,103 @@
+.libPlaylist {
+  cursor: pointer;
+  padding: 6px;
+  width: 162px;
+  border-radius: 4px;
+  transition: 0.25s;
+  &_play {
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+    transform: scale(0);
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.514);
+    &:hover {
+      background-color: black;
+    }
+    &_shown {
+      transform: scale(1);
+    }
+  }
+  &_settings{
+    display: none;
+    position: absolute;
+    top: 6%;
+    right: 6%;
+    
+  }
+  &_topShadow {
+    border-radius: 10px;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px 0px 40px 20px rgba(0, 0, 0, 0.586);
+  }
+  &_imgBlock {
+    display: block;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
+    margin-bottom: 7px;
+
+    &:hover .libPlaylist_topShadow {
+      opacity: 1;
+    }
+    &:hover .libPlaylist_play {
+      transform: scale(1);
+    }
+    &:hover .libPlaylist_settings {
+     display: block;
+    }
+    &:hover .libPlaylist_play:hover {
+      transform: scale(1.15);
+      transition: 0.25s;
+    }
+  }
+  &_img {
+    transition: 0.25s;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+  }
+  &_info {
+    font-weight: 400;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 100%;
+  }
+  &_title {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    line-clamp: 2;
+    font-size: 16px;
+    word-wrap: break-word;
+    word-break: break-all;
+    color: var(--third-text-color);
+    margin-bottom: 6px;
+    overflow: hidden;
+    line-height: 16px;
+    width: 100%;
+  }
+  &_author {
+    color: var(--secondary-text-color);
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    font-size: 14px;
+  }
+  &_trackCount{
+    color: var(--profile-text-color);
+
+  }
+}

@@ -1,0 +1,18 @@
+.postFilters{
+    padding: 20px 10px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 10px;
+    &_createNewPost{
+        padding: 10px;
+        background-color: var(--profile-text-color);
+        color: #fafafa;
+        border-radius: 5px;
+        transition: .25s;
+        opacity: 1;
+        &:hover{
+opacity: 0.8;
+        }
+    }   
+}

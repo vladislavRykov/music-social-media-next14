@@ -1,0 +1,91 @@
+.playerPlaylistMainImg {
+  padding: 40px;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  &_imgContainer {
+    cursor: pointer;
+    position: relative;
+    border-radius: 5px;
+
+    overflow: hidden;
+    &:hover .playerPlaylistMainImg_topOverlay {
+      opacity: 1;
+    }
+    img {
+      object-fit: fill;
+      background-color: #2b2d42;
+    }
+  }
+  &_topOverlay {
+    opacity: 0;
+    transition: 0.3s;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 14;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-shadow: 0px 0px 50px 60px #15161faf;
+    // box-shadow: 0px 0px 50px 60px rgba(0, 0, 0, 0.781);
+  }
+  &_controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &_icon {
+  }
+  &_play {
+    padding: 10px;
+    font-size: 30px;
+    color: #fafafa;
+    border-radius: 50%;
+    background-color: #464853b1;
+    animation-name: controlsAnimation;
+    animation-duration: 0.6s;
+    transform: scale(1);
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &_pause {
+    font-size: 30px;
+    padding: 10px;
+    color: #fafafa;
+    border-radius: 50%;
+    background-color: #4648536d;
+    animation-name: controlsAnimation;
+    animation-duration: 0.6s;
+    transform: scale(1);
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  &_loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+@keyframes controlsAnimation {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}

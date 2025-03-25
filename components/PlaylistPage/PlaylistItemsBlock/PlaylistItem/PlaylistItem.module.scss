@@ -1,0 +1,86 @@
+.playlistItem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  position: relative;
+  z-index: 2;
+  &:hover .playlistItem_duration {
+    display: none;
+  }
+  &:hover .playlistItem_controls {
+    display: block;
+  }
+  &_selectMode {
+    border-radius: 5px;
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    cursor: pointer;
+    &_selected {
+      background-color: #c8c8c83e;
+    }
+  }
+
+  &_imageBlock {
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 4px;
+    position: relative;
+    &:hover .linearMusicItem_overlay {
+      opacity: 1;
+    }
+  }
+  &_image {
+    border-radius: 4px;
+  }
+  &_overlay {
+    opacity: 0;
+    transition: 0.1s;
+    border-radius: 4px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.505);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &_shown {
+      opacity: 1;
+    }
+  }
+  &_play {
+    color: white;
+  }
+  &_infoBlock {
+    flex: 1;
+    padding: 10px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #c6c6c6;
+  }
+  &_songInfo {
+  }
+  &_title {
+    color: #fafafa;
+    margin-bottom: 10px;
+  }
+  &_authorAndViews {
+    display: flex;
+    gap: 50px;
+  }
+  &_author {
+  }
+  &_duration {
+  }
+  &_controls {
+    display: none;
+  }
+}
