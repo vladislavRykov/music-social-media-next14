@@ -20,3 +20,7 @@ previous: string|null;
 results: Event[];
 
 }
+export interface Location{
+  "slug":string,
+  "name":string
+}

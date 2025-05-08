@@ -46,6 +46,11 @@ const UserSchema = new Schema(
       type: String,
       required: false,
     },
+    location: {
+      type: String,
+      default: null,
+    
+    },
     verifyToken: String,
     verifyTokenExpiry: Number,
   },

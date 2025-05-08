@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 import { RootState } from '../store';
 
 export const selectLoading = (state: RootState) => state.userReducer.isLoading; // Селектор для всего объекта
+export const selectLocation = (state: RootState) => state.userReducer.location; // Селектор для всего объекта
 export const selectUser = (state: RootState) => state.userReducer.user; // Селектор для всего объекта
 
 export const userSelectedData = createSelector([selectLoading, selectUser], (isLoading, user) => ({
@@ -9,7 +10,7 @@ export const userSelectedData = createSelector([selectLoading, selectUser], (isL
   userAva: user?.avatar,
   userName: user?.username,
 }));
-export const selectUserProfileData = createSelector( selectUser, ( user) => ({
+export const selectUserProfileData = createSelector(selectUser, (user) => ({
   userAva: user?.avatar,
   userName: user?.username,
   userBanner: user?.banner,
@@ -19,3 +20,11 @@ export const selectEmailVerify = createSelector([selectLoading, selectUser], (is
   isLoading,
   userEmail: user?.email,
 }));
+export const selectUserAndLocation = createSelector(
+  [selectLocation, selectLoading, selectUser],
+  (location, isLoading, user) => ({
+    isLoading,
+    location,
+    user,
+  }),
+);

@@ -23,6 +23,7 @@ export interface UserMainFields {
   avatar?: string;
   banner?: string;
   aboutMe?: string;
+  location: string|null,
 }
 export interface UserProfileData {
   _id: string;
@@ -46,6 +47,7 @@ export interface UserDataMongoose {
   isVerfied: boolean;
   isAdmin: boolean;
   aboutMe?: string;
+  location: string|null,
 }
 
 export interface MusicData {

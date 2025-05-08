@@ -7,7 +7,6 @@ import Head from 'next/head';
 import Headroom from 'react-headroom';
 import { usePathname } from 'next/navigation';
 import cn from 'classnames';
-import { Session } from 'next-auth';
 import API from '@/services/api/api';
 import { getLinks } from '../headerLinks';
 import Profile from '../Profile/Profile';
@@ -15,6 +14,7 @@ import Search from '../Search/Search';
 import Logo from '../Logo/Logo';
 import HeaderLinks from '../HeaderLinks/HeaderLinks';
 import { useAppSelector } from '@/hooks/reduxHooks';
+import UserLocation from '../UserLocation/UserLocation';
 
 const pagesWithCap = ['/user'];
 
@@ -27,7 +27,11 @@ const UserHeader = () => {
   return (
     <Headroom wrapperStyle={{ position: 'absolute', top: '0', left: 0, right: 0, zIndex: 20 }}>
       <div className={cn(s.header, { [s.header_capPage]: isPageWithCap })}>
-        <Logo />
+        <div style={{display: 'flex',gap: '10px',alignItems: 'center'}}>
+                <Logo />
+                <UserLocation/>
+        
+                </div>
         <HeaderLinks links={links} />
         <div className={s.searchAndProfile}>
           <Search />

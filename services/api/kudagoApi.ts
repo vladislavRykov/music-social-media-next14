@@ -1,3 +1,4 @@
+import { Location } from '@/types/kudaGo';
 import { LoginData, RegistrationData, SessionPayload, UserDataMongoose } from '@/types/types';
 import axios from 'axios';
 
@@ -14,6 +15,10 @@ const KudaGo = {
     getEvents: () =>
       instance.get(
         '/events/?lang=&fields=&expand=&categories=concert,party,festival&order_by=&text_format=&ids=&location=spb&actual_since=1740531791&page=2&is_free=&lon=&lat=&radius=',
+      ),
+    getLocation: () =>
+      instance.get<Location[]>(
+        '/locations',
       ),
    
 };

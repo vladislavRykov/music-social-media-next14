@@ -17,7 +17,6 @@ export const createDialogAction = async (otherMember: string) => {
    const dialog = await  findDialogByMembers([otherMember,session.userId.toString()])
    if(dialog) return { ok: false, data: null, message: 'Такой чат уже существует' };
     const newChat = await createChat([session.userId.toString(), otherMember.toString()]);
-    // console.log(newChat)
     return { ok: true, data: newChat._doc, message: 'Чат успешно создан' };
   } catch (error) {
     console.log(123,error);
@@ -32,7 +31,6 @@ export const findAllCurrentUserChatsAction = async () => {
       return { ok: false, data: null, message: 'Вы не авторизированы' };
     }
     const chats =await findAllCurrentUserChats<Overwrite<ChatMongooseT,{members: UserProfileData[],lastMessage: MessageWithAuthor | null }>[]>(session.userId,[{path:'members',select: '_id username avatar banner'},{path: 'lastMessage',populate:{ path: 'author', model: 'User',select: 'username' }}])
-    console.log(chats[1])
     const formattedChars = chats.map(chat=>{
         
 

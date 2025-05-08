@@ -69,10 +69,10 @@ export const useFetchingSA = (
 
   return [fetchingFunc, data, isLoading, error];
 };
-export const useLoading = (
-  cb: any,
+export const useLoading = <T>(
+  cb: (...params: any) => Promise<T>,
   defaultLoadingStatus = true,
-): [(...params: any) => Promise<any>, boolean] => {
+): [(...params: any) => Promise<T>, boolean] => {
   const [isLoading, setIsLoading] = useState(defaultLoadingStatus);
 
   const fetchingFunc = async (...params: any) => {

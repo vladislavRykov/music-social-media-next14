@@ -54,6 +54,7 @@ export const getUserMainFields = cache(async () => {
       return redirect('/login');
     }
     const user = await Models.User.findById(session.userId);
+    console.log(user)
     if (!user) {
       return null;
     }
@@ -67,6 +68,7 @@ export const getUserMainFields = cache(async () => {
       avatar,
       isAdmin,
       banner,
+      location,
     }: UserMainFields = user._doc;
     return {
       _id: _id.toString(),
@@ -78,6 +80,7 @@ export const getUserMainFields = cache(async () => {
       updatedAt,
       avatar,
       isAdmin,
+      location,
     };
   } catch (error) {
     return null;
@@ -194,4 +197,15 @@ export const searchUsersByUsername = async (
     .skip(skipCount)
     .limit(pageSize);
   return users;
+};
+export const getUserLocation = async (userId:string) => {
+  await mongooseConnect();
+  const user = await Models.User.findById(userId).lean<UserDataMongoose>()
+
+  return user && user.location;
+};
+export const setUserLocation = async (userId:string,newLocationSlug:string) => {
+  await mongooseConnect();
+  const updatedUser = await Models.User.findByIdAndUpdate(userId,{location:newLocationSlug },{new:true}).lean<UserDataMongoose>()
+  return updatedUser;
 };

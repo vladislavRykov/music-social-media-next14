@@ -12,7 +12,7 @@ const EventItem = (props:Event) => {
     <div className={s.eventItem}>
          <a target="_blank" href={props.site_url} rel="noopener noreferrer">
 
-        <Image src={props.images[0].image} alt='event img' width={300} height={200}/>
+        <Image placeholder='blur' blurDataURL='/background/lightModeImgPlaceholder.svg' src={props.images[0].image} alt='event img' width={300} height={200}/>
          </a>
         
         <div className={s.eventItem_info}>

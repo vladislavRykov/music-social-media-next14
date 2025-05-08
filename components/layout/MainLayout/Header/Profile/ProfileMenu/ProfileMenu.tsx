@@ -12,6 +12,8 @@ import API from '@/services/api/api';
 import { logout } from '@/actions/auth';
 // import { useRouter } from 'next/navigation';
 import { useRouter } from 'nextjs-toploader/app';
+import { clearUser, setLocation } from '@/redux/slices/UserSlice';
+import { useAppDispatch } from '@/hooks/reduxHooks';
 
 interface ProfileMenuProps {
   isShown: boolean;
@@ -20,6 +22,7 @@ interface ProfileMenuProps {
 }
 
 const ProfileMenu: React.FC<ProfileMenuProps> = ({ isShown, setIsHovered, userName }) => {
+  const dispatch = useAppDispatch()
   const [animate, setAnimate] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const router = useRouter();
@@ -45,6 +48,8 @@ const ProfileMenu: React.FC<ProfileMenuProps> = ({ isShown, setIsHovered, userNa
 
   const logoutHandler = async () => {
     await logout();
+    dispatch(clearUser())
+    dispatch(setLocation(null))
     router.push('/login');
   };
   return (
