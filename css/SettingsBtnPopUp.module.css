@@ -1,0 +1,8 @@
+.settingsBtnPopUp {
+  background-color: #464a6b;
+  border: 1px solid #666b9b;
+  padding: 10px 0px;
+  position: absolute;
+  z-index: 100;
+  width: 240px;
+}

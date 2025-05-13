@@ -5,3 +5,10 @@
   display: flex;
   gap: 10px;
 }
+.noPosts{
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  color: var(--third-text-color);
+  font-size: 20px;
+}

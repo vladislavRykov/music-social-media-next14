@@ -1,15 +1,28 @@
-import React from 'react'
-import OldestNewestSelector from './OldestNewestSelector/OldestNewestSelector'
-import s from './PostFilters.module.scss'
-import Link from 'next/link'
+import React from 'react';
+import OldestNewestSelector from './OldestNewestSelector/OldestNewestSelector';
+import s from './PostFilters.module.scss';
+import Link from 'next/link';
 
-const PostFilters = () => {
+type Props = {
+  selectedOrder: {
+    title: string;
+    value: string;
+  };
+  setSelectedOrder: (filter: { title: string; value: string }) => void;
+  isPostsAuthor: boolean;
+};
+
+const PostFilters = ({ selectedOrder, setSelectedOrder, isPostsAuthor }: Props) => {
   return (
     <div className={s.postFilters}>
-      <Link className={s.postFilters_createNewPost} href={'/post/create'}>Создать пост</Link>
-        <OldestNewestSelector/>
+      {isPostsAuthor && (
+        <Link className={s.postFilters_createNewPost} href={'/post/create'}>
+          Создать пост
+        </Link>
+      )}
+      <OldestNewestSelector selectedOrder={selectedOrder} setSelectedOrder={setSelectedOrder} />
     </div>
-  )
-}
+  );
+};
 
-export default PostFilters
+export default PostFilters;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import s from './PlaylistItemsBlock.module.scss';
-import { MusicData, UserDataMongoose } from '@/types/types';
+import { MusicData, MusicDataWithReactionT, UserDataMongoose, UserMainFields } from '@/types/types';
 import PlaylistItem from './PlaylistItem/PlaylistItem';
 import { Overwrite } from '@/types/common';
 import { PlaylistData } from '@/types/playlistTypes';
@@ -14,25 +14,12 @@ import { areArraysEqual } from '@/utils/ArrayFunctions';
 import { useSearchParams } from 'next/navigation';
 
 type PlaylistItemsBlockProps = {
-  playlistItems: MusicData[];
+  playlistItems: MusicDataWithReactionT[];
   playlistId: string;
   type: string;
-  updatePlaylist: () => Promise<{
-    likesAndDislikes: {
-        likes: string[];
-        dislikes: string[];
-    } | null | undefined;
-    playlist: Overwrite<PlaylistData, {
-        userId: UserDataMongoose;
-        items: MusicData[];
-    }> | null;
-} | null>;
+  updatePlaylist: () => void;
   isAuthor: boolean;
   isPlaylistEmpty: boolean;
-  likesAndDislikes: {
-    likes: string[];
-    dislikes: string[];
-} | null;
 };
 
 const PlaylistItemsBlock: React.FC<PlaylistItemsBlockProps> = ({
@@ -41,26 +28,23 @@ const PlaylistItemsBlock: React.FC<PlaylistItemsBlockProps> = ({
   updatePlaylist,
   isAuthor,
   isPlaylistEmpty,
-  likesAndDislikes,
-  type
+  type,
 }) => {
   const dispatch = useAppDispatch();
-  // const searchParams = useSearchParams();
-  // const shuffled = searchParams?.get('shuffled');
+  console.log(12312313, playlistItems);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  console.log(likesAndDislikes)
   const [playlistItemsState, setPlaylistItemsState] = useState(playlistItems);
   const playlist = useAppSelector((state) => state.playerReducer.playlist);
 
-  const handleOnChange = async (newList: MusicData[]) => {
-    console.log('handleOnChange')
+  const handleOnChange = async (newList: MusicDataWithReactionT[]) => {
+    // console.log('handleOnChange')
     const oldListIds = sortedPlaylistItem.map((item) => item._id);
-  const newListIds = newList.map((item) => item._id);
-  if (areArraysEqual(oldListIds, newListIds)) return 
+    const newListIds = newList.map((item) => item._id);
+    if (areArraysEqual(oldListIds, newListIds)) return;
     try {
       const newListIds = newList.map((item) => item._id);
       playlist._id === playlistId && dispatch(setPlaylistItemsRedux(newListIds)); // Обновляем состояние в Redux
-    setPlaylistItemsState(newList);
+      setPlaylistItemsState(newList);
       // playlist._id !== playlistId && setPlaylistItemsState(newList);
       await setNewPlaylistOrderAction(playlistId, newListIds);
     } catch (error) {
@@ -68,15 +52,15 @@ const PlaylistItemsBlock: React.FC<PlaylistItemsBlockProps> = ({
     }
   };
 
-
   const sortedPlaylistItem =
     // playlist._id === playlistId
     //   ? (playlist.items.map((item) => {
     //       const playlistItem = playlistItems.find((playlistItem) => playlistItem._id === item);
     //       return { id: playlistItem?._id, ...playlistItem };
     //     }) as (MusicData & { id: string })[])
-      // :
-       playlistItemsState.map((item) => ({ id: item._id, ...item }));
+    // :
+    playlistItemsState.map((item) => ({ id: item._id, ...item }));
+  console.log(222222, sortedPlaylistItem);
   return (
     <div className={s.playlistItemsBlock}>
       {!isPlaylistEmpty ? (
@@ -88,7 +72,7 @@ const PlaylistItemsBlock: React.FC<PlaylistItemsBlockProps> = ({
             className={s.playlistItemsBlock_items}>
             {sortedPlaylistItem.map((item) => (
               <PlaylistItem
-              type={type}
+                type={type}
                 isAuthor={isAuthor}
                 updatePlaylist={updatePlaylist}
                 selectionMode={selectedItems.length > 0}
@@ -101,13 +85,13 @@ const PlaylistItemsBlock: React.FC<PlaylistItemsBlockProps> = ({
                 title={item.title}
                 author={item.author}
                 duration={item.duration}
-                likesAndDislikes={likesAndDislikes}
+                reactionStatus={item.reactionStatus}
               />
             ))}
           </ReactSortable>
           {selectedItems.length > 0 && (
             <SelectedPopup
-            type={type}
+              type={type}
               playlistId={playlistId}
               selectedItems={selectedItems}
               closePopup={() => setSelectedItems([])}

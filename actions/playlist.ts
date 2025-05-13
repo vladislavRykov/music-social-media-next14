@@ -1,6 +1,6 @@
 'use server';
 
-import { getMusicsByIds } from '@/dal/music';
+import { getArrayMusicByIdWithIsLiked, getMusicsByIds } from '@/dal/music';
 import {
   addItemsToPlaylist,
   createPlaylist,
@@ -18,7 +18,7 @@ import {
 import { verifySession } from '@/lib/sessions';
 import { AccessType, Overwrite } from '@/types/common';
 import { ItemsPlaylistData, PlaylistData, UserPlaylistData } from '@/types/playlistTypes';
-import { MusicData } from '@/types/types';
+import { MusicData, MusicDataWithReactionT } from '@/types/types';
 import { cache } from 'react';
 
 type createNewPlaylistParams = {
@@ -38,7 +38,7 @@ export const addItemsToPlaylistAction = async (playlistId: string, items: string
     const playlistUpdated = await addItemsToPlaylist(playlistId, items);
     return { ok: true, message: 'Новый элемент добавлен в плейлист.' };
   } catch (error) {
-    return { ok: true, message: 'Не удалось добавить элемент в плейлист.' };
+    return { ok: false, message: 'Не удалось добавить элемент в плейлист.' };
   }
 };
 export const removeItemsToPlaylistAction = async (playlistId: string, items: string[]) => {
@@ -53,7 +53,7 @@ export const removeItemsToPlaylistAction = async (playlistId: string, items: str
     const playlistUpdated = await removeItemsToPlaylist(playlistId, items);
     return { ok: true, message: 'Элемент был удален из плейлиста.' };
   } catch (error) {
-    return { ok: true, message: 'Не удалось удалить элемент из плейлиста.' };
+    return { ok: false, message: 'Не удалось удалить элемент из плейлиста.' };
   }
 };
 export const setNewPlaylistOrderAction = async (playlistId: string, items: string[]) => {
@@ -68,7 +68,7 @@ export const setNewPlaylistOrderAction = async (playlistId: string, items: strin
     const playlistUpdated = await setNewPlaylistOrder(playlistId, items);
     return { ok: true, message: 'Порядок был изменен.' };
   } catch (error) {
-    return { ok: true, message: 'Не изменить порядок.' };
+    return { ok: false, message: 'Не изменить порядок.' };
   }
 };
 
@@ -119,16 +119,29 @@ export const getAllUserPlaylist = async <T>(
 };
 export const getPlayerPlaylistsData = async (playlistId: string) => {
   try {
-    // const session = await verifySession();
+    const session = await verifySession();
     // if (!session) {
     //   return { ok: false, message: 'Вы не авторизированы' };
     // }
     // const items = getMusicsByIds({ musicIds: playlistItems })
-    const playlists = await getPlaylistById<Overwrite<PlaylistData, { items: MusicData[] }>>(
-      playlistId,
-      ['items'],
-    );
-    return { ok: true, data: playlists, message: 'Плейлист успешно получен' };
+    // const playlists = await getPlaylistById<Overwrite<PlaylistData, { items: MusicData[] }>>(
+    //   playlistId,
+    //   ['items'],
+    // );
+    const playlist = await getPlaylistById<PlaylistData>(playlistId);
+    if (!playlist) return { ok: true, data: null, message: 'Плейлист не найден' };
+    const musics = await getArrayMusicByIdWithIsLiked(playlist.items, session?.userId);
+
+    const sortedMusics = playlist.items
+      .map((id) => musics.find((m) => m._id.toString() === id.toString()))
+      .filter((music) => !!music); // Удаляем undefined (если какие-то ID не найдены)
+
+    const playlistWithMusics: Overwrite<PlaylistData, { items: MusicDataWithReactionT[] }> = {
+      ...playlist,
+      items: sortedMusics,
+    };
+
+    return { ok: true, data: playlistWithMusics, message: 'Плейлист успешно получен' };
   } catch (error) {
     return { ok: false, message: 'Не удалось получить плейлист' };
   }
@@ -187,75 +200,80 @@ export const updatePlaylistAction = async (
     return { ok: false, message: 'Не удалось обновить плейлист.' };
   }
 };
-export const addToFavPlaylist = async (
-  items: string[],
-) => {
+export const addToFavPlaylist = async (items: string[]) => {
   try {
     const session = await verifySession();
     if (!session) {
       return { ok: false, message: 'Вы не авторизированы' };
     }
 
-    const favPlaylist = await getPlaylistByType<PlaylistData>({userId: session.userId,type: 'favorites'})
-    if(!favPlaylist) {
-     const newFavPlaylist = await createPlaylist({
+    const favPlaylist = await getPlaylistByType<PlaylistData>({
+      userId: session.userId,
+      type: 'favorites',
+    });
+    if (!favPlaylist) {
+      const newFavPlaylist = await createPlaylist({
         userId: session.userId,
         title: 'Понравившаяся музыка',
-        description: 'В этот плейлист попадают треки, которым вы поставили отметку "Нравится". Изменить параметры плейлиста можно в настройках.',
+        description:
+          'В этот плейлист попадают треки, которым вы поставили отметку "Нравится". Изменить параметры плейлиста можно в настройках.',
         access_type: AccessType.Public,
         items,
-        type: 'favorites'
+        type: 'favorites',
       });
-  
-    }else{
-      
+    } else {
       const playlistUpdated = await addItemsToPlaylist(favPlaylist.userId, items);
     }
-    
+
     return { ok: true, message: 'Трек добавлен в понравившуюся музыку.' };
   } catch (error) {
     return { ok: false, message: 'Не удалось добавить трек в понравившуюся музыку.' };
   }
 };
-export const removeFromFavPlaylist = async (
-  items: string[],
-) => {
+export const removeFromFavPlaylist = async (items: string[]) => {
   try {
     const session = await verifySession();
     if (!session) {
       return { ok: false, message: 'Вы не авторизированы' };
     }
 
-    const disPlaylist = await getPlaylistByType<PlaylistData>({userId: session.userId,type: 'disliked'})
-    if(!disPlaylist) {
-     const newDislikedPlaylist = await createPlaylist({
+    const disPlaylist = await getPlaylistByType<PlaylistData>({
+      userId: session.userId,
+      type: 'disliked',
+    });
+    if (!disPlaylist) {
+      const newDislikedPlaylist = await createPlaylist({
         userId: session.userId,
         title: 'Непонравившаяся музыка',
-        description: 'В этот плейлист попадают треки, которым вы поставили отметку "Не нравится". Изменить параметры плейлиста можно в настройках.',
+        description:
+          'В этот плейлист попадают треки, которым вы поставили отметку "Не нравится". Изменить параметры плейлиста можно в настройках.',
         access_type: AccessType.Private,
         items,
         type: 'disliked',
         hidden: true,
       });
-    }else{
-      
+    } else {
       const playlistUpdated = await removeItemsToPlaylist(disPlaylist.userId, items);
     }
-    
+
     return { ok: true, message: 'Трек добавлен в понравившуюся музыку.' };
   } catch (error) {
     return { ok: false, message: 'Не удалось добавить трек в понравившуюся музыку.' };
   }
 };
-export const replacePlaylistImg = cache(async (playlistId:string,imgUrl: string) => {
+export const replacePlaylistImg = cache(async (playlistId: string, imgUrl: string) => {
   try {
     const session = await verifySession();
     if (!session) {
       return { ok: false, message: 'Вы не авторизированы' };
     }
-   const res = await setNewPlaylistImg(playlistId,imgUrl);
-   if(!res.ok)  return { ok: false, message: res.message};
-    return { ok: true, message: 'Изображение успешно загружена.', deletedPlaylistImgUrl: res.data || null };
+    const res = await setNewPlaylistImg(playlistId, imgUrl);
+    if (!res.ok) return { ok: false, message: res.message };
+    return {
+      ok: true,
+      message: 'Изображение успешно загружена.',
+      deletedPlaylistImgUrl: res.data || null,
+    };
   } catch (error) {
     return { ok: false, message: 'Ошибка при загрузки изображение.' };
   }

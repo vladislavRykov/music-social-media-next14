@@ -1,0 +1,42 @@
+.authorization {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.authorization_login {
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  padding: 18px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #bcbedc;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+.authorization_login:hover {
+  color: rgb(207, 209, 226);
+}
+.authorization_signup {
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  padding: 12px 18px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  background-color: rgb(72, 72, 255);
+  border-radius: 8px;
+  transition: 0.25s;
+}
+.authorization_signup:hover {
+  -webkit-transform: scale(1.03);
+      -ms-transform: scale(1.03);
+          transform: scale(1.03);
+  -webkit-box-shadow: 0px 0px 7px 4px rgba(74, 74, 255, 0.37);
+          box-shadow: 0px 0px 7px 4px rgba(74, 74, 255, 0.37);
+}

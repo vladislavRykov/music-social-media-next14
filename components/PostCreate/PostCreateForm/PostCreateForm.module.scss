@@ -1,6 +1,52 @@
 .postCreateForm{
-
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     &_field{
         padding: 10px 20px;
+        label{
+
+        }
+    }
+    &_labelText{
+        padding: 0px 10px;
+        display: block;
+        margin-bottom: 10px;
+    }
+    &_button{
+        position: relative;
+        background-color: var(--profile-text-color);
+        width: 100%;
+        padding: 15px 20px;
+        color: #fff;
+        font-size: 18px;
+        height: 50px;
+        &:disabled{
+            cursor: default;
+            opacity: 0.7;
+        }
+    }
+    &_form{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+
+    }
+    &_fieldWrapper{
+        
+    }
+    &_error{
+        padding: 5px 10px;
+        color: var(--secondary-text-color);
+    }
+    &_btnLoading{
+       position: absolute;
+       height: 40px;
+       width: 40px;
+       left: 50%;
+       top: 50%;
+       transform: translate(-50%,-50%);
+
     }
 }

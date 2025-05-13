@@ -1,0 +1,24 @@
+.playlistItemBtns {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 200px;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+.playlistItemBtns_like {
+  font-size: 25px;
+  color: #fafafa;
+}
+.playlistItemBtns_dislike {
+  color: #fafafa;
+  font-size: 25px;
+}
+.playlistItemBtns_popup {
+  margin-right: 20px;
+}

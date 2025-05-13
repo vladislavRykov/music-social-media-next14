@@ -4,6 +4,7 @@ import { mongooseConnect } from '@/lib/mongoose';
 import { Models } from '@/models/models';
 import { AccessType } from '@/types/common';
 import { PlaylistData } from '@/types/playlistTypes';
+import { ObjectId } from 'mongodb';
 import { cache } from 'react';
 
 export const getPlaylistById = async <T>(playlistId: string, populate?: string[]) => {
@@ -13,8 +14,21 @@ export const getPlaylistById = async <T>(playlistId: string, populate?: string[]
     query.populate(populate);
   }
   const playlist = await query.lean<T>().exec();
+
   return playlist;
 };
+// export const getPlaylistByIdWithReaction = async (
+//   playlistId: string,
+//   currentUserId?: string,
+//   populate?: string[],
+// ) => {
+//   await mongooseConnect();
+
+//    const query = await Models.Playlist.findById(playlistId);
+
+//   // return playlist[0];
+//   return null
+// };
 export const addItemsToPlaylist = async (playlistId: string, items: string[]) => {
   await mongooseConnect();
   const playlist = await Models.Playlist.findOneAndUpdate(
@@ -70,28 +84,23 @@ export const getPlaylistsByUserName = async <T>(
 
   return playlists;
 };
-export const getPlaylistByType = async <T>({
-  userId,
-  type
-}: {
-  type: string,
-  userId: string;
-}) => {
+export const getPlaylistByType = async <T>({ userId, type }: { type: string; userId: string }) => {
   await mongooseConnect();
-  const playlist = await Models.Playlist.findOne({  type, userId }).lean<T>();
+  const playlist = await Models.Playlist.findOne({ type, userId }).lean<T>();
   return playlist;
 };
-export const getUserLikesAndDislikes = async ({
-  userId,
-}: {
-  userId: string;
-}) => {
+export const getUserLikesAndDislikes = async ({ userId }: { userId: string }) => {
   await mongooseConnect();
-  const favPlaylist = await Models.Playlist.findOne({  type:'favorites', userId }).lean<PlaylistData>();
-  const disPlaylist = await Models.Playlist.findOne({  type:'disliked', userId }).lean<PlaylistData>();
+  const favPlaylist = await Models.Playlist.findOne({
+    type: 'favorites',
+    userId,
+  }).lean<PlaylistData>();
+  const disPlaylist = await Models.Playlist.findOne({
+    type: 'disliked',
+    userId,
+  }).lean<PlaylistData>();
 
-  return {likes: favPlaylist?.items || null,dislikes: disPlaylist?.items|| null}
-
+  return { likes: favPlaylist?.items || null, dislikes: disPlaylist?.items || null };
 };
 export const getUserPlaylistByTitle = async ({
   title,
@@ -134,7 +143,7 @@ export const createPlaylist = async ({
     items,
     type,
     hidden,
-    playlistImg
+    playlistImg,
   });
   return playlist;
 };
@@ -151,28 +160,23 @@ export const updatePlaylist = async (
   const playlist = await Models.Playlist.findByIdAndUpdate(playlistId, newData, { new: true });
   return playlist;
 };
-export const setNewPlaylistImg = async (
-  playlistId: string,
-  newPlaylistImg: string,
-) => {
+export const setNewPlaylistImg = async (playlistId: string, newPlaylistImg: string) => {
   await mongooseConnect();
   const playlist = await Models.Playlist.findById(playlistId);
   if (!playlist) {
-    return { ok: false,data: null, message: 'Плейлист не найден.' };
+    return { ok: false, data: null, message: 'Плейлист не найден.' };
   }
-  const oldAva: string | undefined = playlist.playlistImg
+  const oldAva: string | undefined = playlist.playlistImg;
   playlist.playlistImg = newPlaylistImg;
   await playlist.save();
-    return { ok: true,data: oldAva, message: 'Успешно.' };
+  return { ok: true, data: oldAva, message: 'Успешно.' };
 };
-export const deletePlaylistImg = async (
-  playlistId: string,
-) => {
+export const deletePlaylistImg = async (playlistId: string) => {
   await mongooseConnect();
-  const updatedPlaylist = await Models.Playlist.findByIdAndUpdate(playlistId, { $unset: { playlistImg: 1 } }, { new: false }).lean<PlaylistData>()
- return updatedPlaylist;
+  const updatedPlaylist = await Models.Playlist.findByIdAndUpdate(
+    playlistId,
+    { $unset: { playlistImg: 1 } },
+    { new: false },
+  ).lean<PlaylistData>();
+  return updatedPlaylist;
 };
-
-
-
-

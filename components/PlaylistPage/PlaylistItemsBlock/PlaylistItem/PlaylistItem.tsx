@@ -18,6 +18,7 @@ import RemoveFromPlayList from '@/components/shared/SettingsBtnPopUp/RemoveFromP
 import { Overwrite } from '@/types/common';
 import { PlaylistData } from '@/types/playlistTypes';
 import { MusicData, UserDataMongoose } from '@/types/types';
+import { ItemReactionStatus } from '@/types/likeAndDislikes';
 
 type PlaylistItemProps = {
   id: string;
@@ -30,21 +31,9 @@ type PlaylistItemProps = {
   isSelected: boolean;
   selectionMode: boolean;
   isAuthor: boolean;
-  updatePlaylist: () => Promise<{
-    likesAndDislikes: {
-        likes: string[];
-        dislikes: string[];
-    } | null | undefined;
-    playlist: Overwrite<PlaylistData, {
-        userId: UserDataMongoose;
-        items: MusicData[];
-    }> | null;
-} | null>;
-  likesAndDislikes: {
-    likes: string[];
-    dislikes: string[];
-} | null;
-type: string;
+  reactionStatus: ItemReactionStatus;
+  updatePlaylist: () => void;
+  type: string;
 };
 
 const PlaylistItem: React.FC<PlaylistItemProps> = ({
@@ -52,7 +41,6 @@ const PlaylistItem: React.FC<PlaylistItemProps> = ({
   musicImg,
   title,
   author,
-  likesAndDislikes,
   duration,
   playlistId,
   isSelected,
@@ -60,7 +48,8 @@ const PlaylistItem: React.FC<PlaylistItemProps> = ({
   selectionMode,
   updatePlaylist,
   isAuthor,
-  type
+  type,
+  reactionStatus,
 }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -81,9 +70,7 @@ const PlaylistItem: React.FC<PlaylistItemProps> = ({
     } else {
       if (musicItemLoading) return;
       setMusicItemLoading(true);
-      // await dispatch(setMusicData(_id));
       router.push(`/player/playlist?m=${id}&list=${playlistId}`);
-      // dispatch(setPlaylistItems(playlist));
     }
   };
   useEffect(() => {
@@ -173,13 +160,15 @@ const PlaylistItem: React.FC<PlaylistItemProps> = ({
             // style={{ display: 'block' }}
             style={selectionMode ? { display: 'block' } : {}}>
             <PlaylistItemBtns
+              reactionStatus={reactionStatus}
               setBlockPosition={setBlockPosition}
               setIsPopUpOpen={setIsPopUpOpen}
               selectionMode={selectionMode}
               songId={id}
               isSelected={isSelected}
               onCheckInput={onCheckInput}
-              likesAndDislikes={likesAndDislikes}
+              currentSongReactionStatus={selectedAudio?.reactionStatus || null}
+              currentSongId={selectedAudio?._id || null}
             />
           </div>
         </div>
@@ -194,15 +183,18 @@ const PlaylistItem: React.FC<PlaylistItemProps> = ({
           }}
           closePopup={() => setIsPopUpOpen(false)}>
           <AddToPlayList selectedItems={[id]} />
-          <AddToLiked songId={id}   closePopup={() => setIsPopUpOpen(false)}/>
-        {isAuthor&& type!=='favorites' && <RemoveFromPlayList
-            closePopup={() => {
-              updatePlaylist();
-              setIsPopUpOpen(false);
-            }}
-            playlistId={playlistId}
-            itemsToRemove={[id]}
-          />}
+          {/* <AddToLiked songId={id}   closePopup={() => setIsPopUpOpen(false)}/> */}
+          {/* исправить */}
+          {isAuthor && type !== 'favorites' && (
+            <RemoveFromPlayList
+              closePopup={() => {
+                updatePlaylist();
+                setIsPopUpOpen(false);
+              }}
+              playlistId={playlistId}
+              itemsToRemove={[id]}
+            />
+          )}
         </SettingsBtnPopUp>
       )}
     </>

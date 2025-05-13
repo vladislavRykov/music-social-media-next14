@@ -1,0 +1,10 @@
+.playerPlaylistContent {
+  padding-top: 20px;
+  width: 40%;
+}
+.playerPlaylistContent_title {
+  color: #fafafa;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}

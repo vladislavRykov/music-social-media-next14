@@ -1,0 +1,18 @@
+.defaultPostOption {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+  &:hover{
+    background-color: var(--main-bg-color);
+  }
+  &_icon {
+    color: var(--main-text-color);
+    font-size: 20px;
+  }
+  &_title {
+    color: var(--main-text-color);
+  }
+}

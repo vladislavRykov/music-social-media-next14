@@ -1,0 +1,61 @@
+.postOptionals {
+  align-self: self-start;
+  justify-self: start;
+  margin-left: 10px;
+  grid-column: 3;
+  &_list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  &_edit {
+    a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6px;
+      border-radius: 8px;
+      color: var(--secondary-text-color);
+      background-color: var(--secondary-bg-color);
+    }
+  }
+  &_delete {
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6px;
+      border-radius: 8px;
+      color: var(--secondary-text-color);
+      background-color: var(--secondary-bg-color);
+    }
+  }
+  &_option {
+    position: relative;
+    transition: 0.3s;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  .postDescription {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: calc(100% + 10px);
+    color: var(--secondary-text-color);
+    background-color: var(--secondary-bg-color);
+    padding: 6px;
+    border-radius: 8px;
+    visibility: hidden;
+    opacity: 0;
+
+    /* transition effect. not necessary */
+    transition: opacity 0.2s, visibility 0.2s;
+  }
+
+  .postOptionals_option:hover .postDescription {
+    visibility: visible;
+    opacity: 1;
+  }
+}

@@ -1,0 +1,9 @@
+.searchIcon {
+  color: #777a9e;
+  cursor: pointer;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+.searchIcon:hover {
+  color: #b1b5de;
+}

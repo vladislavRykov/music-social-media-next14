@@ -1,0 +1,22 @@
+.deafultItem {
+  color: #fafafa;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  gap: 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px 16px;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  background-color: #464a6b;
+}
+.deafultItem:hover {
+  background-color: #616694;
+}
+.deafultItem_icon {
+  color: #bdbdbd;
+  font-size: 22px;
+}

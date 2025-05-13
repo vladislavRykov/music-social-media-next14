@@ -1,0 +1,63 @@
+.field_wrapper {
+  position: relative;
+}
+.field_label {
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  position: absolute;
+  opacity: 0;
+  bottom: 50%;
+  -webkit-transform: translateY(-50%) scale(1);
+      -ms-transform: translateY(-50%) scale(1);
+          transform: translateY(-50%) scale(1);
+  left: 0px;
+  font-size: 14px;
+  color: #4f537b;
+}
+.field_input {
+  background-color: transparent;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: #fafafa;
+}
+.field_input::-webkit-input-placeholder {
+  color: #4f537b;
+  font-size: 14px;
+}
+.field_input::-moz-placeholder {
+  color: #4f537b;
+  font-size: 14px;
+}
+.field_input:-ms-input-placeholder {
+  color: #4f537b;
+  font-size: 14px;
+}
+.field_input::-ms-input-placeholder {
+  color: #4f537b;
+  font-size: 14px;
+}
+.field_input::placeholder {
+  color: #4f537b;
+  font-size: 14px;
+}
+.field_movingLine {
+  height: 2px;
+  position: relative;
+  display: block;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#3db4f2), to(#3db4f2));
+  background-image: linear-gradient(#3db4f2, #3db4f2);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  -webkit-transition: background-size 0.2s, color 0.2s;
+  transition: background-size 0.2s, color 0.2s;
+}
+.field_focused {
+  background-size: 100% 100%;
+}
+
+.label_showed {
+  opacity: 1;
+  bottom: 100%;
+  font-size: 13px;
+}

@@ -5,7 +5,7 @@ import IconBtn from '@/components/UI/Buttons/IconBtn';
 import { BsRepeat } from 'react-icons/bs';
 import { BsRepeat1 } from 'react-icons/bs';
 import { LuVolume2 } from 'react-icons/lu';
-import { BsShuffle } from "react-icons/bs";
+import { BsShuffle } from 'react-icons/bs';
 import { LuVolumeX } from 'react-icons/lu';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setVolume } from '@/redux/slices/PlayerSlice';
@@ -31,7 +31,7 @@ const PlayerOptions = ({
           <>
             <div
               className={s.playerOptions_progressLine}
-              style={{ width: `${((audioVolume * 100) / 100) * 100}%` }}>
+              style={{ width: `${((audioVolume * 100) / 20) * 100}%` }}>
               <div className={s.playerOptions_progressLine_thumbWrap}>
                 <div
                   className={cn(s.playerOptions_progressLine_thumb, {
@@ -44,7 +44,7 @@ const PlayerOptions = ({
               onMouseDown={() => setIsMouseDown(true)}
               onMouseUp={() => setIsMouseDown(false)}
               className={s.playerOptions_volumeInput}
-              max={100}
+              max={20}
               min={0}
               type="range"
               value={audioVolume * 100}
@@ -55,7 +55,7 @@ const PlayerOptions = ({
       </div>
       <LuVolume2 onMouseEnter={() => setShowInput(true)} className={s.playerOptions_btn} />
       <BsRepeat className={s.playerOptions_btn} />
-      <BsShuffle className={s.playerOptions_btn}  />
+      <BsShuffle className={s.playerOptions_btn} />
       {/* <Image className={s.playerOptions_btn} src={MixIcons} alt="mix icon" height={22} width={22} /> */}
     </div>
   );

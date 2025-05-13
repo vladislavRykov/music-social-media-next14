@@ -1,0 +1,40 @@
+@charset "UTF-8";
+.chatSidebar {
+  position: relative;
+  width: 360px;
+  height: 100%;
+  background-color: var(--main-bg-color);
+  resize: horizontal;
+  padding-right: 3px;
+  overflow-y: auto;
+  min-width: 260px;
+  max-width: 560px;
+}
+.chatSidebar::-webkit-resizer {
+  background-color: transparent;
+}
+.chatSidebar::-webkit-scrollbar-track {
+  background: transparent;
+  width: 10px;
+}
+.chatSidebar::-webkit-scrollbar {
+  width: 10px; /* Ширина скроллбара */
+}
+.chatSidebar::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  background-color: #1f202f; /* Цвет ползунка */
+  border-radius: 25px; /* Радиус скругления */
+}
+.chatSidebar_main {
+  height: calc(100% - 60px);
+  position: relative;
+}
+.chatSidebar_resize {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 3px;
+  cursor: ew-resize;
+  background-color: transparent;
+}

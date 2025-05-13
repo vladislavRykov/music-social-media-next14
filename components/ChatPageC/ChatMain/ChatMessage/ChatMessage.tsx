@@ -11,6 +11,7 @@ import LinkHighlighter from '@/utils/LinkHighlighter';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'nextjs-toploader/app';
 const ChatPopup = dynamic(() => import('@/components/shared/Popups/ChatPopup/ChatPopup'))
+import cn from 'classnames'
 
 interface Props extends ChatMessageT   {
   time: number;
@@ -50,10 +51,11 @@ const ChatMessage = ({type,voiceSrc,removeMessage,_id,createdAt, isGroupChat=fal
       />
       <div
       onContextMenu={onRightMouseClick}
-        className={s.chatMessage_main}
-        style={
-          isCurrentUserMessage ? { borderBottomRightRadius: '0px',backgroundColor: 'rgb(120,245,254)' } : { borderBottomLeftRadius: '0px' }
-        }>
+        className={cn(s.chatMessage_main,{[s.chatMessage_main_currentUser]:isCurrentUserMessage})}
+        // style={
+        //   isCurrentUserMessage ? { borderBottomRightRadius: '0px',backgroundColor: 'rgb(120,245,254)' } : { borderBottomLeftRadius: '0px' }
+        // }
+        >
         <div className={s.chatMessage_content}>
           {!isCurrentUserMessage && isGroupChat && <div className={s.chatMessage_username}>{author.username}</div>}
           <div className={s.chatMessage_message}>
@@ -66,7 +68,7 @@ const ChatMessage = ({type,voiceSrc,removeMessage,_id,createdAt, isGroupChat=fal
                   <audio controls src={voiceSrc} onLoadedMetadata={(e)=>console.log(e)}/>
                 </div>
             }
-            <span className={s.chatMessage_time} style={isCurrentUserMessage ?{color: 'rgb(79,146,175)'}:{}}>{formattedTime}</span>
+            <span className={s.chatMessage_time} style={isCurrentUserMessage ?{color: '#fff'}:{}}>{formattedTime}</span>
           </div>
         </div>
     {isPopupOpen && <ChatPopup styles={{top: blockPosition.y,left: blockPosition.x}} closePopup={()=>setIsPopupOpen(false)}>

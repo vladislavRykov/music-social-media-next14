@@ -12,19 +12,21 @@
   // background-color: #40436344;
   // background-color: #404363;
   background-color: transparent;
+  color: var(--third-text-color);
   &:hover {
     background-color: var(--secondary-bg-color);
     box-shadow: 0px 0px 15px 3px var(--secondary-bg-shadow-color);
   }
-  &_selected{
-    background-color: #3DB4F2;
+  &_selected {
+    background-color: var(--profile-text-color);
+    // background-color: #3DB4F2;
     color: #fafafa;
     &:hover {
-      background-color: #3DB4F2; // Сохраняем текущий цвет фона
+      background-color: var(--profile-text-color);
+      // background-color: #3DB4F2; // Сохраняем текущий цвет фона
     }
   }
-  &
-  &_img {
+  & &_img {
     border-radius: 50%;
   }
   &_rightBlock {
@@ -46,7 +48,7 @@
   }
   &_time {
     font-size: 12px;
-    color: var(--secondary-text-color);
+    color: var(--third-text-color);
   }
   &_lastMessageAndUnread {
     color: var(--secondary-text-color);
@@ -60,13 +62,12 @@
     text-overflow: ellipsis;
     overflow: hidden;
     padding-right: 5px;
+    color: var(--third-text-color);
   }
   &_unRead {
     padding: 5px;
     border-radius: 50%;
-    background-color: var(--secondary-bg-color);
-    color: var(--main-text-color);
+    background-color: var(--third-text-color);
+    color: var(--secondary-text-color);
   }
 }
-
-

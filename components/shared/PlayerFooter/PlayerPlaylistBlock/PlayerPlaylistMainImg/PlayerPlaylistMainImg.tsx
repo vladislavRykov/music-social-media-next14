@@ -35,16 +35,19 @@ const PlayerPlaylistMainImg = () => {
   return (
     <div className={s.playerPlaylistMainImg}>
       {!isPlayerLoading && selectedAudio ? (
+        // <div className={s.playerPlaylistMainImg_imgContainer} onClick={onImgClick}>
+        //   <Image src={selectedAudio?.image} alt="изображение музыки" width={800} height={500} objectFit='contain' />
         <div className={s.playerPlaylistMainImg_imgContainer} onClick={onImgClick}>
-          <Image src={selectedAudio?.image} alt="изображение музыки" width={800} height={500} />
+          <Image src={selectedAudio?.image} alt="изображение музыки" fill objectFit="contain" />
           <div className={s.playerPlaylistMainImg_controls}>
             {isPlayerLoading ? (
               <Image
                 className={s.playerPlaylistMainImg_loading}
                 src={LoadingSvg}
                 alt="loading"
-                height={50}
-                width={50}
+                // height={50}
+                // width={50}
+                fill
               />
             ) : (
               <>
@@ -62,7 +65,7 @@ const PlayerPlaylistMainImg = () => {
             )}
           </div>
 
-          <div className={s.playerPlaylistMainImg_topOverlay}></div>
+          {/* <div className={s.playerPlaylistMainImg_topOverlay}></div> */}
         </div>
       ) : (
         <ImgLoader height="500" width="800" />

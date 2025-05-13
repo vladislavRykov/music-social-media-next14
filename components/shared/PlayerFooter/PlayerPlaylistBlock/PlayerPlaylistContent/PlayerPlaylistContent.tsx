@@ -5,39 +5,49 @@ import { useAsync } from '@/hooks/useFetching';
 import { getPlayerPlaylistsData } from '@/actions/playlist';
 import { selectPlayerPlaylist } from '@/redux/selectors/playerSelectors';
 import { useAppSelector } from '@/hooks/reduxHooks';
-import { MusicData } from '@/types/types';
+import { MusicData, MusicDataWithReactionT } from '@/types/types';
 import { getMusicsByIds } from '@/dal/music';
 import Image from 'next/image';
 import LoadingSvg from '@/public/circleTube.svg';
+import { getArrayMusicByIdA } from '@/actions/music';
 
 const PlayerPlaylistContent = () => {
   const { playlist } = useAppSelector(selectPlayerPlaylist);
-  console.log(playlist)
+  console.log(playlist);
   const getPlaylistData = async () => {
-    console.log(playlist)
+    console.log(playlist);
     if (playlist._id) {
       const res = await getPlayerPlaylistsData(playlist._id);
+      console.log(
+        'player',
+        res.data?.items
+      );
       if (!res.ok) return null;
       const data = { title: res.data?.title, _id: res.data?._id, items: res.data?.items } as {
         title: string;
-        items: MusicData[];
+        items: MusicDataWithReactionT[];
         _id: string | null;
       };
       return data;
     } else if (playlist.items.length > 0) {
-      console.log(playlist.items)
-      const res = await getMusicsByIds({ musicIds: playlist.items });
-      if (!res) return null;
-      return { title: 'Без названия', _id: null, items: res };
+      const res = await getArrayMusicByIdA(playlist.items);
+      console.log(res);
+      if (!res.ok) return null;
+      return { title: 'Без названия', _id: null, items: res.data };
     } else {
       return null;
     }
   };
-  const { execute, status, data: playlistData, error } = useAsync(getPlaylistData, [playlist._id,playlist.items.length]);
+  const {
+    execute,
+    status,
+    data: playlistData,
+    error,
+  } = useAsync(getPlaylistData, [playlist._id, playlist.items.length]);
   console.log(playlistData);
   return (
     <div className={s.playerPlaylistContent}>
-      {status === 'success' && playlistData && (
+      {status === 'success' && playlistData && playlistData.items && (
         <>
           <div className={s.playerPlaylistContent_title}>{playlistData.title}</div>
           <PlayerPlaylistItems playlistItems={playlistData.items} />

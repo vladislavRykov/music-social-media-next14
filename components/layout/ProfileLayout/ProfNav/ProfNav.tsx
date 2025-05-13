@@ -2,28 +2,31 @@
 import Link from 'next/link';
 import React, { useEffect, useRef } from 'react';
 import s from './ProfNav.module.scss';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import cn from 'classnames';
 import { useAppSelector } from '@/hooks/reduxHooks';
 
-const routesWithScroll = ['/library','/posts'];
+const routesWithScroll = ['/library', '/posts', '/posts/*'];
 const ProfNav = () => {
-  const userName = useAppSelector((state) => state.userReducer.user?.username);
+  // const userName = useAppSelector((state) => state.userReducer.user?.username);
+  const pathname = usePathname();
+  const params: { nickname: string } | null = useParams();
+  // const splitedPathname = pathname?.split('/')
+  // const userFromCurrentUrl = splitedPathname && splitedPathname[1]==='user' && splitedPathname[2]
   const ProfNavLinks = [
     {
       title: 'Обзор',
-      href: `/user/${userName}`,
+      href: `/user/${params?.nickname}`,
     },
     {
       title: 'Библиотека',
-      href: `/user/${userName}/library`,
+      href: `/user/${params?.nickname}/library`,
     },
     {
       title: 'Посты',
-      href: `/user/${userName}/posts`,
+      href: `/user/${params?.nickname}/posts`,
     },
   ];
-  const pathname = usePathname();
   const navRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (routesWithScroll.some((route) => pathname?.includes(route)))
@@ -31,7 +34,7 @@ const ProfNav = () => {
   }, [pathname]);
 
   return (
-    <div ref={navRef} className={s.profnav}>
+    <div id="profile-nav" ref={navRef} className={s.profnav}>
       <ul className={s.profnav_items}>
         {ProfNavLinks.map((link) => (
           <li key={link.href}>

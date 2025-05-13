@@ -13,13 +13,13 @@ const PostCreatePage = () => {
 
   return (
     <div className={s.postCreatePage}>
-      <h2 className={s.postCreatePage_title}>
-        Создание поста
+      <div className={s.postCreatePage_postHeader}>
         <div onClick={() => router.back()} className={s.postCreatePage_back}>
           <FaArrowLeft />
           <span>К постам</span>
         </div>
-      </h2>
+        <h2 className={s.postCreatePage_title}>Создание поста</h2>
+      </div>
       <PostCreateForm />
     </div>
   );

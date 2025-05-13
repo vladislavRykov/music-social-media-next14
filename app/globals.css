@@ -79,7 +79,7 @@ h6 {
 }
 /* Темы */
 :root {
-  
+  /* --bg-image: ''; */
   --profile-text-color: #3DB4F2; /* Цвет по умолчанию */
 
   --header-bg-color: #2b2d42;
@@ -91,9 +91,13 @@ h6 {
   --main-bg-color: #edf1f5;
 
   --secondary-bg-shadow-color: #dcdcdc;
+  --home-page-header-img: url('/background/main_page_bg.jpg');
+   --chat-bg-img: url('/background/chat_bg_light3.jpg');
 }
 
 [data-theme='default'] {
+  --home-page-header-img: url('/background/main_page_bg.jpg');
+  --chat-bg-img: url('/background/chat_bg_light3.jpg');
   --main-text-color: #5c72a7;
   --secondary-text-color: #7A858F;
   --third-text-color: #0b1622;
@@ -103,6 +107,8 @@ h6 {
   --secondary-bg-shadow-color: #dcdcdc;
 }
 [data-theme='dark'] {
+  --home-page-header-img: url('/background/main_page_bg_dark.jpg');
+   --chat-bg-img: url('/background/chat_bg_dark2.jpg');
   --main-text-color: #5c72a7;
   --secondary-text-color: #728AA1;
   --third-text-color: #fafafa;

@@ -1,0 +1,13 @@
+.eventList_wrapper {
+  width: 70%;
+  margin: 0 auto;
+  padding: 40px 30px;
+}
+.eventList_items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}

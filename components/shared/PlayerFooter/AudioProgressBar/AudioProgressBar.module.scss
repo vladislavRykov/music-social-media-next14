@@ -28,7 +28,8 @@
     z-index: 14;
     left: 0;
     height: 4px;
-    background-color: #3db4f2;
+    // background-color: #3db4f2;
+    background-color: var(--profile-text-color);
     width: unset;
     pointer-events: none;
     &_thumbWrap {
@@ -42,7 +43,8 @@
       top: 50%;
       transform: translateY(-50%);
       position: absolute;
-      background-color: #3db4f2;
+      // background-color: #3db4f2;
+       background-color: var(--profile-text-color);
       width: 12px;
       height: 12px;
       border-radius: 50%;
@@ -56,7 +58,8 @@
     width: 100%;
     appearance: none;
     &::-webkit-slider-thumb {
-      background-color: #3db4f2;
+      // background-color: #3db4f2;
+         background-color: var(--profile-text-color);
       appearance: none;
       height: 1px;
       width: 1px;

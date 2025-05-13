@@ -1,0 +1,48 @@
+.selectedFiltersBlock {
+  padding: 30px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 13px;
+}
+.selectedFiltersBlock:hover .selectedFiltersBlock_tagClearAll {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.selectedFiltersBlock_tag {
+  cursor: pointer;
+  background-color: #3db4f2;
+  color: #fffffe;
+  padding: 5px 10px;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 6px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.selectedFiltersBlock_tag:hover .selectedFiltersBlock_close {
+  display: block;
+}
+.selectedFiltersBlock_close {
+  display: none;
+}
+.selectedFiltersBlock_tagClearAll {
+  cursor: pointer;
+  display: none;
+  background-color: #abc2cf;
+  color: #fffffe;
+  padding: 5px 10px;
+  border-radius: 5px;
+  gap: 6px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}

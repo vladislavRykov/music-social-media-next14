@@ -1,4 +1,5 @@
 import { StaticImageData } from 'next/image';
+import { ItemReactionStatus, LikeAndDislike } from './likeAndDislikes';
 
 export interface RegistrationData {
   username: string;
@@ -65,6 +66,9 @@ export interface MusicData {
   //   year: number | null;
   //   season: string | null;
   // };
+}
+export interface MusicDataWithReactionT extends MusicData{
+  reactionStatus: ItemReactionStatus
 }
 export interface Genre {
   _id: string;

@@ -1,0 +1,24 @@
+.playerPlaylist_icon {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+.playerPlaylist_iconWrap {
+  cursor: pointer;
+  color: #fafafa;
+  padding: 10px;
+  font-size: 42px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.playerPlaylist_opened {
+  -webkit-transform: rotateZ(-180deg);
+      -ms-transform: rotate(-180deg);
+          transform: rotateZ(-180deg);
+}

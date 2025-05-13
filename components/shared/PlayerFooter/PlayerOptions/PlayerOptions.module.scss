@@ -9,7 +9,8 @@
   &_volumeInput {
     cursor: pointer;
     display: block;
-    height: 2px;
+    height: 10px;
+    // height: 2px;
     background-color: transparent;
     width: 100%;
     appearance: none;
@@ -20,6 +21,8 @@
       opacity: 0;
     }
     &_line {
+      top: 50%;
+      transform: translateY(-50%);
       z-index: 12;
       position: absolute;
       left: 0;
@@ -32,6 +35,8 @@
   &_progressLine {
     position: absolute;
     z-index: 14;
+    top: 50%;
+    transform: translateY(-50%);
     left: 0;
     height: 2px;
     background-color: #fafafa;

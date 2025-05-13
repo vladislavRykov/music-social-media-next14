@@ -39,6 +39,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   }, [isPlaying, musicData]);
   useEffect(() => {
     if (audioRef.current) {
+      // console.log(audioVolume)
       audioRef.current.volume = audioVolume;
     }
   }, [audioVolume]);

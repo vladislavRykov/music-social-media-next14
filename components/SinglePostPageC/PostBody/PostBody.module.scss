@@ -1,0 +1,59 @@
+.postBody {
+  padding: 10px;
+  background-color: var(--secondary-bg-color);
+  display: flex;
+  flex-direction: column;
+  grid-column: 2;
+  gap: 10px;
+  .postImage {
+    object-fit: contain;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    &_container {
+      width: 100%;
+      height: 400px;
+      position: relative;
+      overflow: hidden;
+      &::before {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        filter: blur(20px);
+        z-index: 0;
+        background-image: var(--bg-image);
+      }
+    }
+  }
+  &_title {
+    text-align: center;
+    color: var(--profile-text-color);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  &_content {
+    font-size: 16px;
+    color: var(--secondary-text-color);
+  }
+  &_postInfo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  &_createdAt {
+    color: var(--main-text-color);
+  }
+}
+
+.errorBody {
+  font-size: 20px;
+  color: var(--profile-text-color);
+  font-weight: 600;
+  padding: 20px;
+  text-align: center;
+}

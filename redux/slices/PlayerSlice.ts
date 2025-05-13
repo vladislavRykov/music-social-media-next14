@@ -1,27 +1,29 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { AppDispatch, RootState } from '../store';
-import { MusicData, UserMainFields } from '@/types/types';
+import { MusicData, MusicDataWithReactionT, UserMainFields } from '@/types/types';
 import { getUserMainFields } from '@/dal/user';
 import { getMusicById } from '@/dal/music';
 import { string } from 'yup';
 import { getPlaylistById } from '@/dal/playlist';
 import { PlaylistData } from '@/types/playlistTypes';
 import { shuffleArray } from '@/utils/ArrayFunctions';
+import { getMusicByIdA } from '@/actions/music';
+import { ItemReactionStatus } from '@/types/likeAndDislikes';
 
 export const setMusicData = createAsyncThunk(
   'player/getMusicData',
   async (musicId: string, thunkAPI) => {
-    const res = await getMusicById(musicId);
-    // const res =currentUser?._id ? await getAllUserLikeAndDislikeAction(currentUser?._id):null
-    return res as MusicData | null;
+    const res = await getMusicByIdA(musicId);
+    console.log(res.data);
+    return res.data;
   },
 );
 export const setPlaylistData = createAsyncThunk(
   'player/setPlaylistData',
-  async ({playlistId,shuffle=false}:{playlistId:string,shuffle?: boolean}, thunkAPI) => {
+  async ({ playlistId, shuffle = false }: { playlistId: string; shuffle?: boolean }, thunkAPI) => {
     const res = await getPlaylistById<PlaylistData>(playlistId);
-    const items:string[]|undefined = shuffle && res ?shuffleArray(res.items):  res?.items
-    return { items: items || [], _id: res?._id || null ,type: res?.type ||null};
+    const items: string[] | undefined = shuffle && res ? shuffleArray(res.items) : res?.items;
+    return { items: items || [], _id: res?._id || null, type: res?.type || null };
   },
 );
 
@@ -29,13 +31,13 @@ interface MusicFiltersFields {
   playlist: {
     _id: string | null;
     items: string[];
-    type: string|null;
+    type: string | null;
   };
   currentTime: number;
   volume: number;
   loop: boolean;
   isPlaying: boolean;
-  selectedAudio: MusicData | null;
+  selectedAudio: MusicDataWithReactionT | null;
   isLoading: boolean;
   errorMessage: null | any;
   showPlayer: boolean;
@@ -46,10 +48,10 @@ const initialState: MusicFiltersFields = {
   playlist: {
     _id: null,
     items: [],
-    type:null,
+    type: null,
   },
   currentTime: 0,
-  volume: 0.2,
+  volume: 0.05,
   loop: false,
   isPlaying: true,
   selectedAudio: null,
@@ -61,7 +63,7 @@ export const playerSlice = createSlice({
   name: 'playerSlice',
   initialState,
   reducers: {
-    setAudio: (state, action: PayloadAction<MusicData | null>) => {
+    setAudio: (state, action: PayloadAction<MusicDataWithReactionT | null>) => {
       state.selectedAudio = action.payload;
     },
     setLoop: (state, action: PayloadAction<boolean>) => {
@@ -81,7 +83,7 @@ export const playerSlice = createSlice({
       action: PayloadAction<{
         _id: string | null;
         items: string[];
-        type: string|null
+        type: string | null;
       }>,
     ) => {
       state.playlist = action.payload;
@@ -102,6 +104,11 @@ export const playerSlice = createSlice({
       state.selectedAudio = null;
       state.isLoading = true;
       state.errorMessage = null;
+    },
+    changeSelectedMusicReaction: (state, action: PayloadAction<ItemReactionStatus>) => {
+      if (state.selectedAudio) {
+        state.selectedAudio.reactionStatus = action.payload;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -149,6 +156,7 @@ export const {
   setPlaylist,
   clearPlayer,
   setPlaylistItems,
+  changeSelectedMusicReaction,
 } = playerSlice.actions;
 
 export default playerSlice.reducer;

@@ -1,33 +1,91 @@
-import React from 'react'
-import mockPostImg from '@/public/profCap.jpg'
-import PostItem from '../PostItem/PostItem'
-import s from './PostList.module.scss'
+'use client';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import mockPostImg from '@/public/profCap.jpg';
+import PostItem from '../PostItem/PostItem';
+import s from './PostList.module.scss';
+import { useAsync, useLoading } from '@/hooks/useFetching';
+import { useParams } from 'next/navigation';
+import { findAllPostsByUsername } from '@/actions/post';
+import { MongoosePost } from '@/types/postTypes';
+import useScrollPagination from '@/hooks/useScrollPagination';
+import Image from 'next/image';
+import cicleTube from '@/public/circleTube.svg';
 
-const posts = [
-    {  _id: '1',
-        text: 'string',
-        postImg: mockPostImg,
-    },
-    {  _id: '2',
-        text: 'stringstringstringstring',
-        postImg: mockPostImg,
-    },
-    {  _id: '3',
-        text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt condimentum urna eget dictum. Cras facilisis eget arcu a dignissim. Maecenas scelerisque ullamcorper elementum. Fusce sit amet eros sed nunc vulputate lobortis vitae at eros. Integer feugiat, erat vitae cursus ultrices, ante urna vestibulum elit, quis dictum diam orci eu libero. Cras suscipit placerat eros, non lobortis purus euismod sed. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus blandit eget dolor ac cursus. Suspendisse malesuada ullamcorper risus, vel vestibulum est. Phasellus quis leo ut ipsum laoreet tincidunt. Cras urna enim, imperdiet vel libero eget, dapibus commodo erat. Aliquam quis quam et libero feugiat dignissim.
+type Props = {
+  isPostsAuthor: boolean;
+  selectedSortOrder: {
+    title: string;
+    value: string;
+  };
+};
 
-Donec mattis pellentesque lorem vel semper. Etiam non ipsum eget orci molestie lobortis. Etiam pretium augue tristique, lacinia odio sit amet, commodo magna. Fusce quis elit vitae eros dictum posuere in at sapien. Suspendisse potenti. Sed lacinia, augue id pretium blandit, turpis nisl fringilla purus, efficitur pellentesque est nibh at est. Nulla a sodales mauris, at commodo ante.
+const PostList = ({ selectedSortOrder,isPostsAuthor }: Props) => {
+  const params: { nickname: string } | null = useParams();
+  const loadMoreItems = useRef(true);
+  const [posts, setPosts] = useState<MongoosePost[]>([]);
 
-Integer lacinia interdum orci, vitae fermentum enim suscipit commodo. Nulla eu leo eget arcu semper faucibus at non risus. Nullam porta erat eu erat molestie facilisis. Proin molestie, purus vel ullamcorper aliquam, nibh quam malesuada felis, sed pulvinar neque tortor et erat. Mauris sed ex non lorem dignissim auctor. Fusce mollis cursus luctus. Donec ullamcorper pellentesque est, nec vestibulum purus fringilla sit amet. Suspendisse scelerisque dignissim ligula vitae accumsan. Aliquam aliquet dui vitae porttitor mattis. Duis ut metus non leo molestie pulvinar non quis tortor. Ut imperdiet nisl quis ipsum fringilla placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam nec quam at odio rhoncus faucibus. Nam at tellus pretium, suscipit diam vitae, volutpat purus. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Duis ullamcorper lorem libero, eget mollis libero malesuada at.`,
-        postImg: mockPostImg,
-    },
-]
+  const getPostsByUsername = async (sortType: string, posts: MongoosePost[]) => {
+    const postLimit = 4;
+    if (!loadMoreItems.current) return;
+    const lastPostId = posts.length > 0 ? posts[posts.length - 1]._id : null;
+    console.log(params);
+    console.log(posts);
+    if (!params) return;
+    const res = await findAllPostsByUsername({
+      username: params?.nickname,
+      sortType,
+      lastPostId,
+      limit: postLimit,
+    });
+    console.log(res);
+    if (!res.ok || !res.data) return;
+    setPosts((prev) => [...prev, ...res.data]);
+    if (res.data.length < postLimit) loadMoreItems.current = false; // закончились посты
+  };
 
-const PostList = () => {
+  //     const {data:posts,status,error,execute}=useAsync(getPostsByUsername,[params?.nickname])
+  //      const sortedPosts = posts && posts.sort((a, b) => {
+  //         if(selectedSortOrder.value==='DESC'){
+  //             return +new Date(b.createdAt) - (+new Date(a.createdAt));
+
+  //         }else{
+  //             return +new Date(a.createdAt) - (+new Date(b.createdAt));
+  //         }
+  // });
+  const [getPostsByUsernameLoading, isLoading] = useLoading(getPostsByUsername);
+  // const {execute,status,data,error} = useAsync(getEvents,[isOnlyFreeEvents,location?.slug])
+
+  useEffect(() => {
+    loadMoreItems.current = true;
+    setPosts([]);
+  }, [selectedSortOrder.value]); // Перезагрузка при изменении slug или free-flag
+  const refObserver = useScrollPagination({
+    loadMoreCallback: () => getPostsByUsernameLoading(selectedSortOrder.value, posts),
+    threshold: 100, // подгружаем, когда расстояние до конца страницы меньше 100 пикселей
+    scrollDeps: [selectedSortOrder.value, posts],
+  });
+  // useEffect(() => {
+  //   const targetElement = document.getElementById('profile-nav');
+  //   console.log(targetElement);
+  //   if (targetElement) {
+  //     targetElement.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // }, [selectedSortOrder.value]);
+
   return (
-    <div className={s.postList}>
-        {posts.map(post=><PostItem key={post._id} {...post}/>)}
+    <div className={s.postList} style={isLoading ? { height: '100vh' } : {}}>
+      {posts.length === 0 && !isLoading && <div className={s.noPosts}>Пусто</div>}
+      {posts.map((post) => (
+        <PostItem  key={post._id} {...post} isPostsAuthor={isPostsAuthor}/>
+      ))}
+      {isLoading && (
+        <div style={{ textAlign: 'center' }}>
+          <Image src={cicleTube} height={50} width={50} alt="Loading..." />
+        </div>
+      )}
+      <div ref={refObserver}></div>
     </div>
-  )
-}
+  );
+};
 
-export default PostList
+export default PostList;

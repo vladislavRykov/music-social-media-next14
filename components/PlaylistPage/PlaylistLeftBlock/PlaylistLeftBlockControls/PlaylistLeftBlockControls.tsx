@@ -31,20 +31,7 @@ type Props = {
     desc: string;
     access_type: AccessType;
   };
-  likesAndDislikes: {
-    likes: string[];
-    dislikes: string[];
-} | null;
-  updatePlaylistData: () => Promise<{
-    likesAndDislikes: {
-        likes: string[];
-        dislikes: string[];
-    } | null | undefined;
-    playlist: Overwrite<PlaylistData, {
-        userId: UserDataMongoose;
-        items: MusicData[];
-    }> | null;
-} | null>;
+  updatePlaylistData:  () => void;
 };
 
 const PlaylistLeftBlockControls: React.FC<Props> = ({

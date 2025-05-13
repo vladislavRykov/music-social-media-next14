@@ -8,12 +8,13 @@ import { useSearchParams } from 'next/navigation';
 import { AccessType, Overwrite } from '@/types/common';
 import { useAsync } from '@/hooks/useFetching';
 import { PlaylistData, UserPlaylistData } from '@/types/playlistTypes';
-import { MusicData, UserDataMongoose } from '@/types/types';
+import { MusicData, UserDataMongoose, UserMainFields } from '@/types/types';
 import Image from 'next/image';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import { selectUser } from '@/redux/selectors/userSelectors';
 import mockPlaylistAva from '@/public/musicImg.jpg';
-import { getAllUserLikeAndDislikeAction } from '@/actions/likesAndDislikes';
+import { getPlayerPlaylistsData } from '@/actions/playlist';
+import { getUserMainFieldsById } from '@/dal/user';
 
 const PlaylistPage = () => {
   const searchParams = useSearchParams();
@@ -21,17 +22,16 @@ const PlaylistPage = () => {
 
   const list = searchParams?.get('list');
   const asyncFunction = async () => {
-    if (!list || list==='LM') return null
-      const res =currentUser?._id ? await getAllUserLikeAndDislikeAction(currentUser?._id):null
-      console.log(155,res)
-      const playlist= await getPlaylistById<
-      Overwrite<PlaylistData, { userId: UserDataMongoose; items: MusicData[] }>
-      >(list, ['userId', 'items']);
-      return {likesAndDislikes: res?.data,playlist}
+    if (!list || list === 'LM') return null;
+    const playlistData = await getPlayerPlaylistsData(list);
+    if (!playlistData.ok || !playlistData.data) return null;
+    const userData: UserMainFields | null = await getUserMainFieldsById(playlistData.data.userId);
+    if (!userData) return null;
+    console.log(playlistData.data.items.map((id) => id));
+    return { playlist: playlistData.data, userData };
   };
-  const { execute, data, error, status } = useAsync(asyncFunction, [list,currentUser?._id]);
-  console.log(1552,data?.likesAndDislikes)
-  const isAuthor = currentUser?._id === data?.playlist?.userId._id;
+  const { execute, data, error, status } = useAsync(asyncFunction, [list, currentUser?._id]);
+  const isAuthor = currentUser?._id === data?.userData._id;
 
   const backgroundImageStyle: CSSProperties = {
     backgroundImage: `url(${data?.playlist?.items[0]?.image})`,
@@ -64,38 +64,37 @@ const PlaylistPage = () => {
           backgroundColor: '#030303b5',
           filter: 'blur(30px)',
         }}></div>
-      {status === 'success' && data?.playlist && data?.likesAndDislikes ? (
+      {status === 'success' && data?.playlist ? (
         <>
           <PlaylistLeftBlock
-          isPlaylistHasImg={!!data.playlist.playlistImg}
+            isPlaylistHasImg={!!data.playlist.playlistImg}
             isPlaylistEmpty={isPlaylistEmpty}
             isAuthor={isAuthor}
             firstSongId={data?.playlist.items[0]?._id}
             playlistId={data?.playlist._id}
             author={{
-              username: data?.playlist.userId.username,
-              avatar: data?.playlist.userId.avatar || '',
+              username: data?.userData.username,
+              avatar: data?.userData.avatar || '',
             }}
             type={data?.playlist.type}
             title={data?.playlist.title}
-            playlistImg={data.playlist.playlistImg || data?.playlist.items[0]?.image || mockPlaylistAva}
+            playlistImg={
+              data.playlist.playlistImg || data?.playlist.items[0]?.image || mockPlaylistAva
+            }
             description={data?.playlist.description}
             trackCount={data?.playlist.items.length}
             totalDuration={data?.playlist.items.reduce((acc, prev) => acc + prev.duration, 0)}
             access_type={data?.playlist.access_type as AccessType}
             createdAt={data?.playlist.createdAt}
-            updatePlaylistData={execute}
-            likesAndDislikes={data.likesAndDislikes ||null}
+            updatePlaylistData={() => execute()}
           />
           <PlaylistItemsBlock
-        type={data?.playlist.type}
+            type={data?.playlist.type}
             isPlaylistEmpty={isPlaylistEmpty}
             isAuthor={isAuthor}
-            updatePlaylist={execute}
+            updatePlaylist={() => execute()}
             playlistId={data?.playlist._id}
             playlistItems={data?.playlist.items}
-            likesAndDislikes={data.likesAndDislikes ||null}
-        
           />
         </>
       ) : (

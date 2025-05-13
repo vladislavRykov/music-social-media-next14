@@ -7,9 +7,11 @@ import LikesAndDislikes from './LikesAndDislikes'
 import Chat from './Chat'
 import Message from './Message'
 import File from './File'
+import Reaction from './Reaction'
 import Post from './Post'
 
 export const Models = {
+  Reaction,
   Post,
   File,
   Message,

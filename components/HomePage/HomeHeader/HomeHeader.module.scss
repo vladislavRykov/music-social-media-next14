@@ -1,6 +1,10 @@
 .homeHeader{
     position: relative;
     height: 400px;
+    background-image: var(--home-page-header-img);
+    background-position: top;
+    background-repeat: no-repeat;
+    background-size: cover;
     &_text{
         position: absolute;
         bottom: 0;

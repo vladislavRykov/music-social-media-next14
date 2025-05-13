@@ -31,20 +31,7 @@ type PlaylistLeftBlockProps = {
   isPlaylistEmpty: boolean;
   type: string;
   isPlaylistHasImg: boolean;
-  likesAndDislikes: {
-    likes: string[];
-    dislikes: string[];
-} | null;
-  updatePlaylistData:  () => Promise<{
-    likesAndDislikes: {
-        likes: string[];
-        dislikes: string[];
-    } | null | undefined;
-    playlist: Overwrite<PlaylistData, {
-        userId: UserDataMongoose;
-        items: MusicData[];
-    }> | null;
-} | null>
+  updatePlaylistData: () => void;
 };
 
 const PlaylistLeftBlock: React.FC<PlaylistLeftBlockProps> = ({
@@ -56,7 +43,6 @@ const PlaylistLeftBlock: React.FC<PlaylistLeftBlockProps> = ({
   totalDuration,
   access_type,
   createdAt,
-  likesAndDislikes,
   author,
   playlistId,
   firstSongId,
@@ -86,7 +72,13 @@ const PlaylistLeftBlock: React.FC<PlaylistLeftBlockProps> = ({
             alt="Изображение плейлиста"
             priority
           />
-       {type!=='favorites' && <PlaylistUploadAvatar updatePlaylistData={updatePlaylistData} playlistId={playlistId} isPlaylistHasImg={isPlaylistHasImg}/>}
+          {type !== 'favorites' && (
+            <PlaylistUploadAvatar
+              updatePlaylistData={updatePlaylistData}
+              playlistId={playlistId}
+              isPlaylistHasImg={isPlaylistHasImg}
+            />
+          )}
         </div>
         <h2 className={s.playlistLeftBlock_title}>{title}</h2>
         <div className={s.playlistLeftBlock_author}>
@@ -106,12 +98,11 @@ const PlaylistLeftBlock: React.FC<PlaylistLeftBlockProps> = ({
       </div>
       {!isPlaylistEmpty && (
         <PlaylistLeftBlockControls
-        type={type}
+          type={type}
           playlistData={playlistData}
           playlistId={playlistId}
           firstSongId={firstSongId}
           updatePlaylistData={updatePlaylistData}
-          likesAndDislikes={likesAndDislikes}
           isAuthor={isAuthor}
         />
       )}

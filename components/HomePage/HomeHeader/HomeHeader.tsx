@@ -12,7 +12,7 @@ type Props = {
 const HomeHeader = ({scrollIntoViewOfMain}:Props) => {
   return (
     <div className={s.homeHeader}>
-        <Image style={{objectFit: 'cover',objectPosition: 'top center'}} src={MainPageImage} fill alt='bg_img'/>
+        {/* <Image style={{objectFit: 'cover',objectPosition: 'top center'}} src={MainPageImage} fill alt='bg_img'/> */}
         <div className={s.homeHeader_text}>
             <h2>MusicMates</h2>
             <p>Слушай любимую музыку, делись её с близкими, следи за актуальными событиями в мире музыки</p>

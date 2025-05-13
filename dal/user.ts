@@ -86,6 +86,41 @@ export const getUserMainFields = cache(async () => {
     return null;
   }
 });
+export const getUserMainFieldsById = cache(async (userId:string) => {
+  try {
+    const user = await Models.User.findById(userId);
+    console.log(user)
+    if (!user) {
+      return null;
+    }
+    const {
+      _id,
+      email,
+      username,
+      createdAt,
+      aboutMe,
+      updatedAt,
+      avatar,
+      isAdmin,
+      banner,
+      location,
+    }: UserMainFields = user._doc;
+    return {
+      _id: _id.toString(),
+      banner,
+      username,
+      aboutMe,
+      email,
+      createdAt,
+      updatedAt,
+      avatar,
+      isAdmin,
+      location,
+    };
+  } catch (error) {
+    return null;
+  }
+});
 export const replaceUserAvatar = cache(async (imgUrl: string) => {
   try {
     await mongooseConnect();

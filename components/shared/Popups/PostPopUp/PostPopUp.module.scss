@@ -1,0 +1,12 @@
+.postItemPopUp{
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+.postPopUpInner{
+    display: flex;
+    flex-direction: column;
+    padding: 12px 0px;
+    background-color: var(--secondary-bg-color);
+    border-radius: 8px;
+}

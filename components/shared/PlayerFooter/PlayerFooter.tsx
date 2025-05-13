@@ -95,8 +95,13 @@ const PlayerFooter = () => {
                   viewsCount={musicData.viewsCount}
                   likes={musicData.likes}
                 />
-                <PlayerLikeDislike songId={musicData._id}/>
-                <PlayerSettings playlistType={playlist.type} isOpen={isOpen} playlistId={playlist._id} musicId={musicData._id} />
+                <PlayerLikeDislike reactionType={musicData.reactionStatus} songId={musicData._id} />
+                <PlayerSettings
+                  playlistType={playlist.type}
+                  isOpen={isOpen}
+                  playlistId={playlist._id}
+                  musicId={musicData._id}
+                />
               </>
             )}
           </div>

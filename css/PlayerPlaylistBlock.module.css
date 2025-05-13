@@ -1,0 +1,26 @@
+.wrapper {
+  position: fixed;
+  display: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 40px;
+  gap: 20px;
+  background-color: #2b2d42;
+  border-top: 2px solid #474a69;
+  width: 100%;
+  bottom: -100%;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  z-index: 4;
+  left: 0;
+  height: calc(100vh - 148px);
+}
+.wrapper_open {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}

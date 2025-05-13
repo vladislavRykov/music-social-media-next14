@@ -1,0 +1,39 @@
+.forgotPage_form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 25px;
+}
+.forgotPage_submit {
+  -ms-flex-item-align: center;
+      align-self: center;
+  padding: 10px 25px;
+  color: white;
+  background-color: rgb(77, 202, 255);
+  border-radius: 6px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 16px;
+  font-weight: 600;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+.forgotPage_submit_loader {
+  font-size: 16px;
+}
+.forgotPage_links {
+  text-align: center;
+  font-size: 13px;
+  color: rgb(153, 153, 153);
+  font-weight: 500;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+.forgotPage_links:hover {
+  color: rgb(118, 212, 255);
+}

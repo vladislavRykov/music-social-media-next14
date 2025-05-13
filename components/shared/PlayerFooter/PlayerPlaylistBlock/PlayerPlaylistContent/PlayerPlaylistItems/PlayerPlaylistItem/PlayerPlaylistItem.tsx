@@ -16,6 +16,7 @@ import SettingsBtnPopUp from '@/components/shared/SettingsBtnPopUp/SettingsBtnPo
 import AddToPlayList from '@/components/shared/SettingsBtnPopUp/AddToPlayList/AddToPlayList';
 import AddToLiked from '@/components/shared/SettingsBtnPopUp/AddToLiked/AddToLiked';
 import RemoveFromPlayList from '@/components/shared/SettingsBtnPopUp/RemoveFromPlayList/RemoveFromPlayList';
+import { ItemReactionStatus } from '@/types/likeAndDislikes';
 
 interface PlayerPlaylistItemProps {
   _id: string;
@@ -25,8 +26,8 @@ interface PlayerPlaylistItemProps {
   playlist: string[];
   image: string;
   playlistId: string | null;
+  reactionStatus: ItemReactionStatus;
 }
-
 const PlayerPlaylistItem: React.FC<PlayerPlaylistItemProps> = ({
   _id,
   author,
@@ -35,9 +36,12 @@ const PlayerPlaylistItem: React.FC<PlayerPlaylistItemProps> = ({
   playlist,
   duration,
   playlistId,
+  reactionStatus,
 }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const [reactionType, setReactionType] = useState<ItemReactionStatus>(reactionStatus);
+  console.log(reactionType);
   const createQueryString = useCallback(
     (name: string, value: string) => {
       const params = new URLSearchParams(searchParams?.toString());
@@ -142,7 +146,15 @@ const PlayerPlaylistItem: React.FC<PlayerPlaylistItemProps> = ({
             styles={{ top: '0', right: '100%' }}
             closePopup={() => setIsPopUpOpen(false)}>
             <AddToPlayList selectedItems={[_id]} />
-            <AddToLiked songId={_id}   closePopup={() => setIsPopUpOpen(false)}/>
+            <AddToLiked
+              reactionType={reactionType}
+              setReactionType={(reaction: ItemReactionStatus) => setReactionType(reaction)}
+              songId={_id}
+              currentSongId={selectedAudio?._id}
+              currentSongReaction={selectedAudio?.reactionStatus}
+              reactionStatus={reactionStatus}
+              closePopup={() => setIsPopUpOpen(false)}
+            />
             {playlistId && (
               <RemoveFromPlayList
                 closePopup={() => setIsPopUpOpen(false)}

@@ -9,18 +9,26 @@ import { getAllMusic } from '@/dal/music';
 import { MusicData } from '@/types/types';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import { filtersSelectedData } from '@/redux/selectors/musicFiltersSelectors';
+import { useAsync } from '@/hooks/useFetching';
+import circleTube from '@/public/circleTube.svg';
+import Image from 'next/image';
 
 const BrowseMusics = () => {
   const { selectedGenres, year, search, season } = useAppSelector(filtersSelectedData);
   const [musicItemType, setMusicItemType] = useState<'block' | 'linear-record'>('block');
-  const [browseMusic, setBrowseMusic] = useState<MusicData[] | null>(null);
-  useEffect(() => {
-    (async () => {
-      const res = await getAllMusic({ genres: selectedGenres.map((genre) => genre.value), search });
-      const data = JSON.parse(JSON.stringify(res));
-      setBrowseMusic(data);
-    })();
-  }, [search, selectedGenres]);
+
+  const getBrowseMusics = async () => {
+    const res = await getAllMusic({ genres: selectedGenres.map((genre) => genre.value), search });
+    const data = JSON.parse(JSON.stringify(res));
+    return data as MusicData[];
+  };
+
+  const {
+    status,
+    data: browseMusic,
+    error,
+    execute,
+  } = useAsync(getBrowseMusics, [selectedGenres, search]);
   const MusicIdArray = browseMusic?.map((track) => track._id);
   return (
     <div className={s.browseMusics}>
@@ -47,33 +55,39 @@ const BrowseMusics = () => {
           [s.browseMusics_blockMusics]: musicItemType === 'block',
           [s.browseMusics_linearMusics]: musicItemType === 'linear-record',
         })}>
-        {browseMusic?.map((track) => {
-          if (musicItemType === 'block') {
-            return (
-              <BrowseMusicItem
-                key={track._id}
-                _id={track._id}
-                author={track.author}
-                title={track.title}
-                image={track.image}
-                playlist={MusicIdArray || []}
-              />
-            );
-          } else {
-            return (
-              <LinearMusicItem
-                key={track._id}
-                _id={track._id}
-                viewsCount={track.viewsCount}
-                author={track.author}
-                title={track.title}
-                image={track.image}
-                playlist={MusicIdArray || []}
-              />
-            );
-          }
-        })}
+        {status == 'success' &&
+          browseMusic?.map((track) => {
+            if (musicItemType === 'block') {
+              return (
+                <BrowseMusicItem
+                  key={track._id}
+                  _id={track._id}
+                  author={track.author}
+                  title={track.title}
+                  image={track.image}
+                  playlist={MusicIdArray || []}
+                />
+              );
+            } else {
+              return (
+                <LinearMusicItem
+                  key={track._id}
+                  _id={track._id}
+                  viewsCount={track.viewsCount}
+                  author={track.author}
+                  title={track.title}
+                  image={track.image}
+                  playlist={MusicIdArray || []}
+                />
+              );
+            }
+          })}
       </div>
+        {status == 'pending' && (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Image src={circleTube} alt="loading..." width={60} height={60} />
+        </div>
+        )}
     </div>
   );
 };

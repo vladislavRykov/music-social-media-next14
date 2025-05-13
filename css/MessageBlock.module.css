@@ -1,0 +1,130 @@
+.messageBlock {
+  padding: 10px 20px;
+}
+.messageBlock_content {
+  height: 100%;
+  width: 70%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 10px;
+}
+.messageBlock_inputWrapper {
+  width: 100%;
+  background-color: #fafafa;
+  padding: 22px 20px;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 5px;
+  position: relative;
+}
+.messageBlock_textarea {
+  color: black;
+  background-color: #fafafa;
+  resize: none;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  width: 100%;
+}
+.messageBlock_defBtn {
+  cursor: pointer;
+  background-color: #fafafa;
+  padding: 20px;
+  border-radius: 50%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.messageBlock_defBtn:hover {
+  background-color: #3DB4F2;
+}
+.messageBlock_defBtn:hover .messageBlock_iconBtn {
+  color: #fafafa;
+}
+.messageBlock_iconBtn {
+  color: #3DB4F2;
+  -webkit-transform: scale(0);
+      -ms-transform: scale(0);
+          transform: scale(0);
+  -webkit-animation: animateBtnIcon 0.25s ease forwards;
+          animation: animateBtnIcon 0.25s ease forwards;
+}
+.messageBlock_sendIcon {
+  position: relative;
+  left: 3px;
+}
+.messageBlock_recordingTimer {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}
+.messageBlock_redDot {
+  background-color: red;
+  border-radius: 50%;
+  height: 12px;
+  width: 12px;
+  opacity: 1;
+  -webkit-animation: animatedDot 1.5s ease-out infinite;
+          animation: animatedDot 1.5s ease-out infinite;
+}
+
+@-webkit-keyframes animateBtnIcon {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+
+@keyframes animateBtnIcon {
+  from {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+  }
+  to {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
+@-webkit-keyframes animatedDot {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}
+@keyframes animatedDot {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
+}

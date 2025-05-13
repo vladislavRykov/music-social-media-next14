@@ -1,0 +1,10 @@
+.librarymain {
+  min-height: 100vh;
+}
+
+.itemList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+}

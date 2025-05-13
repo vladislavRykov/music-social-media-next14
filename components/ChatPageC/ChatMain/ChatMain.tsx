@@ -37,7 +37,6 @@ const ChatMain = () => {
 
 
  const backgroundImageStyle: CSSProperties = {
-    backgroundImage: `url(${chatBG.src})`,
     paddingBottom: isPlayerShown ? '80px' : '0px'
   };
 

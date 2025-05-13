@@ -1,0 +1,29 @@
+.popup {
+  position: fixed;
+  z-index: 200;
+  bottom: 100px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+.popup_container {
+  padding: 20px 30px;
+  border-radius: 5px;
+  border: 1px solid #484848;
+  background-color: #212121;
+  color: #fafafa;
+  font-size: 16px;
+}
+.popup_flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.popup_btn {
+  color: #fafafa;
+}

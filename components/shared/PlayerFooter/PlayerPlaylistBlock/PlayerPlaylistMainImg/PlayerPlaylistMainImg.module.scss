@@ -9,13 +9,15 @@
     cursor: pointer;
     position: relative;
     border-radius: 5px;
+    width: 800px;
+    height: 500px;
 
     overflow: hidden;
     &:hover .playerPlaylistMainImg_topOverlay {
       opacity: 1;
     }
     img {
-      object-fit: fill;
+      // object-fit: fill;
       background-color: #2b2d42;
     }
   }

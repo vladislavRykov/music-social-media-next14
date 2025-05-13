@@ -3,20 +3,21 @@ import React, { useState } from 'react'
 import s from './OldestNewestSelector.module.scss'
 import PopupWrapper from '@/components/shared/Popups/PopupWrapper'
 import cn from 'classnames'
+import { orderFilters } from '../orderFilters'
 
-const orderFilters = [
-    {
-        title: 'Сначала новые',
-        value: 'DESC'
-    },
-    {
-        title: 'Сначала старые',
-        value: 'ASC'
-    },
-]
+type Props = {
+       selectedOrder: {
+    title: string;
+    value: string;
+}
+setSelectedOrder: (filter: {
+    title: string;
+    value: string;
+})=>void
+}
 
-const OldestNewestSelector = () => {
-    const [selectedOrder,setSelectedOrder] = useState(orderFilters[0])
+const OldestNewestSelector = ({selectedOrder,setSelectedOrder}:Props) => {
+    
     const [isFilterSelectOpen,setIsFilterSelectOpen] = useState(false)
 
         const onOptionClick= (filter:{

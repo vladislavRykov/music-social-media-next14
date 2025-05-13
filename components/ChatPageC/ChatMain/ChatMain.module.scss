@@ -1,34 +1,36 @@
-.chatMain{
-    flex: 1;
+.chatMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-image: var(--chat-bg-img);
+  background-position: center;
+  &_content {
+    overflow: auto;
+    // height: calc(100% - 80px);
+    flex: 1 1 auto;
+    &::-webkit-scrollbar-track {
+      background: transparent;
+      // background: #2b2d42;
+      width: 5px;
+    }
+    &::-webkit-scrollbar {
+      width: 5px; /* Ширина скроллбара */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      // border: 8px solid transparent;
+      // border: 8px solid #2b2d42;
+      background-color: var(--third-text-color); /* Цвет ползунка */
+      border-radius: 2px; /* Радиус скругления */
+    }
+  }
+  &_chatNotSelected {
+    height: 100%;
     display: flex;
-    flex-direction: column;
-    &_content{
-        overflow: auto;
-        // height: calc(100% - 80px);
-        flex: 1 1 auto;
-        &::-webkit-scrollbar-track {
-            background: transparent;
-            // background: #2b2d42;
-            width: 5px;
-          }
-          &::-webkit-scrollbar {
-            width: 5px; /* Ширина скроллбара */
-          }
-        
-          &::-webkit-scrollbar-thumb {
-            // border: 8px solid transparent;
-            // border: 8px solid #2b2d42;
-            background-color: #fafafa; /* Цвет ползунка */
-            border-radius: 2px; /* Радиус скругления */
-          }
-    }
-    &_chatNotSelected{
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fafafa;
-      font-size: 25px;
-      font-weight: 600;
-    }
+    align-items: center;
+    justify-content: center;
+    color: var(--third-text-color);
+    font-size: 25px;
+    font-weight: 600;
+  }
 }

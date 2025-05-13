@@ -39,19 +39,7 @@ type Props = {
     desc: string;
     access_type: AccessType;
   };
-  updatePlaylistData:() => Promise<{
-    likesAndDislikes: {
-        likes: string[];
-        dislikes: string[];
-    } | null | undefined;
-    playlist: Overwrite<PlaylistData, {
-        userId: UserDataMongoose;
-        items: MusicData[];
-    }> | null;
-} | null>;
-
-
- 
+  updatePlaylistData: () => void;
 };
 const options = [
   {

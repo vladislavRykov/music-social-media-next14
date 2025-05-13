@@ -13,22 +13,21 @@ type EditPlaylistModalProps = {
     desc: string;
     access_type: AccessType;
   };
-  updatePlaylistData:() => Promise<{
-    likesAndDislikes: {
-        likes: string[];
-        dislikes: string[];
-    } | null | undefined;
-    playlist: Overwrite<PlaylistData, {
-        userId: UserDataMongoose;
-        items: MusicData[];
-    }> | null;
-} | null>;
+  updatePlaylistData:() => void;
 };
 
-const EditPlaylistModal: React.FC<EditPlaylistModalProps> = ({ closeModal, playlistData,updatePlaylistData }) => {
+const EditPlaylistModal: React.FC<EditPlaylistModalProps> = ({
+  closeModal,
+  playlistData,
+  updatePlaylistData,
+}) => {
   return (
     <SecondaryModal closeModal={closeModal}>
-      <InnerEditPlaylist updatePlaylistData={updatePlaylistData} closeModal={closeModal} playlistData={playlistData} />
+      <InnerEditPlaylist
+        updatePlaylistData={updatePlaylistData}
+        closeModal={closeModal}
+        playlistData={playlistData}
+      />
     </SecondaryModal>
   );
 };
