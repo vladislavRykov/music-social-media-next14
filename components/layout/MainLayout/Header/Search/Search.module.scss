@@ -6,3 +6,15 @@
     color: #b1b5de;
   }
 }
+.search {
+  position: relative;
+  &_popup {
+    position: absolute;
+    transition: 0.15s;
+    z-index: 130;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    top: -8px;
+  }
+}

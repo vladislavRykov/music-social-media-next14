@@ -11,12 +11,15 @@ import AddToPlayList from '../../SettingsBtnPopUp/AddToPlayList/AddToPlayList';
 import SettingsBtnPopUp from '../../SettingsBtnPopUp/SettingsBtnPopUp';
 import RemoveFromPlayList from '../../SettingsBtnPopUp/RemoveFromPlayList/RemoveFromPlayList';
 import ClosePlayer from '../../SettingsBtnPopUp/ClosePlayer/ClosePlayer';
+import { ItemReactionStatus } from '@/types/likeAndDislikes';
 
 type PlayerSettingsProps = {
   playlistId: string | null;
   musicId: string;
   isOpen: boolean | undefined;
   playlistType: string | null;
+  reactionType: ItemReactionStatus
+  currentSongReaction: ItemReactionStatus
 };
 
 const PlayerSettings: React.FC<PlayerSettingsProps> = ({
@@ -24,6 +27,9 @@ const PlayerSettings: React.FC<PlayerSettingsProps> = ({
   musicId,
   isOpen,
   playlistType,
+  reactionType,
+  currentSongReaction,
+
 }) => {
   // const dispatch = useAppDispatch();
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
@@ -46,7 +52,7 @@ const PlayerSettings: React.FC<PlayerSettingsProps> = ({
           }}
           closePopup={() => setIsPopUpOpen(false)}>
           <AddToPlayList selectedItems={[musicId]} />
-          <AddToLiked closePopup={() => setIsPopUpOpen(false)} songId={musicId} />
+          <AddToLiked reactionType={reactionType} currentSongReaction={currentSongReaction} closePopup={() => setIsPopUpOpen(false)} songId={musicId} currentSongId={musicId} />
           {playlistId && playlistType !== 'favorites' && (
             <RemoveFromPlayList
               closePopup={() => {

@@ -31,7 +31,6 @@ const AddToLiked = ({
 }: {
   songId: string;
   closePopup: () => void;
-  reactionStatus: ItemReactionStatus;
   currentSongId?: string;
   setReactionType?: (reaction: ItemReactionStatus) => void;
   reactionType?: ItemReactionStatus;

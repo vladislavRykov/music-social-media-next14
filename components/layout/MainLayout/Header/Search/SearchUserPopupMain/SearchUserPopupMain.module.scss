@@ -1,0 +1,37 @@
+.content {
+}
+.input {
+  background-color: #d7d6d6;
+  color: black;
+  width: 100%;
+  &::placeholder {
+    color: black;
+  }
+  &_wrapper {
+    background-color: #d7d6d6;
+    padding: 8px 16px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+}
+.useritems {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  max-height: 300px;
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    // background: #2b2d42;
+    width: 5px;
+  }
+  &::-webkit-scrollbar {
+    width: 5px; /* Ширина скроллбара */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    // border: 8px solid transparent;
+    // border: 8px solid #2b2d42;
+    background-color: black; /* Цвет ползунка */
+    border-radius: 2px; /* Радиус скругления */
+  }
+}

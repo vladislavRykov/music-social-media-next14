@@ -97,6 +97,8 @@ const PlayerFooter = () => {
                 />
                 <PlayerLikeDislike reactionType={musicData.reactionStatus} songId={musicData._id} />
                 <PlayerSettings
+                reactionType={musicData.reactionStatus}
+                currentSongReaction={musicData.reactionStatus}
                   playlistType={playlist.type}
                   isOpen={isOpen}
                   playlistId={playlist._id}

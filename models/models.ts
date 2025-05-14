@@ -3,12 +3,12 @@ import User from './User';
 import Music from './Music';
 import Genre from './Genre';
 import Playlist from './Playlist';
-import LikesAndDislikes from './LikesAndDislikes'
 import Chat from './Chat'
 import Message from './Message'
 import File from './File'
 import Reaction from './Reaction'
 import Post from './Post'
+import Relationship from './RelationshipSchema'
 
 export const Models = {
   Reaction,
@@ -21,5 +21,5 @@ export const Models = {
   Music,
   Genre,
   Playlist,
-  LikesAndDislikes
+  Relationship,
 };

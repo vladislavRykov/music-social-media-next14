@@ -4,7 +4,8 @@
   gap: 10px;
   border-bottom: 1px solid #474a69;
   align-items: center;
-  background-color: #2b2d42;
+  background-color: transparent;
+  // background-color: #2b2d42;
   justify-content: space-between;
   padding: 2px 8px;
   &:hover .playerPlaylistItem_timer {
@@ -29,6 +30,8 @@
   }
   &_image {
     border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
   }
   &_overlay {
     opacity: 0;
@@ -85,6 +88,7 @@
   &_viewsCount {
   }
   &_selected {
-    background-color: #454868;
+    // background-color: #454868;
+    background-color: color-mix(in srgb, #222334, white 8%);
   }
 }

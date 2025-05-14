@@ -15,6 +15,8 @@
   }
   &_image {
     border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
   }
   &_overlay {
     opacity: 0;
@@ -40,7 +42,7 @@
     padding: 10px 0px;
   }
   &_title {
-    color: var(--main-text-color);
+    color: var(--third-text-color);
     margin-bottom: 10px;
   }
   &_authorAndViews {

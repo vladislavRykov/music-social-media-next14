@@ -6,6 +6,8 @@
 }
 .profileImg {
   border-radius: 5px;
+  object-fit: cover;
+  object-position: center;
   &_arrow {
     color: #515470;
     transition: 0.25s;

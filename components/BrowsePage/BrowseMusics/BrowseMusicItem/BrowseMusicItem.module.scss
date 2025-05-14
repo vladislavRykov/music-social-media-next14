@@ -4,9 +4,12 @@
   display: block;
   &_image {
     border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
+
   }
   &_title {
-    color: var(--main-text-color);
+    color: var(--third-text-color);
     margin-bottom: 10px;
   }
   &_author {

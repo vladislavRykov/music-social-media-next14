@@ -37,7 +37,6 @@ const PostList = ({ selectedSortOrder,isPostsAuthor }: Props) => {
       lastPostId,
       limit: postLimit,
     });
-    console.log(res);
     if (!res.ok || !res.data) return;
     setPosts((prev) => [...prev, ...res.data]);
     if (res.data.length < postLimit) loadMoreItems.current = false; // закончились посты
@@ -62,7 +61,8 @@ const PostList = ({ selectedSortOrder,isPostsAuthor }: Props) => {
   const refObserver = useScrollPagination({
     loadMoreCallback: () => getPostsByUsernameLoading(selectedSortOrder.value, posts),
     threshold: 100, // подгружаем, когда расстояние до конца страницы меньше 100 пикселей
-    scrollDeps: [selectedSortOrder.value, posts],
+    commonDeps: [selectedSortOrder.value],
+    scrollDeps: [posts]
   });
   // useEffect(() => {
   //   const targetElement = document.getElementById('profile-nav');

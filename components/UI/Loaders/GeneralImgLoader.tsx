@@ -12,8 +12,8 @@ const ImgLoader: React.FC<ImgLoaderProps> = ({ width, height, ...rest }) => (
     width={width}
     height={height}
     viewBox={`0 0 ${width} ${height}`}
-    backgroundColor="#454868"
-    foregroundColor="#7074a1"
+    backgroundColor="#13141e"
+    foregroundColor="#1a1c29"
     {...rest}>
     <rect x="0" y="0" rx="5" ry="5" width={width} height={height} />
   </ContentLoader>

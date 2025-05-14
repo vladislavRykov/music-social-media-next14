@@ -1,0 +1,32 @@
+.searchUserPopup {
+  &_wrapper {
+    padding: 40px 20px 20px;
+    background-color: transparent;
+    animation: fadeInOverlay 0.3s ease forwards;
+  }
+  &_content {
+    width: 330px;
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 14px 10px;
+  }
+  &_triangle {
+    line-height: 0;
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  &_hiddenTopDiv {
+    position: relative;
+  }
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

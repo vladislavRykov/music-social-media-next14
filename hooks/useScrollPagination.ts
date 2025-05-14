@@ -2,18 +2,22 @@ import { useRef, useEffect } from 'react';
 
 const DEFAULT_THRESHOLD = 200; // расстояние от низа экрана до начала подгрузки (px)
 
-type ParamsT ={
-  loadMoreCallback: ()=>Promise<void>,
-  threshold: number,
-  scrollDeps?: any[],
-}
+type ParamsT = {
+  loadMoreCallback: () => Promise<void>;
+  threshold: number;
+  scrollDeps?: any[];
+  commonDeps?: any[];
+  immediate?: boolean;
+};
 
 const useScrollPagination = ({
   loadMoreCallback,
   threshold = DEFAULT_THRESHOLD,
-  scrollDeps = []
-}:ParamsT) => {
-  const observerTarget = useRef<HTMLDivElement|null>(null); // реф, привязанный к последнему элементу списка
+  scrollDeps = [],
+  commonDeps = [],
+  immediate = true,
+}: ParamsT) => {
+  const observerTarget = useRef<HTMLDivElement | null>(null); // реф, привязанный к последнему элементу списка
   const isFetching = useRef(false); // предотвращает множественные вызовы подгрузки
 
   /**
@@ -23,27 +27,40 @@ const useScrollPagination = ({
     if (observerTarget.current && !isFetching.current) {
       const targetRect = observerTarget.current.getBoundingClientRect();
       const viewportHeight = document.documentElement.clientHeight;
-      
+
       // Проверяем, достигнута ли позиция ниже порога
-      console.log(targetRect.top <= viewportHeight + threshold)
-      if ((targetRect.top <= viewportHeight + threshold)) {
+      console.log(targetRect.top <= viewportHeight + threshold);
+      if (targetRect.top <= viewportHeight + threshold) {
         isFetching.current = true;
-        loadMoreCallback().then(() => {
-          isFetching.current = false;
-        }).catch(() => {
-          isFetching.current = false;
-        });
+        loadMoreCallback()
+          .then(() => {
+            isFetching.current = false;
+          })
+          .catch(() => {
+            isFetching.current = false;
+          });
       }
     }
   };
-
+  useEffect(() => {
+    if (!immediate) return;
+    if (observerTarget.current && !isFetching.current) {
+      isFetching.current = true;
+      loadMoreCallback()
+        .then(() => {
+          isFetching.current = false;
+        })
+        .catch(() => {
+          isFetching.current = false;
+        });
+    }
+  }, commonDeps);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    handleScroll()
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, scrollDeps); // пустой массив deps, слушаем глобальные события
+  }, [...scrollDeps, ...commonDeps]); // пустой массив deps, слушаем глобальные события
 
   return observerTarget;
 };

@@ -4,9 +4,11 @@
   align-items: center;
   &_like {
     font-size: 25px;
+    // color: var(--profile-text-color);
     color: #fafafa;
   }
   &_dislike {
+    // color: var(--profile-text-color);
     color: #fafafa;
     font-size: 25px;
   }

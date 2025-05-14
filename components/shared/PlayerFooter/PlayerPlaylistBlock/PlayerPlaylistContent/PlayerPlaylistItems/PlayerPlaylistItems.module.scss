@@ -4,16 +4,18 @@
   height: 500px;
   overflow: auto;
   &::-webkit-scrollbar-track {
-    background: #2b2d42;
+    // background: #2b2d42;
+    background: transparent;
     width: 24px;
   }
   &::-webkit-scrollbar {
     width: 24px; /* Ширина скроллбара */
   }
-
+  
   &::-webkit-scrollbar-thumb {
-    border: 8px solid #2b2d42;
-    background-color: #1f202f; /* Цвет ползунка */
+    // border: 8px solid #2b2d42;
+    border: 8px solid #222334;
+    background-color: #0a0a0f; /* Цвет ползунка */
     border-radius: 25px; /* Радиус скругления */
   }
 }

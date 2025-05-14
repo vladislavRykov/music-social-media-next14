@@ -12,6 +12,7 @@ import { filtersSelectedData } from '@/redux/selectors/musicFiltersSelectors';
 import { useAsync } from '@/hooks/useFetching';
 import circleTube from '@/public/circleTube.svg';
 import Image from 'next/image';
+import BrowseMusicItemLoader from '@/components/UI/Loaders/BrowseMusicItemLoader';
 
 const BrowseMusics = () => {
   const { selectedGenres, year, search, season } = useAppSelector(filtersSelectedData);
@@ -82,12 +83,12 @@ const BrowseMusics = () => {
               );
             }
           })}
+
+        {status == 'pending' &&
+          Array(12)
+            .fill(0)
+            .map((_, idx) => <BrowseMusicItemLoader />)}
       </div>
-        {status == 'pending' && (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Image src={circleTube} alt="loading..." width={60} height={60} />
-        </div>
-        )}
     </div>
   );
 };

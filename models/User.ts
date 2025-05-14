@@ -49,10 +49,16 @@ const UserSchema = new Schema(
     location: {
       type: String,
       default: null,
-    
     },
     verifyToken: String,
     verifyTokenExpiry: Number,
+    friendRequests: [
+      {
+        from: { type: Schema.Types.ObjectId, ref: 'User' },
+        status: { type: String, enum: ['pending', 'accepted', 'rejected'], default: 'pending' },
+        createdAt: { type: Date, default: Date.now },
+      },
+    ],
   },
   {
     timestamps: true,

@@ -54,7 +54,7 @@ export const getUserMainFields = cache(async () => {
       return redirect('/login');
     }
     const user = await Models.User.findById(session.userId);
-    console.log(user)
+    console.log(user);
     if (!user) {
       return null;
     }
@@ -86,10 +86,10 @@ export const getUserMainFields = cache(async () => {
     return null;
   }
 });
-export const getUserMainFieldsById = cache(async (userId:string) => {
+export const getUserMainFieldsById = cache(async (userId: string) => {
   try {
     const user = await Models.User.findById(userId);
-    console.log(user)
+    console.log(user);
     if (!user) {
       return null;
     }
@@ -220,12 +220,12 @@ export const searchUsersByUsername = async (
   searchString: string,
   pageSize = 10,
   currentPage = 1,
-  selectedFields: string[] =['username','avatar','_id'],
+  selectedFields: string[] = ['username', 'avatar', '_id'],
 ) => {
   const skipCount = (currentPage - 1) * pageSize;
-  console.log(selectedFields.join(' '))
+  console.log(selectedFields.join(' '));
   const users = await Models.User.find({
-    username: { $regex: searchString, $options: 'i' } // Поиск по регулярному выражению с игнорированием регистра
+    username: { $regex: searchString, $options: 'i' }, // Поиск по регулярному выражению с игнорированием регистра
   })
     .select(selectedFields)
     .sort({ createdAt: -1 }) // Сортировка по убыванию
@@ -233,14 +233,55 @@ export const searchUsersByUsername = async (
     .limit(pageSize);
   return users;
 };
-export const getUserLocation = async (userId:string) => {
+export const searchUsersByUsernameScroll = async <T>(
+  {
+    searchString,
+    currentUserId,
+    lastPostId,
+    limit = 10,
+    selectedFields = ['username', 'avatar', '_id'],
+  }: {
+    searchString: string;
+    lastPostId: string | null;
+    currentUserId?: string;
+    limit?: number;
+    selectedFields: string[];
+  },
+
+  populate?: { path: string; select?: string }[],
+) => {
   await mongooseConnect();
-  const user = await Models.User.findById(userId).lean<UserDataMongoose>()
+  const idSortFilter = { _id: { $lt: lastPostId } };
+  // { _id: { $gt: lastPostId } }
+  let filters: any = lastPostId
+    ? { ...idSortFilter, username: { $regex: searchString, $options: 'i' } }
+    : { username: { $regex: searchString, $options: 'i' } };
+  if (currentUserId) {
+    filters = { ...filters, _id: { $ne: currentUserId } };
+  }
+  const query = Models.User.find(filters)
+    .select(selectedFields)
+    .sort({ createdAt: -1 }) // сортируем по убыванию _id
+    .limit(limit);
+
+  if (populate) {
+    query.populate(populate);
+  }
+  const users = await query.lean<T>().exec();
+  return users;
+};
+export const getUserLocation = async (userId: string) => {
+  await mongooseConnect();
+  const user = await Models.User.findById(userId).lean<UserDataMongoose>();
 
   return user && user.location;
 };
-export const setUserLocation = async (userId:string,newLocationSlug:string) => {
+export const setUserLocation = async (userId: string, newLocationSlug: string) => {
   await mongooseConnect();
-  const updatedUser = await Models.User.findByIdAndUpdate(userId,{location:newLocationSlug },{new:true}).lean<UserDataMongoose>()
+  const updatedUser = await Models.User.findByIdAndUpdate(
+    userId,
+    { location: newLocationSlug },
+    { new: true },
+  ).lean<UserDataMongoose>();
   return updatedUser;
 };

@@ -19,6 +19,7 @@ import LoadingSvg from '@/public/circleTube.svg';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import Image from 'next/image';
 import { moveToFront } from '@/utils/MoveToFront';
+import LibraryItemLoader from '@/components/UI/Loaders/LibraryItemLoader';
 
 type PlaylistType = Overwrite<
   PlaylistData,
@@ -82,7 +83,7 @@ const LibraryMain = () => {
             );
           })}
         {status === 'pending' && (
-          <Image src={LoadingSvg} alt="loading..." height={100} width={100} />
+          Array(10).fill(0).map((_,idx)=><LibraryItemLoader key={idx}/>)
         )}
       </div>
     </div>
