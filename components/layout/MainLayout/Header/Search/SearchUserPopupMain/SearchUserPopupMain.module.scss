@@ -35,3 +35,13 @@
     border-radius: 2px; /* Радиус скругления */
   }
 }
+.listLoader {
+  position: relative;
+  height: 80px;
+  width: 100%;
+  image {
+    object-fit: contain;
+    object-position: center;
+    background-color: transparent;
+  }
+}

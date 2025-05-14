@@ -1,0 +1,45 @@
+.friendRequestItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  transition: .1s;
+  &:hover{
+    background-color: color-mix(in srgb, var(--main-bg-color), black 10%) ;
+  }
+  &_info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  &_img {
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
+  }
+  &_username {
+    color: var(--profile-text-color);
+  }
+  &_btns {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  &_button {
+    padding: 4px 8px;
+    border-radius: 2px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+  }
+  &_accept {
+    background-color: rgb(57, 165, 57);
+  }
+  &_reject {
+    background-color: rgb(156, 0, 0);
+  }
+  &_btnIcon {
+    color: #fff;
+  }
+}

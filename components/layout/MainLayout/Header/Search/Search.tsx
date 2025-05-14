@@ -4,9 +4,11 @@ import { FaSearch } from 'react-icons/fa';
 import s from './Search.module.scss';
 import SecondaryModal from '@/components/UI/Modals/SecondaryModal/SecondaryModal';
 import SearchUserPopup from './SearchUserPopup/SearchUserPopup';
+import { useDebounce } from '@/hooks/hooks';
 
 const Search = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const debouncedValue = useDebounce<boolean>(isModalOpen,100);
   return (
     <div className={s.search}>
       <FaSearch
@@ -15,11 +17,11 @@ const Search = () => {
         onMouseOut={() => setIsModalOpen(false)}
         onMouseOver={() => setIsModalOpen(true)}
       />
-      {true && (
-        <div className={s.search_popup}>
-          <SearchUserPopup setIsHovered={(value:boolean)=>setIsModalOpen(value)} />
-        </div>
+      {/* <div className={s.search_popup}> */}
+      {debouncedValue && (
+        <SearchUserPopup setIsHovered={(value: boolean) => setIsModalOpen(value)} />
       )}
+      {/* </div> */}
     </div>
   );
 };

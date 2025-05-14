@@ -12,27 +12,31 @@ export const createChat = async (members: string[]) => {
 
   return chat;
 };
-export const findAllCurrentUserChats = async <T>(currentUserId: string, populate?: { path: string; select?: string, populate?: { path: string, model: string ,select?:string} }[]) => {
+export const findAllCurrentUserChats = async <T>(
+  currentUserId: string,
+  populate?: {
+    path: string;
+    select?: string;
+    populate?: { path: string; model: string; select?: string };
+  }[],
+) => {
   await mongooseConnect();
-  const query =  Models.Chat.find({
+  const query = Models.Chat.find({
     members: { $in: currentUserId },
   });
 
   if (populate) {
-      query.populate(populate);
-    }
-    const chat = await query.lean<T>().exec();
-    return chat;
-
+    query.populate(populate);
+  }
+  const chat = await query.lean<T>().exec();
+  return chat;
 };
 export const findDialogByMembers = async (members: string[]) => {
   await mongooseConnect();
-  const chat: ChatMongooseT | null = await Models.Chat.findOne({
+  const chat = await Models.Chat.findOne({
     type: 'dialog',
-    members:{$all: members},
-  });
-
-  console.log(members)
+    members: { $all: members },
+  }).lean<ChatMongooseT>();
 
   return chat;
 };
@@ -42,10 +46,13 @@ export const findChatById = async (chatId: string) => {
 
   return chat;
 };
-export const updateChatLastMessage = async (chatId: string,messageId: string) => {
+export const updateChatLastMessage = async (chatId: string, messageId: string) => {
   await mongooseConnect();
-  const chat = await Models.Chat.findOneAndUpdate({_id: chatId},{ lastMessage: messageId },
-    { new: true }).lean<ChatMongooseT>();
+  const chat = await Models.Chat.findOneAndUpdate(
+    { _id: chatId },
+    { lastMessage: messageId },
+    { new: true },
+  ).lean<ChatMongooseT>();
 
   return chat;
 };

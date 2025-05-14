@@ -14,6 +14,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifySession } from '@/lib/sessions';
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
+import { addFriendRequestT, FriendRequestMongoosePopulatedT, FriendRequestStatus } from '@/types/relationT';
+import { Overwrite } from '@/types/common';
 
 type ResponseData = {
   message: string;
@@ -284,4 +286,32 @@ export const setUserLocation = async (userId: string, newLocationSlug: string) =
     { new: true },
   ).lean<UserDataMongoose>();
   return updatedUser;
+};
+
+export const pushNewFriendRequest = async (to: string, requestData: addFriendRequestT) => {
+  await mongooseConnect();
+  const updatedUser = await Models.User.findByIdAndUpdate(
+    to,
+    {
+      $push: { friendRequests: { ...requestData, status: FriendRequestStatus.Pending } },
+    },
+    { new: true },
+  );
+};
+export const checkIfRequestExists = async (to: string, from: string) => {
+  await mongooseConnect();
+  const isExists = await Models.User.exists({ _id: to, 'friendRequests.from': from });
+  return isExists;
+};
+export const getCurrentUserFriendRequests = async (currentUserId: string) => {
+  await mongooseConnect();
+  const user = await Models.User.findById(currentUserId)
+    .populate('friendRequests.from', 'username avatar _id')
+    .lean<
+      Overwrite<
+        UserDataMongoose,
+        { friendRequests: FriendRequestMongoosePopulatedT[] }
+      >
+    >();
+  return user?.friendRequests || null;
 };

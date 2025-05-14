@@ -6,6 +6,8 @@ import { UserProfileData } from '@/types/types';
 import React, { useEffect, useRef, useState } from 'react';
 import s from './SearchUserPopupMain.module.scss';
 import SearchUserItem from '../SearchUserItem/SearchUserItem';
+import Image from 'next/image';
+import circleTube from '@/public/circleTube.svg';
 
 const SearchUserPopupMain = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -48,35 +50,40 @@ const SearchUserPopupMain = () => {
       <div className={s.content}>
         <div className={s.useritems}>
           {users.map((user) => (
-            <SearchUserItem {...user}/>
+            <SearchUserItem {...user} />
           ))}
           {users.map((user) => (
-            <SearchUserItem {...user}/>
+            <SearchUserItem {...user} />
           ))}
           {users.map((user) => (
-            <SearchUserItem {...user}/>
+            <SearchUserItem {...user} />
           ))}
           {users.map((user) => (
-            <SearchUserItem {...user}/>
+            <SearchUserItem {...user} />
           ))}
           {users.map((user) => (
-            <SearchUserItem {...user}/>
+            <SearchUserItem {...user} />
           ))}
           {users.map((user) => (
-            <SearchUserItem {...user}/>
+            <SearchUserItem {...user} />
           ))}
           {users.map((user) => (
-            <SearchUserItem {...user}/>
+            <SearchUserItem {...user} />
           ))}
           {users.map((user) => (
-            <SearchUserItem {...user}/>
+            <SearchUserItem {...user} />
           ))}
           {users.map((user) => (
-            <SearchUserItem {...user}/>
+            <SearchUserItem {...user} />
           ))}
           {users.map((user) => (
-            <SearchUserItem {...user}/>
+            <SearchUserItem {...user} />
           ))}
+          {isLoading && (
+            <div className={s.listLoader}>
+              <Image src={circleTube} alt="loading" fill />
+            </div>
+          )}
           <div ref={refObserver}></div>
         </div>
       </div>

@@ -31,12 +31,19 @@
     padding: 10px;
     cursor: pointer;
     border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   &_addFriendBtn {
     background-color: rgb(85, 222, 85);
   }
   &_chatBtn {
     background-color: rgb(132, 132, 240);
+  }
+  &_btnLoading{
+    object-fit: cover;
+    object-position: center;
   }
 }
 .btnDescription {

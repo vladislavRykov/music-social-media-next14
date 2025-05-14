@@ -1,5 +1,6 @@
 import { StaticImageData } from 'next/image';
 import { ItemReactionStatus, LikeAndDislike } from './likeAndDislikes';
+import { FriendRequestStatus } from './relationT';
 
 export interface RegistrationData {
   username: string;
@@ -49,6 +50,11 @@ export interface UserDataMongoose {
   isAdmin: boolean;
   aboutMe?: string;
   location: string|null,
+  friendRequests:{
+    from: string;
+    status: FriendRequestStatus;
+    createdAt: Date;
+  }[]
 }
 
 export interface MusicData {

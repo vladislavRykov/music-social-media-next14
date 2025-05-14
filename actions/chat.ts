@@ -15,7 +15,7 @@ export const createDialogAction = async (otherMember: string) => {
       return { ok: false, data: null, message: 'Вы не авторизированы' };
     }
    const dialog = await  findDialogByMembers([otherMember,session.userId.toString()])
-   if(dialog) return { ok: false, data: null, message: 'Такой чат уже существует' };
+   if(dialog) return { ok: false, data: dialog, message: 'Такой чат уже существует' };
     const newChat = await createChat([session.userId.toString(), otherMember.toString()]);
     return { ok: true, data: newChat._doc, message: 'Чат успешно создан' };
   } catch (error) {
