@@ -10,6 +10,7 @@ import { MongoosePost } from '@/types/postTypes';
 import useScrollPagination from '@/hooks/useScrollPagination';
 import Image from 'next/image';
 import cicleTube from '@/public/circleTube.svg';
+import PostItemLoader from '@/components/UI/Loaders/PostItemLoader';
 
 type Props = {
   isPostsAuthor: boolean;
@@ -65,11 +66,14 @@ const PostList = ({ selectedSortOrder, isPostsAuthor }: Props) => {
       {posts.map((post) => (
         <PostItem key={post._id} {...post} isPostsAuthor={isPostsAuthor} />
       ))}
-      {isLoading && (
-        <div style={{ textAlign: 'center' }}>
-          <Image src={cicleTube} height={50} width={50} alt="Loading..." />
-        </div>
-      )}
+      {isLoading &&
+        Array(8)
+          .fill(0)
+          .map((_, idx) => (
+            <div>
+              <PostItemLoader key={idx} />
+            </div>
+          ))}
       <div ref={refObserver}></div>
     </div>
   );

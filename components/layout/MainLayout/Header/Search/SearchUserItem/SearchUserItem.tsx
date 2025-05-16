@@ -20,6 +20,7 @@ interface SearchUserItemProps extends UserProfileData {}
 const SearchUserItem = ({ _id, avatar, username }: SearchUserItemProps) => {
   const router = useRouter();
   const onChatBtnClick = async () => {
+     toast.info('Переходим в чат. Пожайлуста, подождите.');
     const res = await createDialogAction(_id);
     if (!res.ok && res.data) {
       router.push(`/chat/${res.data?._id}`);
@@ -27,6 +28,7 @@ const SearchUserItem = ({ _id, avatar, username }: SearchUserItemProps) => {
       return;
     }
     if (!res.ok) return toast.error(res.message);
+    router.push(`/chat/${res.data?._id}`);
   };
   const onSendFriendRequstBtnClick = async () => {
     toast.info('Запрос отправляется. Пожайлуста, подождите.');

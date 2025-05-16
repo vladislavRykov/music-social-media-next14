@@ -9,6 +9,9 @@
     color: black;
     background-color: #fafafa;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
   &_btn {
     background-color: rgb(66, 66, 66);

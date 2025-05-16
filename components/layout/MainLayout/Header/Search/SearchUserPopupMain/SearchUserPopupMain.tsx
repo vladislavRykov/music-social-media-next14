@@ -55,33 +55,6 @@ const SearchUserPopupMain = () => {
           {users.map((user) => (
             <SearchUserItem {...user} />
           ))}
-          {users.map((user) => (
-            <SearchUserItem {...user} />
-          ))}
-          {users.map((user) => (
-            <SearchUserItem {...user} />
-          ))}
-          {users.map((user) => (
-            <SearchUserItem {...user} />
-          ))}
-          {users.map((user) => (
-            <SearchUserItem {...user} />
-          ))}
-          {users.map((user) => (
-            <SearchUserItem {...user} />
-          ))}
-          {users.map((user) => (
-            <SearchUserItem {...user} />
-          ))}
-          {users.map((user) => (
-            <SearchUserItem {...user} />
-          ))}
-          {users.map((user) => (
-            <SearchUserItem {...user} />
-          ))}
-          {users.map((user) => (
-            <SearchUserItem {...user} />
-          ))}
           {isLoading && (
             <div className={s.listLoader}>
               <Image src={circleTube} alt="loading" fill />

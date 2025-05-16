@@ -8,16 +8,19 @@ import { LuVolume2 } from 'react-icons/lu';
 import { BsShuffle } from 'react-icons/bs';
 import { LuVolumeX } from 'react-icons/lu';
 import { useAppDispatch } from '@/hooks/reduxHooks';
-import { setVolume } from '@/redux/slices/PlayerSlice';
+import { setLoop, setVolume } from '@/redux/slices/PlayerSlice';
 import cn from 'classnames';
 
 const PlayerOptions = ({
   audioVolume,
   isPlayerHovered,
+  loop,
 }: {
   audioVolume: number;
   isPlayerHovered: boolean;
+  loop: boolean;
 }) => {
+  console.log(loop)
   const dispatch = useAppDispatch();
   const [showInput, setShowInput] = useState(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -54,9 +57,12 @@ const PlayerOptions = ({
         )}
       </div>
       <LuVolume2 onMouseEnter={() => setShowInput(true)} className={s.playerOptions_btn} />
-      <BsRepeat className={s.playerOptions_btn} />
+      <BsRepeat
+        onClick={() => dispatch(setLoop(!loop))}
+        className={s.playerOptions_btn}
+        style={loop ? { color: '#fff' } : {}}
+      />
       <BsShuffle className={s.playerOptions_btn} />
-      {/* <Image className={s.playerOptions_btn} src={MixIcons} alt="mix icon" height={22} width={22} /> */}
     </div>
   );
 };

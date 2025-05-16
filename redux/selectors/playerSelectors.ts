@@ -26,6 +26,7 @@ export const selectPlayerData = createSelector(selectPlayerState, (state) => ({
   showPlayer: state.showPlayer,
   playlist: state.playlist,
   isPlayerLoading: state.isLoading,
+  loop: state.loop,
 }));
 export const selectPlayerPlaylist = createSelector(selectPlayerState, (state) => ({
   musicData: state.selectedAudio,

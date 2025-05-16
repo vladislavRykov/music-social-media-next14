@@ -4,10 +4,21 @@
   left: 0;
   top: 0;
   width: 550px;
-  padding-top: 118px;
-  padding-left: 200px;
+  // padding-top: 118px;
+  // padding-left: 200px;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
   z-index: 10;
+  &_flexWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   &_infoBlock {
+    width: 300px;
     text-align: center;
     align-items: center;
     display: flex;
@@ -24,7 +35,7 @@
     object-fit: cover;
     object-position: center;
   }
- 
+
   &_title {
     color: #fafafa;
     font-size: 20px;
@@ -50,6 +61,12 @@
     line-height: 18px;
   }
   &_desc {
+    cursor: pointer;
     color: #c2c2c275;
+    display: -webkit-box; /* Обязательное свойство для line-clamp */
+    -webkit-line-clamp: 2; /* Максимальное количество строк текста */
+    -webkit-box-orient: vertical; /* Направление упаковки строк */
+    overflow: hidden; /* Скрывает лишние строки */
+    text-overflow: ellipsis; /* Показывает троеточие после обрезанного текста */
   }
 }

@@ -12,6 +12,7 @@ interface AudioPlayerProps {
   audioRef: React.RefObject<any>;
   musicData: MusicData;
   playlist: string[];
+  loop: boolean;
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({
@@ -21,6 +22,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   isPlaying,
   audioVolume,
   playlist,
+  loop,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -32,6 +34,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   useEffect(() => {
     if (!audioRef.current) return;
     if (isPlaying) {
+      console.log(audioRef.current);
       audioRef.current.play();
     } else {
       audioRef.current.pause();
@@ -39,7 +42,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   }, [isPlaying, musicData]);
   useEffect(() => {
     if (audioRef.current) {
-      // console.log(audioVolume)
       audioRef.current.volume = audioVolume;
     }
   }, [audioVolume]);
@@ -49,7 +51,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
       onTimeUpdate={(e: ChangeEvent<HTMLAudioElement>) =>
         dispatch(setCurrentTime(e.target.currentTime))
       }
-      // loop={}
+      loop={loop}
       onEnded={onSongEnded}
       ref={audioRef}
       src={src}

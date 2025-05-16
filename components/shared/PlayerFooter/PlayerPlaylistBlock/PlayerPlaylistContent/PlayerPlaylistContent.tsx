@@ -10,6 +10,7 @@ import { getMusicsByIds } from '@/dal/music';
 import Image from 'next/image';
 import LoadingSvg from '@/public/circleTube.svg';
 import { getArrayMusicByIdA } from '@/actions/music';
+import Link from 'next/link';
 
 const PlayerPlaylistContent = () => {
   const { playlist } = useAppSelector(selectPlayerPlaylist);
@@ -18,10 +19,7 @@ const PlayerPlaylistContent = () => {
     console.log(playlist);
     if (playlist._id) {
       const res = await getPlayerPlaylistsData(playlist._id);
-      console.log(
-        'player',
-        res.data?.items
-      );
+      console.log('player', res.data?.items);
       if (!res.ok) return null;
       const data = { title: res.data?.title, _id: res.data?._id, items: res.data?.items } as {
         title: string;
@@ -49,7 +47,9 @@ const PlayerPlaylistContent = () => {
     <div className={s.playerPlaylistContent}>
       {status === 'success' && playlistData && playlistData.items && (
         <>
-          <div className={s.playerPlaylistContent_title}>{playlistData.title}</div>
+          <div className={s.playerPlaylistContent_title}>
+            <Link className={s.playerPlaylistContent_titleLink} href={`/playlist?list=${playlist._id}`}>{playlistData.title}</Link>
+          </div>
           <PlayerPlaylistItems playlistItems={playlistData.items} />
         </>
       )}

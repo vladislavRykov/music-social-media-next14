@@ -34,8 +34,16 @@ const inter = Inter({
 const PlayerFooter = () => {
   const pathname = usePathname();
   const isOpen = pathname?.includes('/player/playlist');
-  const { musicData, isPlaying, audioVolume, currentTime, showPlayer, playlist, isPlayerLoading } =
-    useAppSelector(selectPlayerData);
+  const {
+    musicData,
+    isPlaying,
+    audioVolume,
+    currentTime,
+    showPlayer,
+    playlist,
+    isPlayerLoading,
+    loop,
+  } = useAppSelector(selectPlayerData);
   const [isPlayerHovered, setIsPlayerHovered] = useState(false);
   const audio = useRef<HTMLAudioElement | null>(null);
   if (!showPlayer) return;
@@ -59,6 +67,7 @@ const PlayerFooter = () => {
         <div className={s.playerFooter_container}>
           {musicData && (
             <AudioPlayer
+              loop={loop}
               musicData={musicData}
               audioRef={audio}
               audioVolume={audioVolume}
@@ -108,7 +117,11 @@ const PlayerFooter = () => {
             )}
           </div>
           <div className={s.rightBlock}>
-            <PlayerOptions isPlayerHovered={isPlayerHovered} audioVolume={audioVolume} />
+            <PlayerOptions
+              loop={loop}
+              isPlayerHovered={isPlayerHovered}
+              audioVolume={audioVolume}
+            />
             <PlayerPlaylist musicId={musicData?._id || ''} playlist={playlist} />
           </div>
         </div>

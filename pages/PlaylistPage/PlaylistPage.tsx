@@ -19,6 +19,7 @@ import { getUserMainFieldsById } from '@/dal/user';
 const PlaylistPage = () => {
   const searchParams = useSearchParams();
   const currentUser = useAppSelector(selectUser);
+  const isPlayerShown = useAppSelector((state) => state.playerReducer.showPlayer);
 
   const list = searchParams?.get('list');
   const asyncFunction = async () => {
@@ -45,7 +46,7 @@ const PlaylistPage = () => {
 
   const isPlaylistEmpty = data?.playlist?.items.length === 0;
   return (
-    <div className={s.playlistPage}>
+    <div className={s.playlistPage} style={isPlayerShown ? { paddingBottom: '80px' } : {}}>
       <div style={backgroundImageStyle}></div>
       <div
         style={{
@@ -60,6 +61,7 @@ const PlaylistPage = () => {
       {status === 'success' && data?.playlist && (
         <>
           <PlaylistLeftBlock
+            isPlayerShown={isPlayerShown}
             isPlaylistHasImg={!!data.playlist.playlistImg}
             isPlaylistEmpty={isPlaylistEmpty}
             isAuthor={isAuthor}

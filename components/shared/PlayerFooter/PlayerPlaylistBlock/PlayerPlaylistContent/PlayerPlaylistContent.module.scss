@@ -7,5 +7,9 @@
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 10px;
+    display: block;
+  }
+  &_titleLink {
+    color: var(--third-text-color);
   }
 }
