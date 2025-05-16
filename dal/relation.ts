@@ -13,7 +13,7 @@ export const createRelation = async ({
   status: RelationStatus;
 }) => {
   await mongooseConnect();
-  const relation = await Models.Relationship.create({
+  const relation: RelationMongooseT = await Models.Relationship.create({
     userA: currentUserId,
     userB: otherUserId,
     status,
@@ -42,6 +42,54 @@ export const updateRelationStatus = async ({
     { new: false },
   ).lean<RelationMongooseT>();
   return oldRelation;
+};
+export const isUsersHaveRelation = async ({
+  currentUserId,
+  otherUserId,
+}: {
+  currentUserId: string;
+  otherUserId: string;
+}) => {
+  await mongooseConnect();
+  const realtion = await Models.Relationship.exists({
+    $or: [
+      { userA: currentUserId, userB: otherUserId },
+      { userA: otherUserId, userB: currentUserId },
+    ],
+  });
+  return realtion;
+};
+export const isUsersFriends = async ({
+  currentUserId,
+  otherUserId,
+}: {
+  currentUserId: string;
+  otherUserId: string;
+}) => {
+  await mongooseConnect();
+  const realtion = await Models.Relationship.exists({
+    status: RelationStatus.Friends,
+    $or: [
+      { userA: currentUserId, userB: otherUserId },
+      { userA: otherUserId, userB: currentUserId },
+    ],
+  });
+  return realtion;
+};
+export const isUserBlocked = async ({
+  currentUserId,
+  otherUserId, //который который мог заблочить текущего
+}: {
+  currentUserId: string;
+  otherUserId: string;
+}) => {
+  await mongooseConnect();
+  const realtion = await Models.Relationship.exists({
+    status: RelationStatus.Blocked,
+    userA: otherUserId,
+    userB: currentUserId,
+  });
+  return realtion;
 };
 export const updateRelationUserOrder = async ({
   currentUserA,

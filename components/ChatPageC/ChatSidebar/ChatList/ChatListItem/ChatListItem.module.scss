@@ -38,20 +38,20 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 5px;
+    margin-bottom: 9px;
   }
   &_chatname {
     font-size: 16px;
-    color: var(--third-text-color);
+    // color: var(--third-text-color);
     text-overflow: ellipsis;
     overflow: hidden;
   }
   &_time {
     font-size: 12px;
-    color: var(--third-text-color);
+    // color: var(--third-text-color);
   }
   &_lastMessageAndUnread {
-    color: var(--secondary-text-color);
+    // color: var(--secondary-text-color);
     align-items: center;
     display: flex;
     justify-content: flex-start;
@@ -62,7 +62,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     padding-right: 5px;
-    color: var(--third-text-color);
+    // color: var(--third-text-color);
   }
   &_unRead {
     padding: 5px;

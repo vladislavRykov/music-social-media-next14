@@ -11,4 +11,5 @@ const RelationshipSchema = new Schema(
   },
 );
 
+RelationshipSchema.index({ userA: 1, userB: 1 }, { unique: true });
 export default models?.Relationship || model('Relationship', RelationshipSchema);

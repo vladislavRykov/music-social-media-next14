@@ -12,7 +12,7 @@ import { MusicData, UserDataMongoose, UserMainFields } from '@/types/types';
 import Image from 'next/image';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import { selectUser } from '@/redux/selectors/userSelectors';
-import mockPlaylistAva from '@/public/musicImg.jpg';
+import circleTube from '@/public/circleTube.svg';
 import { getPlayerPlaylistsData } from '@/actions/playlist';
 import { getUserMainFieldsById } from '@/dal/user';
 
@@ -35,8 +35,6 @@ const PlaylistPage = () => {
 
   const backgroundImageStyle: CSSProperties = {
     backgroundImage: `url(${data?.playlist?.items[0]?.image})`,
-    // backgroundSize: 'cover',
-    // backgroundPosition: 'center',
     position: 'absolute',
     top: 0,
     left: 0,
@@ -48,11 +46,6 @@ const PlaylistPage = () => {
   const isPlaylistEmpty = data?.playlist?.items.length === 0;
   return (
     <div className={s.playlistPage}>
-      {/* <Image
-        src={playlist?.items[0].image || ''}
-        style={{ zIndex: 1, filter: 'blur(30px)', position: 'fixed' }}
-        alt="img"
-      /> */}
       <div style={backgroundImageStyle}></div>
       <div
         style={{
@@ -64,7 +57,7 @@ const PlaylistPage = () => {
           backgroundColor: '#030303b5',
           filter: 'blur(30px)',
         }}></div>
-      {status === 'success' && data?.playlist ? (
+      {status === 'success' && data?.playlist && (
         <>
           <PlaylistLeftBlock
             isPlaylistHasImg={!!data.playlist.playlistImg}
@@ -97,8 +90,11 @@ const PlaylistPage = () => {
             playlistItems={data?.playlist.items}
           />
         </>
-      ) : (
-        <>загрузка</>
+      )}
+      {status === 'pending' && (
+        <div className={s.loadingBlock}>
+          <Image src={circleTube} height={100} width={100} alt="loading..." />
+        </div>
       )}
     </div>
   );

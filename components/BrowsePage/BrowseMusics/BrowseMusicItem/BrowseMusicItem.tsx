@@ -18,7 +18,7 @@ import {
 import { MusicData } from '@/types/types';
 import cn from 'classnames';
 import { selectMusicitemData } from '@/redux/selectors/playerSelectors';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 
 interface BrowseMusicItemProps {
   _id: string;

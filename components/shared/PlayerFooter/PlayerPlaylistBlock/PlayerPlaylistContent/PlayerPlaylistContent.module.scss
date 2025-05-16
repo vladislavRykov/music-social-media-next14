@@ -2,7 +2,8 @@
   padding-top: 20px;
   width: 40%;
   &_title {
-    color: #fafafa;
+    // color: #fafafa;
+    color: var(--third-text-color);
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 10px;

@@ -15,13 +15,13 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectMusicitemData, selectPlayerPlaylist } from '@/redux/selectors/playerSelectors';
 import { GrVolume } from 'react-icons/gr';
 import LoadingSvg from '@/public/circleTube.svg';
-import { useRouter } from 'next/navigation';
 import LibPlaylistSettings from './LibPlaylistSettings/LibPlaylistSettings';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import SettingsBtnPopUp from '@/components/shared/SettingsBtnPopUp/SettingsBtnPopUp';
 import OpenPlaylistPlayer from '@/components/shared/SettingsBtnPopUp/OpenPlaylistPlayer/OpenPlaylistPlayer';
 import DeletePlaylist from '@/components/shared/SettingsBtnPopUp/DeletePlaylist/DeletePlaylist';
 import ShufflePlaylist from '@/components/shared/SettingsBtnPopUp/ShufflePlaylist/ShufflePlaylist';
+import { useRouter } from 'nextjs-toploader/app';
 
 interface LibPlaylistProps {
   playlistImg: StaticImageData | string;

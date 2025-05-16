@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import s from './ProfileMenu.module.scss';
 import { getMenuLinks } from './profileLinks';
 import ProfileLink from './ProfileLink';
@@ -7,10 +7,7 @@ import { IoTriangleSharp } from 'react-icons/io5';
 import cn from 'classnames';
 import { delay } from '@/utils/delay';
 import { IoMdLogOut } from 'react-icons/io';
-import { signOut } from 'next-auth/react';
-import API from '@/services/api/api';
 import { logout } from '@/actions/auth';
-// import { useRouter } from 'next/navigation';
 import { useRouter } from 'nextjs-toploader/app';
 import { clearUser, setLocation } from '@/redux/slices/UserSlice';
 import { useAppDispatch } from '@/hooks/reduxHooks';

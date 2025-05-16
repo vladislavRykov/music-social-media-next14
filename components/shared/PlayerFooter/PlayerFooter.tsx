@@ -45,7 +45,7 @@ const PlayerFooter = () => {
         <div
           className={s.playerFooter}
           style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-          <Image src={LoadingSvg} height={60} width={60} alt="loading..." />;
+          <Image src={LoadingSvg} height={60} width={60} alt="loading..." />
         </div>
         <PlayerPlaylistBlock isOpen={!!isOpen} />
       </>
@@ -97,8 +97,8 @@ const PlayerFooter = () => {
                 />
                 <PlayerLikeDislike reactionType={musicData.reactionStatus} songId={musicData._id} />
                 <PlayerSettings
-                reactionType={musicData.reactionStatus}
-                currentSongReaction={musicData.reactionStatus}
+                  reactionType={musicData.reactionStatus}
+                  currentSongReaction={musicData.reactionStatus}
                   playlistType={playlist.type}
                   isOpen={isOpen}
                   playlistId={playlist._id}

@@ -10,8 +10,6 @@ import PostTextArea from '../PostFields/PostTextarea/PostTextarea';
 import { storage } from '@/firebase/firebase';
 import { getDownloadURL, ref, StorageError, uploadBytesResumable } from 'firebase/storage';
 import { createUniqueName } from '@/utils/createUniqueName';
-import { delay } from '@/utils/delay';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import cicleTube from '@/public/circleTube.svg';
 

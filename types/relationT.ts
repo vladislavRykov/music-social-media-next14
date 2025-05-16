@@ -11,11 +11,13 @@ export interface FriendRequestMongooseT {
   from: string;
   status: FriendRequestStatus;
   createdAt: Date;
+  _id: string,
 }
 export interface FriendRequestMongoosePopulatedT {
   from: { username: string; avatar?: string; _id: string };
   status: FriendRequestStatus;
   createdAt: Date;
+   _id: string,
 }
 export interface addFriendRequestT {
   from: string;

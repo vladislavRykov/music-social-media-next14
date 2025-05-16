@@ -80,69 +80,72 @@ h6 {
 /* Темы */
 :root {
   /* --bg-image: ''; */
-  --profile-text-color: #3DB4F2; /* Цвет по умолчанию */
+  --profile-text-color: #3db4f2; /* Цвет по умолчанию */
 
   --header-bg-color: #2b2d42;
 
   --main-text-color: #5c72a7;
-  --secondary-text-color: #7A858F;
+  --secondary-text-color: #7a858f;
   --third-text-color: #0b1622;
   --secondary-bg-color: #fafafa;
   --main-bg-color: #edf1f5;
 
   --secondary-bg-shadow-color: #dcdcdc;
   --home-page-header-img: url('/background/main_page_bg.jpg');
-   --chat-bg-img: url('/background/chat_bg_light3.jpg');
+  --chat-bg-img: url('/background/chat_bg_light3.jpg');
+
+  --player-img-overlay: #22233476;
 }
 
 [data-theme='default'] {
   --home-page-header-img: url('/background/main_page_bg.jpg');
   --chat-bg-img: url('/background/chat_bg_light3.jpg');
   --main-text-color: #5c72a7;
-  --secondary-text-color: #7A858F;
+  --secondary-text-color: #7a858f;
   --third-text-color: #0b1622;
   --secondary-bg-color: #fafafa;
   --main-bg-color: #edf1f5;
 
   --secondary-bg-shadow-color: #dcdcdc;
+
+  --player-img-overlay: #22233476;
 }
 [data-theme='dark'] {
   --home-page-header-img: url('/background/main_page_bg_dark.jpg');
-   --chat-bg-img: url('/background/chat_bg_dark2.jpg');
+  --chat-bg-img: url('/background/chat_bg_dark2.jpg');
   --main-text-color: #5c72a7;
-  --secondary-text-color: #728AA1;
+  --secondary-text-color: #728aa1;
   --third-text-color: #fafafa;
   --secondary-bg-color: #2b2d42;
   --main-bg-color: #0b1622;
 
   --secondary-bg-shadow-color: #1e202f;
+
+  --player-img-overlay: #ffffff28;
 }
 
 [data-text-color] {
   --profile-text-color: var(--profile-text-color);
 }
-[data-text-color="#3DB4F2"] {
-  --profile-text-color: #3DB4F2; 
+[data-text-color='#3DB4F2'] {
+  --profile-text-color: #3db4f2;
 }
 
-[data-text-color="#C063FF"] {
-  --profile-text-color: #C063FF;
+[data-text-color='#C063FF'] {
+  --profile-text-color: #c063ff;
 }
-[data-text-color="#4CCA51"] {
-  --profile-text-color: #4CCA51;
+[data-text-color='#4CCA51'] {
+  --profile-text-color: #4cca51;
 }
-[data-text-color="#EF881A"] {
-  --profile-text-color: #EF881A;
+[data-text-color='#EF881A'] {
+  --profile-text-color: #ef881a;
 }
-[data-text-color="#E13333"] {
-  --profile-text-color: #E13333;
+[data-text-color='#E13333'] {
+  --profile-text-color: #e13333;
 }
-[data-text-color="#FC9DD6"] {
-  --profile-text-color: #FC9DD6;
+[data-text-color='#FC9DD6'] {
+  --profile-text-color: #fc9dd6;
 }
-[data-text-color="#677B94"] {
-  --profile-text-color: #677B94;
+[data-text-color='#677B94'] {
+  --profile-text-color: #677b94;
 }
-
-
-

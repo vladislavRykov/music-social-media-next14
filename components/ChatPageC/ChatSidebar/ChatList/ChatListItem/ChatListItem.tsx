@@ -87,7 +87,7 @@ const ChatListItem = ({lastMessage,type,chatName,chatImg,chatId,selectedChat}:Pr
             </div>
            {lastMessage && <div  className={s.chatListItem_lastMessageAndUnread}>
                 <span  className={s.chatListItem_lastMessage}>{isLastMessageFromCurrentUser ? 'Вы' :lastMessage.from.username}: {lastMessage.type === MessageTypes.Text ?lastMessage.message: '-Голосовое сообщение-'}</span>
-                <span  className={s.chatListItem_unRead}>60</span>
+                {/* <span  className={s.chatListItem_unRead}>60</span> */}
             </div>}
 
         </div>

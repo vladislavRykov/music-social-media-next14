@@ -37,6 +37,8 @@
   }
   &_image {
     border-radius: 4px;
+    object-fit: cover;
+    object-position: center;
   }
   &_overlay {
     opacity: 0;

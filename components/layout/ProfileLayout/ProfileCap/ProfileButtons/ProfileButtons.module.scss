@@ -1,0 +1,32 @@
+.profileButtons {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  gap: 10px;
+  padding: 22px;
+  &_btns {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    button {
+      padding: 8px 12px;
+      color: #fff;
+      border-radius: 5px;
+    }
+  }
+  &_addFriend {
+    background-color: rgb(126, 217, 126);
+  }
+  &_chat {
+    background-color: rgb(115, 115, 219);
+  }
+  &_hiddenBtns{
+    position: relative;
+  }
+  &_arrow{
+    color: #fff;
+  }
+
+}

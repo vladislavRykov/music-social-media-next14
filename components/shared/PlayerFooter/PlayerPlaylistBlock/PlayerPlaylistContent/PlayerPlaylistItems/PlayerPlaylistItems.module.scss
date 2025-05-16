@@ -14,8 +14,8 @@
   
   &::-webkit-scrollbar-thumb {
     // border: 8px solid #2b2d42;
-    border: 8px solid #222334;
-    background-color: #0a0a0f; /* Цвет ползунка */
+    border: 8px solid var(--main-bg-color);
+    background-color: var(--third-text-color); /* Цвет ползунка */
     border-radius: 25px; /* Радиус скругления */
   }
 }

@@ -14,8 +14,8 @@ import API from '@/services/api/api';
 import { AxiosError } from 'axios';
 import { Bounce, Flip, ToastContainer, toast } from 'react-toastify';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import { signUp } from '@/actions/auth';
+import { useRouter } from 'nextjs-toploader/app';
 
 const formValidationSchema = Yup.object({
   email: Yup.string().required('Обязательное поле.').email('Введите корректный email'),

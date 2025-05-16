@@ -14,9 +14,9 @@ import { IoLinkOutline } from 'react-icons/io5';
 import cn from 'classnames';
 import { createNewPlaylist } from '@/actions/playlist';
 import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
 import { PlaylistData } from '@/types/playlistTypes';
 import FormikSelectSecondary from '@/components/UI/Formik/FormikSelectSecondary/FormikSelectSecondary';
+import { useRouter } from 'nextjs-toploader/app';
 
 const formValidationSchema = Yup.object({
   title: Yup.string().max(16, 'Максимум 16 символов в названии.').required('Обязательное поле.'),

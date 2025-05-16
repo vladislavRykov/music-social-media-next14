@@ -42,25 +42,25 @@ const useScrollPagination = ({
       }
     }
   };
-  useEffect(() => {
-    if (!immediate) return;
-    if (observerTarget.current && !isFetching.current) {
-      isFetching.current = true;
-      loadMoreCallback()
-        .then(() => {
-          isFetching.current = false;
-        })
-        .catch(() => {
-          isFetching.current = false;
-        });
-    }
-  }, commonDeps);
+  // useEffect(() => {
+  //   if (!immediate) return;
+  //   if (observerTarget.current && !isFetching.current) {
+  //     isFetching.current = true;
+  //     loadMoreCallback()
+  //       .then(() => {
+  //         isFetching.current = false;
+  //       })
+  //       .catch(() => {
+  //         isFetching.current = false;
+  //       });
+  //   }
+  // }, commonDeps);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [...scrollDeps, ...commonDeps]); // пустой массив deps, слушаем глобальные события
+  }, [...scrollDeps]); // пустой массив deps, слушаем глобальные события
 
   return observerTarget;
 };

@@ -5,7 +5,6 @@ import { MdOutlineEdit } from 'react-icons/md';
 import { setIsPlaying } from '@/redux/slices/PlayerSlice';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectPlayerPlaylist } from '@/redux/selectors/playerSelectors';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { GrVolume } from 'react-icons/gr';
 import { BsShuffle } from "react-icons/bs";
@@ -19,6 +18,7 @@ import { AccessType, Overwrite } from '@/types/common';
 import { PlaylistData } from '@/types/playlistTypes';
 import { MusicData, UserDataMongoose } from '@/types/types';
 import ShufflePlaylist from '@/components/shared/SettingsBtnPopUp/ShufflePlaylist/ShufflePlaylist';
+import { useRouter } from 'nextjs-toploader/app';
 
 type Props = {
   playlistId: string;

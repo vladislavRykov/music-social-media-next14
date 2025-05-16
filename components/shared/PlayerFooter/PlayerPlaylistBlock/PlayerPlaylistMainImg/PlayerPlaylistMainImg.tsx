@@ -36,7 +36,7 @@ const PlayerPlaylistMainImg = () => {
     <div className={s.playerPlaylistMainImg}>
       {!isPlayerLoading && selectedAudio ? (
         <div className={s.playerPlaylistMainImg_imgContainer} onClick={onImgClick}>
-          <Image src={selectedAudio?.image} alt="изображение музыки" fill objectFit="contain" />
+          <Image src={selectedAudio?.image} alt="изображение музыки" fill/>
           <div className={s.playerPlaylistMainImg_controls}>
             {isPlayerLoading ? (
               <Image
@@ -66,7 +66,7 @@ const PlayerPlaylistMainImg = () => {
           <div className={s.playerPlaylistMainImg_topOverlay}></div>
         </div>
       ) : (
-        <ImgLoader height="500" width="800" />
+        <ImgLoader height="500" width="500" />
       )}
     </div>
   );

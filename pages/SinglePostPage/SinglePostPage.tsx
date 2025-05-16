@@ -7,7 +7,7 @@ import { useAppSelector } from '@/hooks/reduxHooks';
 import PostBody from '@/components/SinglePostPageC/PostBody/PostBody';
 import PostOptionals from '@/components/SinglePostPageC/PostOptionals/PostOptionals';
 import { FaArrowLeft } from 'react-icons/fa';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 
 type Props = {
   postData: { ok: boolean; data: MongoosePost | null; message: string };

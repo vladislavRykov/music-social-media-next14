@@ -14,8 +14,13 @@ import { NextRequest, NextResponse } from 'next/server';
 import { verifySession } from '@/lib/sessions';
 import { redirect } from 'next/navigation';
 import { cache } from 'react';
-import { addFriendRequestT, FriendRequestMongoosePopulatedT, FriendRequestStatus } from '@/types/relationT';
+import {
+  addFriendRequestT,
+  FriendRequestMongoosePopulatedT,
+  FriendRequestStatus,
+} from '@/types/relationT';
 import { Overwrite } from '@/types/common';
+import { ObjectId } from 'mongodb';
 
 type ResponseData = {
   message: string;
@@ -303,15 +308,94 @@ export const checkIfRequestExists = async (to: string, from: string) => {
   const isExists = await Models.User.exists({ _id: to, 'friendRequests.from': from });
   return isExists;
 };
-export const getCurrentUserFriendRequests = async (currentUserId: string) => {
+// export const getFriendReqByFromAndStatus =  async (
+//   currentUserId: string,
+//   status: FriendRequestStatus = FriendRequestStatus.Pending,
+// ): Promise<FriendRequestMongoosePopulatedT[] | null> => {
+//   await mongooseConnect();
+//   const requests: FriendRequestMongoosePopulatedT[] | null = await Models.User.aggregate([
+//     { $match: { _id: new ObjectId(currentUserId) } },
+//     { $unwind: '$friendRequests' },
+//     { $match: { 'friendRequests.status': status } },
+//     {
+//       $lookup: {
+//         from: 'users',
+//         localField: 'friendRequests.from',
+//         foreignField: '_id',
+//         as: 'fromUser',
+//       },
+//     },
+//     { $unwind: '$fromUser' },
+//     {
+//       $project: {
+//         _id: '$friendRequests._id',
+//         from: {
+//           _id: '$fromUser._id',
+//           username: '$fromUser.username',
+//           avatar: '$fromUser.avatar',
+//         },
+//         status: '$friendRequests.status',
+//         createdAt: '$friendRequests.createdAt',
+//       },
+//     },
+//   ]);
+//   return requests;
+// };
+export const changeFriendRequestStatus = async (
+  to: string,
+  requestId: string,
+  newStatus: FriendRequestStatus,
+) => {
   await mongooseConnect();
-  const user = await Models.User.findById(currentUserId)
-    .populate('friendRequests.from', 'username avatar _id')
-    .lean<
-      Overwrite<
-        UserDataMongoose,
-        { friendRequests: FriendRequestMongoosePopulatedT[] }
-      >
-    >();
-  return user?.friendRequests || null;
+  const oldUser = await Models.User.findOneAndUpdate(
+    { _id: to, 'friendRequests._id': requestId },
+    { $set: { 'friendRequests.$.status': newStatus } },
+  ).lean<UserDataMongoose>();
+  return oldUser?.friendRequests || null;
+};
+export const getCurrentUserFriendRequests = async (
+  currentUserId: string,
+  status: FriendRequestStatus = FriendRequestStatus.Pending,
+): Promise<FriendRequestMongoosePopulatedT[] | null> => {
+  await mongooseConnect();
+  const requests: FriendRequestMongoosePopulatedT[] | null = await Models.User.aggregate([
+    { $match: { _id: new ObjectId(currentUserId) } },
+    { $unwind: '$friendRequests' },
+    { $match: { 'friendRequests.status': status } },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'friendRequests.from',
+        foreignField: '_id',
+        as: 'fromUser',
+      },
+    },
+    { $unwind: '$fromUser' },
+    {
+      $project: {
+        _id: '$friendRequests._id',
+        from: {
+          _id: '$fromUser._id',
+          username: '$fromUser.username',
+          avatar: '$fromUser.avatar',
+        },
+        status: '$friendRequests.status',
+        createdAt: '$friendRequests.createdAt',
+      },
+    },
+  ]);
+  return requests;
+};
+export const countUserFriendRequests = async (
+  currentUserId: string,
+  status: FriendRequestStatus = FriendRequestStatus.Pending,
+) => {
+  await mongooseConnect();
+  const requestCount: { total: number }[] = await Models.User.aggregate([
+    { $match: { _id: new ObjectId(currentUserId) } },
+    { $unwind: '$friendRequests' },
+    { $match: { 'friendRequests.status': status } },
+    { $count: 'total' },
+  ]);
+  return requestCount.length === 0 ? 0 : requestCount[0].total;
 };

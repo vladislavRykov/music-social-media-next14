@@ -152,7 +152,6 @@ const PlayerPlaylistItem: React.FC<PlayerPlaylistItemProps> = ({
               songId={_id}
               currentSongId={selectedAudio?._id}
               currentSongReaction={selectedAudio?.reactionStatus}
-              reactionStatus={reactionStatus}
               closePopup={() => setIsPopUpOpen(false)}
             />
             {playlistId && (

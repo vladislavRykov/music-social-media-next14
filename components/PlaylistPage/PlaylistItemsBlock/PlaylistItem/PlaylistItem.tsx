@@ -3,7 +3,6 @@ import s from './PlaylistItem.module.scss';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectMusicitemData, selectPlayerPlaylist } from '@/redux/selectors/playerSelectors';
 import { setIsPlaying, setMusicData, setPlaylistItems } from '@/redux/slices/PlayerSlice';
-import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { GrVolume } from 'react-icons/gr';
 import { FaPause, FaPlay } from 'react-icons/fa';
@@ -19,6 +18,7 @@ import { Overwrite } from '@/types/common';
 import { PlaylistData } from '@/types/playlistTypes';
 import { MusicData, UserDataMongoose } from '@/types/types';
 import { ItemReactionStatus } from '@/types/likeAndDislikes';
+import { useRouter } from 'nextjs-toploader/app';
 
 type PlaylistItemProps = {
   id: string;

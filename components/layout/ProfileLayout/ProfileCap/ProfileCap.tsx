@@ -12,11 +12,13 @@ import { getUserProfByUserName } from '@/dal/user';
 import { toast } from 'react-toastify';
 import { UserProfileData } from '@/types/types';
 import { useLoading } from '@/hooks/useFetching';
+import ProfileButtons from './ProfileButtons/ProfileButtons';
 
 const ProfileCap = () => {
   const [profileData, setProfileData] = useState<UserProfileData | null>(null);
   const [getUserProfByUserNameF, isLoading] = useLoading(getUserProfByUserName);
   const params: { nickname: string } | null = useParams();
+  const currentUserName = useAppSelector((state) => state.userReducer.user?.username);
   useEffect(() => {
     const getProfile = async () => {
       if (!params?.nickname) return;
@@ -31,6 +33,8 @@ const ProfileCap = () => {
   }, [params?.nickname]);
 
   const [bannerImg, setBannerImg] = useState<null | StaticImageData>(null);
+  const isCurrentUserProfile =
+    !!profileData && currentUserName && currentUserName === profileData.username;
 
   return (
     <div className={s.wrapper}>
@@ -52,6 +56,12 @@ const ProfileCap = () => {
         username={profileData?.username}
         isLoading={isLoading}
       />
+      {!isLoading && profileData && !isCurrentUserProfile && (
+        <ProfileButtons
+          profileUserId={profileData?._id}
+          isCurrentUserProfile={isCurrentUserProfile}
+        />
+      )}
     </div>
   );
 };

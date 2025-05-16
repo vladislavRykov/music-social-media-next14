@@ -7,13 +7,13 @@ import Link from 'next/link';
 import { FaUserFriends } from 'react-icons/fa';
 import { IoChatbubblesOutline } from 'react-icons/io5';
 import cn from 'classnames';
-import { useRouter } from 'next/navigation';
 import { toast } from 'react-toastify';
 import { createDialogAction } from '@/actions/chat';
 import { useLoading } from '@/hooks/useFetching';
 import circleTube from '@/public/circleTube.svg';
 import { FaBullseye } from 'react-icons/fa6';
 import { sendFriendRequest } from '@/actions/user';
+import { useRouter } from 'nextjs-toploader/app';
 
 interface SearchUserItemProps extends UserProfileData {}
 

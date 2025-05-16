@@ -5,11 +5,9 @@
   align-items: center;
   padding: 40px;
   gap: 20px;
-  // background-color: black;
   
-  // background-color: #1d1f2d;
-  background-color: #222334;
-  // background-color: #2b2d42; старый
+  // background-color: #222334;
+  background-color: var(--main-bg-color);
   border-top: 2px solid #474a69;
   width: 100%;
   bottom: -100%;

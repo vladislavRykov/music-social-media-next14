@@ -28,14 +28,17 @@ const SearchUserPopupMain = () => {
   const [searchUsersLoading, isLoading] = useLoading(searchUsers);
   console.log(users);
   useEffect(() => {
-    loadMoreItems.current = true;
-    setUsers([]);
+    const firstLoad = async () => {
+      loadMoreItems.current = true;
+      setUsers([]);
+      searchUsersLoading(debouncedValue, []);
+    };
+    firstLoad();
   }, [debouncedValue]); // Перезагрузка при изменении slug или free-flag
   const refObserver = useScrollPagination({
     loadMoreCallback: () => searchUsersLoading(debouncedValue, users),
     threshold: 100, // подгружаем, когда расстояние до конца страницы меньше 100 пикселей
-    commonDeps: [debouncedValue],
-    scrollDeps: [users],
+    scrollDeps: [users, debouncedValue],
   });
   return (
     <div className={s.wrapper}>

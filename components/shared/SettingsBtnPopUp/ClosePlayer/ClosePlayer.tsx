@@ -4,7 +4,7 @@ import DeafultItem from '../DeafultItem/DeafultItem';
 import { IoIosCloseCircle } from 'react-icons/io';
 import { clearPlayer } from '@/redux/slices/PlayerSlice';
 import { useAppDispatch } from '@/hooks/reduxHooks';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 
 const ClosePlayer = ({ isOpen }: { isOpen: boolean | undefined }) => {
   const dispatch = useAppDispatch();

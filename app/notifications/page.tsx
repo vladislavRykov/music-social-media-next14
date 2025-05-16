@@ -4,6 +4,7 @@ import React from 'react';
 
 const page = async () => {
   const friendRequests = await getMyFriendRequests();
+  console.log(friendRequests)
   //   console.log(2222, friendRequests, 3333, friendRequests?.data?.[0].from);
   return (
     <NotificationsPage

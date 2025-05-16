@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import s from './PlayerPlaylist.module.scss';
 import { GoTriangleUp } from 'react-icons/go';
 import cn from 'classnames';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'nextjs-toploader/app';
 
 type Playlist = {
   _id: string | null;

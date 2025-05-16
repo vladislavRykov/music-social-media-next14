@@ -21,6 +21,8 @@
 
   &_playlistImg {
     border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
   }
  
   &_title {
@@ -35,6 +37,8 @@
     align-items: center;
   }
   &_avatar {
+    object-fit: cover;
+    object-position: center;
     border-radius: 50%;
   }
   &_authorName {
