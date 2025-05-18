@@ -7,5 +7,6 @@ export interface ChatMongooseT {
     members: string[],
     lastMessage: string|null,
     type: string,
+    relation?: string,
 }
 export type MessageWithAuthor = Overwrite<MessageMongoose,{author: {_id: Schema.Types.ObjectId,username:string}}>

@@ -91,7 +91,7 @@ export const useAsync = <T>(
 ) => {
   const [status, setStatus] = useState<'idle' | 'pending' | 'error' | 'success'>('idle');
   const [data, setData] = useState<T | null>(null);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<any | null>(null);
 
   // функция "execute" оборачивает asyncFunction и
   // обрабатывает настройку состояний для pending, value и error
@@ -123,5 +123,5 @@ export const useAsync = <T>(
     }
   }, [execute, immediate]);
 
-  return { execute, status, data, error,helpers: {setData} };
+  return { execute, status, data, error, helpers: { setData } };
 };

@@ -1,4 +1,5 @@
-import { updateChatLastMessage } from '@/dal/chat';
+import { findChatById, updateChatLastMessage } from '@/dal/chat';
+import { isUserBlocked } from '@/dal/relation';
 import { Schema, model, models } from 'mongoose';
 
 const MessageSchema = new Schema(
@@ -46,9 +47,20 @@ const MessageSchema = new Schema(
 MessageSchema.pre('save', async function (next) {
   try {
     console.log(123, this);
-    const chat = await updateChatLastMessage(this.chat.toString(), this._id.toString());
-    // console.log(chat)
+    const chat = await findChatById(this.chat.toString());
+    if (chat?.type === 'dialog') {
+      const otherMember = chat.members.filter((user) => user.toString() !== this.author.toString());
 
+      const isBlocked = await isUserBlocked({
+        currentUserId: this.author.toString(),
+        otherUserId: otherMember[0],
+      });
+
+      if (isBlocked) {
+        throw new Error('Сообщение не может быть отправлено');
+      }
+    }
+    await updateChatLastMessage(this.chat.toString(), this._id.toString());
     next();
   } catch (error) {
     next(error);

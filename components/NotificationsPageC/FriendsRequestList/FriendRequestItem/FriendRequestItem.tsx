@@ -7,7 +7,7 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import mockAvatar from '@/public/avatar2.webp';
+import mockAvatar from '@/public/avatars/default.jpg';
 import s from './FriendRequestItem.module.scss';
 import { IoIosCheckmark } from 'react-icons/io';
 import { IoIosClose } from 'react-icons/io';

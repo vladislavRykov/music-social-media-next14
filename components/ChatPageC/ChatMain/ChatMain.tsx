@@ -47,6 +47,12 @@ const ChatMain = () => {
   return (
     <div className={s.chatMain} style={backgroundImageStyle}>
       <div className={s.chatMain_content}>
+        {status === 'error' && (
+          <div
+            style={{ textAlign: 'center', paddingTop: '100px', color: '#fff', fontSize: '20px' }}>
+            {error.message}
+          </div>
+        )}
         {status === 'pending' && (
           <div className={s.loadingChat}>
             <Image src={LoadingSvg} height={100} width={100} alt="loading..." />
@@ -61,15 +67,17 @@ const ChatMain = () => {
           />
         )}
       </div>
-      <MessageBlock
-        isChatLoading={status === 'pending'}
-        updateChat={async () => {
-          execute();
-          return;
-        }}
-        addNewMessage={(data: ChatMessageT) => helpers.setData((prev) => prev && [...prev, data])}
-        chatId={params?.slug[0]}
-      />
+      {status === 'success' && (
+        <MessageBlock
+          isChatLoading={status !== 'success'}
+          updateChat={async () => {
+            execute();
+            return;
+          }}
+          addNewMessage={(data: ChatMessageT) => helpers.setData((prev) => prev && [...prev, data])}
+          chatId={params?.slug[0]}
+        />
+      )}
     </div>
   );
 };

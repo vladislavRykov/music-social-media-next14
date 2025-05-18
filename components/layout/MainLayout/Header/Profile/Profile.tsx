@@ -1,7 +1,7 @@
 'use client';
 import Image, { StaticImageData } from 'next/image';
 import React, { useEffect, useState } from 'react';
-import mockAvatar from '@/public/avatar2.webp';
+import defaultAvatar from '@/public/avatars/default.jpg';
 import s from './Profile.module.scss';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import ProfileMenu from './ProfileMenu/ProfileMenu';
@@ -19,7 +19,7 @@ const Profile = () => {
     });
   }, []);
   const [imgSrc, setImgSrc] = useState<StaticImageData | string>(
-    isLoading ? '/loader1.gif' : mockAvatar,
+    isLoading ? '/loader1.gif' : defaultAvatar,
   );
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Profile = () => {
     if ( userAva) {
       setImgSrc(userAva);
     }else{
-      setImgSrc(mockAvatar);
+      setImgSrc(defaultAvatar);
     }
   }, [isLoading, userAva]);
   return (
@@ -42,7 +42,7 @@ const Profile = () => {
           height={38}
           width={38}
           alt="avatar"
-          onError={() => setImgSrc(mockAvatar)}
+          onError={() => setImgSrc(defaultAvatar)}
         />
 
         <ProfileMenu

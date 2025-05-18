@@ -1,7 +1,7 @@
 'use client';
 import ImgDropBox from '@/components/UI/ImgDropBox/ImgDropBox';
 import React, { useState } from 'react';
-import mockBanner from '@/public/profCap.jpg';
+import mockBanner from '@/public/bannerDefault.jpg';
 import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { toast } from 'react-toastify';
 import { deleteOneImg, uploadOneImg } from '@/actions/files';

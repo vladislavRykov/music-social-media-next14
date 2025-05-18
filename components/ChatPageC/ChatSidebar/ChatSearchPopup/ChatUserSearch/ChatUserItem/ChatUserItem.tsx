@@ -1,7 +1,7 @@
 'use client';
 import Image from 'next/image';
 import React from 'react';
-import mockAvatar from '@/public/avatar.jpg';
+import defaultAvatar from '@/public/avatars/default.jpg';
 import s from './ChatUserItem.module.scss';
 import { createDialogAction } from '@/actions/chat';
 import { toast } from 'react-toastify';
@@ -29,7 +29,7 @@ const ChatUserItem = ({ avatar, _id, username, closePopup }: Props) => {
     <div className={s.chatUserItem} onClick={onUserClick}>
       <Image
         className={s.chatUserItem_ava}
-        src={avatar || mockAvatar}
+        src={avatar || defaultAvatar}
         alt="avatar"
         height={40}
         width={40}

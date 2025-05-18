@@ -3,8 +3,14 @@
   display: flex;
   gap: 10px;
   &_image {
-    align-self: flex-end;
     border-radius: 50%;
+    // cursor: pointer;
+    object-fit: cover;
+    object-position: center;
+  }
+  &_imageLink {
+    align-self: flex-end;
+    position: relative;
     cursor: pointer;
   }
   &_main {
@@ -18,7 +24,6 @@
     word-break: break-word;
     border-bottom-left-radius: 0px;
     &_currentUser {
-    
       border-bottom-left-radius: 20px;
       border-bottom-right-radius: 0px;
       background-color: var(--profile-text-color);

@@ -22,11 +22,21 @@
   &_chat {
     background-color: rgb(115, 115, 219);
   }
-  &_hiddenBtns{
+  &_hiddenBtns {
     position: relative;
   }
-  &_arrow{
+  &_arrow {
     color: #fff;
   }
-
+  &_status {
+    padding: 10px 12px;
+    border-radius: 5px;
+    color: #fff;
+  }
+  &_blocked {
+    background-color: rgb(236, 118, 118);
+  }
+  &_friend {
+    background-color: rgb(98, 237, 137);
+  }
 }

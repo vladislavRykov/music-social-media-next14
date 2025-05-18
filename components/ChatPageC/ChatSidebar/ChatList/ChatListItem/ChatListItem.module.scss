@@ -28,6 +28,8 @@
   }
   & &_img {
     border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
   }
   &_rightBlock {
     flex-grow: 1;
@@ -69,5 +71,11 @@
     border-radius: 50%;
     background-color: var(--third-text-color);
     color: var(--secondary-text-color);
+  }
+  &_friendStatus {
+    color: rgb(3, 27, 3);
+  }
+  &_blockedStatus {
+    color: rgb(65, 6, 6);
   }
 }

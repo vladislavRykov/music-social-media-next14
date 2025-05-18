@@ -35,10 +35,12 @@ const SearchUserPopupMain = () => {
     };
     firstLoad();
   }, [debouncedValue]); // Перезагрузка при изменении slug или free-flag
+  const elementWithScroll = useRef<HTMLDivElement | null>(null);
   const refObserver = useScrollPagination({
     loadMoreCallback: () => searchUsersLoading(debouncedValue, users),
     threshold: 100, // подгружаем, когда расстояние до конца страницы меньше 100 пикселей
     scrollDeps: [users, debouncedValue],
+    elementWithScroll,
   });
   return (
     <div className={s.wrapper}>
@@ -51,7 +53,7 @@ const SearchUserPopupMain = () => {
         />
       </div>
       <div className={s.content}>
-        <div className={s.useritems}>
+        <div ref={elementWithScroll} className={s.useritems}>
           {users.map((user) => (
             <SearchUserItem {...user} />
           ))}

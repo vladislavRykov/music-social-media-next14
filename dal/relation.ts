@@ -43,6 +43,22 @@ export const updateRelationStatus = async ({
   ).lean<RelationMongooseT>();
   return oldRelation;
 };
+export const getUsersRelation = async ({
+  currentUserId,
+  otherUserId,
+}: {
+  currentUserId: string;
+  otherUserId: string;
+}) => {
+  await mongooseConnect();
+  const realtion = await Models.Relationship.findOne({
+    $or: [
+      { userA: currentUserId, userB: otherUserId },
+      { userA: otherUserId, userB: currentUserId },
+    ],
+  }).lean<RelationMongooseT>();
+  return realtion;
+};
 export const isUsersHaveRelation = async ({
   currentUserId,
   otherUserId,
@@ -92,21 +108,21 @@ export const isUserBlocked = async ({
   return realtion;
 };
 export const updateRelationUserOrder = async ({
-  currentUserA,
-  currentUserB,
+  userA,
+  userB,
 }: {
-  currentUserA: string;
-  currentUserB: string;
+  userA: string;
+  userB: string;
 }) => {
   await mongooseConnect();
   const oldRelation = await Models.Relationship.findOneAndUpdate(
     {
       $or: [
-        { userA: currentUserA, userB: currentUserB },
-        { userA: currentUserB, userB: currentUserA },
+        { userA: userA, userB: userB },
+        { userA: userB, userB: userA },
       ],
     },
-    { userA: currentUserB, userB: currentUserA },
+    { userA, userB },
     { new: false },
   ).lean<RelationMongooseT>();
   return oldRelation;

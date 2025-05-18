@@ -28,7 +28,7 @@ const {execute,status,data:responseData,error}=useAsync(fetchChats,[debouncedVal
 return (
 <div>
     {status ==='pending' && <Image src={LoadingSvg} alt='loading...' height={100} width={100}/>}
-    {status ==='success' && responseData && responseData.map((chat,idx)=><ChatListItem chatId={chat._id} selectedChat={params?.slug?.[0]||null} key={idx} chatName={chat.chatName} type={chat.type} chatImg={chat.chatImg||null} lastMessage={chat.lastMessage &&  {from: {userId: chat.lastMessage.author._id.toString(),username: chat.lastMessage.author.username},message: chat.lastMessage.text,        time: chat.lastMessage.createdAt}}/>)}
+    {status ==='success' && responseData && responseData.map((chat,idx)=><ChatListItem relationStatus={chat.relation?.status} chatId={chat._id} selectedChat={params?.slug?.[0]||null} key={idx} chatName={chat.chatName} type={chat.type} chatImg={chat.chatImg||null} lastMessage={chat.lastMessage &&  {from: {userId: chat.lastMessage.author._id.toString(),username: chat.lastMessage.author.username},message: chat.lastMessage.text,        time: chat.lastMessage.createdAt}}/>)}
 </div>
 )
 }

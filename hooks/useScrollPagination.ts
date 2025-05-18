@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, MutableRefObject } from 'react';
 
 const DEFAULT_THRESHOLD = 200; // расстояние от низа экрана до начала подгрузки (px)
 
@@ -6,18 +6,17 @@ type ParamsT = {
   loadMoreCallback: () => Promise<void>;
   threshold: number;
   scrollDeps?: any[];
-  commonDeps?: any[];
-  immediate?: boolean;
+  elementWithScroll?: MutableRefObject<any | null>;
 };
 
 const useScrollPagination = ({
   loadMoreCallback,
   threshold = DEFAULT_THRESHOLD,
   scrollDeps = [],
-  commonDeps = [],
-  immediate = true,
+  elementWithScroll,
 }: ParamsT) => {
   const observerTarget = useRef<HTMLDivElement | null>(null); // реф, привязанный к последнему элементу списка
+  // const elementWithScroll = useRef<T | null>(null); // реф, привязанный к последнему элементу списка
   const isFetching = useRef(false); // предотвращает множественные вызовы подгрузки
 
   /**
@@ -56,9 +55,17 @@ const useScrollPagination = ({
   //   }
   // }, commonDeps);
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    if (elementWithScroll?.current) {
+      elementWithScroll.current.addEventListener('scroll', handleScroll);
+    } else {
+      window.addEventListener('scroll', handleScroll);
+    }
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      if (elementWithScroll?.current) {
+        elementWithScroll.current.removeEventListener('scroll', handleScroll);
+      } else {
+        window.removeEventListener('scroll', handleScroll);
+      }
     };
   }, [...scrollDeps]); // пустой массив deps, слушаем глобальные события
 

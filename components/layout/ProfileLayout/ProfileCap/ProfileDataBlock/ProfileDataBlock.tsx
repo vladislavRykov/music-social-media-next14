@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import s from './ProfileDataBlock.module.scss';
 import Image, { StaticImageData } from 'next/image';
-import mockAvatar from '@/public/avatar2.webp';
-import { getSession } from 'next-auth/react';
+import defaultAvatar from '@/public/avatars/default.jpg';
 import { getMe, getUserMainFields } from '@/dal/user';
 import { UserDataMongoose, UserMainFields } from '@/types/types';
 import { useAppSelector } from '@/hooks/reduxHooks';
@@ -34,10 +33,10 @@ const ProfileDataBlock = ({
             width={160}
             alt="profile image"
             loading="lazy"
-            src={srcImg || userAva || mockAvatar}
+            src={srcImg || userAva || defaultAvatar}
             placeholder="blur"
             blurDataURL={'/loader1.gif'}
-            onError={() => setSrcImg(mockAvatar)}
+            onError={() => setSrcImg(defaultAvatar)}
           />
           <h1 className={s.ProfileDataBlock_nickname}>{username || 'Имя пользователя'}</h1>
         </>

@@ -8,6 +8,7 @@ const Chat = async() => {
   console.log('chat')
   const res =await findAllCurrentUserChatsAction()
   console.log(res)
+  console.log(res.data?.[0].relation)
   return <div className={s.chat}>
     <div className={s.flex}>
 

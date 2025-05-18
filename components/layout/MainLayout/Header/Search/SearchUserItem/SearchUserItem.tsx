@@ -2,7 +2,7 @@ import { UserProfileData } from '@/types/types';
 import React from 'react';
 import s from './SearchUserItem.module.scss';
 import Image from 'next/image';
-import mockAvatar from '@/public/avatar2.webp';
+import defaultAvatar from '@/public/avatars/default.jpg';
 import Link from 'next/link';
 import { FaUserFriends } from 'react-icons/fa';
 import { IoChatbubblesOutline } from 'react-icons/io5';
@@ -45,7 +45,7 @@ const SearchUserItem = ({ _id, avatar, username }: SearchUserItemProps) => {
         <Link href={`/user/${username}`}>
           <Image
             className={s.searchUserItem_image}
-            src={avatar || mockAvatar}
+            src={avatar || defaultAvatar}
             height={38}
             width={38}
             alt="avatar"

@@ -11,7 +11,8 @@ const EventItem = (props: Event) => {
       <a target="_blank" href={props.site_url} rel="noopener noreferrer">
         <div className={s.eventItem_imageWrap}>
           <Image
-          fill
+            className={s.eventItem_image}
+            fill
             placeholder="blur"
             blurDataURL="/background/lightModeImgPlaceholder.svg"
             src={props.images[0].image}

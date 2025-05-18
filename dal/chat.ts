@@ -28,7 +28,7 @@ export const findAllCurrentUserChats = async <T>(
   if (populate) {
     query.populate(populate);
   }
-  const chat = await query.lean<T>().exec();
+  const chat = await query.sort({ updatedAt: -1 }).lean<T>().exec();
   return chat;
 };
 export const findDialogByMembers = async (members: string[]) => {
@@ -46,6 +46,23 @@ export const findChatById = async (chatId: string) => {
 
   return chat;
 };
+export const findChatByIdPopulated = async <T>(
+  chatId: string,
+  populate?: {
+    path: string;
+    select?: string;
+    populate?: { path: string; model: string; select?: string };
+  }[],
+) => {
+  await mongooseConnect();
+  const query = Models.Chat.findById(chatId).lean<T>();
+
+  if (populate) {
+    query.populate(populate);
+  }
+  const chat = await query.lean<T>().exec();
+  return chat;
+};
 export const updateChatLastMessage = async (chatId: string, messageId: string) => {
   await mongooseConnect();
   const chat = await Models.Chat.findOneAndUpdate(
@@ -55,4 +72,14 @@ export const updateChatLastMessage = async (chatId: string, messageId: string) =
   ).lean<ChatMongooseT>();
 
   return chat;
+};
+export const updateChatRelation = async (chatId: string, relation: string) => {
+  await mongooseConnect();
+  const updatedChat = await Models.Chat.findByIdAndUpdate(
+    { _id: chatId },
+    { relation },
+    { new: true },
+  ).lean<ChatMongooseT>();
+
+  return updatedChat;
 };

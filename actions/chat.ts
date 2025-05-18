@@ -6,6 +6,7 @@ import { verifySession } from '@/lib/sessions';
 import { ChatMongooseT } from '@/types/chatTypes';
 import { Overwrite } from '@/types/common';
 import { MessageMongoose } from '@/types/messageT';
+import { RelationMongooseT } from '@/types/relationT';
 import { UserProfileData } from '@/types/types';
 import { Schema } from 'mongoose';
 
@@ -42,11 +43,16 @@ export const findAllCurrentUserChatsAction = async () => {
     const chats = await findAllCurrentUserChats<
       Overwrite<
         ChatMongooseT,
-        { members: UserProfileData[]; lastMessage: MessageWithAuthor | null }
+        {
+          members: UserProfileData[];
+          lastMessage: MessageWithAuthor | null;
+          relation?: RelationMongooseT;
+        }
       >[]
     >(session.userId, [
       { path: 'members', select: '_id username avatar banner' },
       { path: 'lastMessage', populate: { path: 'author', model: 'User', select: 'username' } },
+      { path: 'relation' },
     ]);
     const formattedChars = chats.map((chat) => {
       const membersWithoutCurrentUser = chat.members.filter(

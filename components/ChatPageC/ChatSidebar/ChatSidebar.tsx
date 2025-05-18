@@ -6,6 +6,7 @@ import SidebarHeader from './SidebarHeader/SidebarHeader'
 import ChatSearchPopup from './ChatSearchPopup/ChatSearchPopup'
 import { UserProfileData } from '@/types/types'
 import { MessageWithAuthor } from '@/types/chatTypes'
+import { RelationMongooseT } from '@/types/relationT'
 
 type Props= {
   chats: {
@@ -15,6 +16,7 @@ type Props= {
     type: string;
     members: UserProfileData[];
     lastMessage: MessageWithAuthor | null;
+    relation?: RelationMongooseT;
 }[] | null
 }
 

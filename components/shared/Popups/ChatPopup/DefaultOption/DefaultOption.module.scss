@@ -1,14 +1,18 @@
-.defaultOption{
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    padding: 5px 8px;
-    cursor: pointer;
-    &_icon{
-        color: gray;
-    }
-    &_title{
-        color: black;
-    }
-
+.defaultOption {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 5px 8px;
+  cursor: pointer;
+  transition: 0.1s;
+  border-radius: 10px;
+  &:hover {
+    background-color: rgb(205, 205, 205);
+  }
+  &_icon {
+    color: gray;
+  }
+  &_title {
+    color: black;
+  }
 }
