@@ -10,7 +10,9 @@
   color: rgb(26, 26, 26);
   background-color: #fff;
   &_item {
+    background-color: transparent;
     cursor: pointer;
+    color: rgb(49, 49, 49);
     padding: 4px 8px;
     transition: 0.1s;
     &:hover {

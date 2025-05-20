@@ -55,7 +55,7 @@ const ChatMessage = ({
     <div
       className={s.chatMessage}
       style={isCurrentUserMessage ? { alignSelf: 'flex-end', flexDirection: 'row-reverse' } : {}}>
-      <ChatMessageAvatar isCurrentUserMessage={isCurrentUserMessage} userId={author._id} username={author.username} avatar={author.avatar}/>
+      {!isCurrentUserMessage && <ChatMessageAvatar isCurrentUserMessage={isCurrentUserMessage} userId={author._id} username={author.username} avatar={author.avatar}/>}
       <div
         onContextMenu={onRightMouseClick}
         className={cn(s.chatMessage_main, {

@@ -43,6 +43,24 @@ export const updateRelationStatus = async ({
   ).lean<RelationMongooseT>();
   return oldRelation;
 };
+export const deleteRelation = async ({
+  currentUserId,
+  otherUserId,
+}: {
+  currentUserId: string;
+  otherUserId: string;
+}) => {
+  await mongooseConnect();
+  const deletedRelation = await Models.Relationship.findOneAndDelete(
+    {
+      $or: [
+        { userA: currentUserId, userB: otherUserId },
+        { userA: otherUserId, userB: currentUserId },
+      ],
+    },
+  ).lean<RelationMongooseT>();
+  return deletedRelation;
+};
 export const getUsersRelation = async ({
   currentUserId,
   otherUserId,

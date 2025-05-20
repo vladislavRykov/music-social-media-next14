@@ -1,0 +1,35 @@
+.userLocation_content {
+  position: relative;
+}
+.userLocation_currentLocation {
+  padding: 12px 20px;
+  background-color: transparent;
+  color: #bcbedc;
+  border-radius: 10px;
+  text-decoration: underline;
+}
+.userLocation_currentLocation:disabled {
+  color: gray;
+  cursor: default;
+}
+.userLocation_locationList {
+  cursor: pointer;
+  padding: 8px 0px;
+  left: 0;
+  top: 102%;
+  border-radius: 12px;
+  background-color: #2b2d42;
+  color: #bcbedc;
+  -webkit-box-shadow: 2px 2px 5px 2px rgb(55, 55, 55);
+          box-shadow: 2px 2px 5px 2px rgb(55, 55, 55);
+  position: absolute;
+}
+.userLocation_location {
+  padding: 6px 8px;
+}
+.userLocation_location:hover {
+  background-color: var(--secondary-text-color);
+}
+.userLocation_selectedLocation {
+  background-color: var(--main-text-color);
+}

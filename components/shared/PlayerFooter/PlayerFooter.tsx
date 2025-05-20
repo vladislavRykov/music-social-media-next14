@@ -19,6 +19,7 @@ import { Inter, Roboto } from 'next/font/google';
 import { selectPlayerData } from '@/redux/selectors/playerSelectors';
 import { usePathname } from 'next/navigation';
 import PlayerPlaylistBlock from './PlayerPlaylistBlock/PlayerPlaylistBlock';
+import { getFromLocalStorage } from '@/utils/localStorageHelper';
 
 const roboto = Roboto({
   weight: ['400', '700'],

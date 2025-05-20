@@ -1,0 +1,23 @@
+@charset "UTF-8";
+.chatList {
+  padding-left: 10px;
+  padding-top: 10px;
+  width: 100%;
+  overflow-y: auto;
+  height: 100%;
+}
+.chatList::-webkit-resizer {
+  background-color: transparent;
+}
+.chatList::-webkit-scrollbar-track {
+  background: transparent;
+  width: 10px;
+}
+.chatList::-webkit-scrollbar {
+  width: 10px; /* Ширина скроллбара */
+}
+.chatList::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  background-color: #1f202f; /* Цвет ползунка */
+  border-radius: 25px; /* Радиус скругления */
+}

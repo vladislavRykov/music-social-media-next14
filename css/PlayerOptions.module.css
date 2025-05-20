@@ -1,0 +1,86 @@
+.playerOptions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 16px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.playerOptions_inputWrap {
+  width: 100px;
+  position: relative;
+}
+.playerOptions_volumeInput {
+  cursor: pointer;
+  display: block;
+  height: 10px;
+  background-color: transparent;
+  width: 100%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+.playerOptions_volumeInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  height: 1px;
+  width: 1px;
+  opacity: 0;
+}
+.playerOptions_volumeInput_line {
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  z-index: 12;
+  position: absolute;
+  left: 0;
+  height: 2px;
+  background-color: #878888;
+  width: 100%;
+  pointer-events: none;
+}
+.playerOptions_progressLine {
+  position: absolute;
+  z-index: 14;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  left: 0;
+  height: 2px;
+  background-color: #fafafa;
+  width: unset;
+  pointer-events: none;
+}
+.playerOptions_progressLine_thumbWrap {
+  position: relative;
+  height: 2px;
+}
+.playerOptions_progressLine_thumb {
+  pointer-events: none;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  right: -6px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%);
+  position: absolute;
+  background-color: #fafafa;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.playerOptions_btn {
+  color: #8b8b8b;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.input_active {
+  width: 18px;
+  height: 18px;
+  right: -9px;
+}

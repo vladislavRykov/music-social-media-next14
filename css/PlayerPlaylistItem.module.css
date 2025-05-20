@@ -1,0 +1,125 @@
+.playerPlaylistItem {
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  border-bottom: 1px solid var(--secondary-text-color);
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: transparent;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 2px 8px;
+}
+.playerPlaylistItem:hover {
+  background-color: var(--secondary-bg-color);
+  -webkit-box-shadow: 0px 0px 4px 1px var(--secondary-bg-shadow-color);
+          box-shadow: 0px 0px 4px 1px var(--secondary-bg-shadow-color);
+}
+.playerPlaylistItem:hover .playerPlaylistItem_timer {
+  display: none;
+}
+.playerPlaylistItem:hover .playerPlaylistItem_settings {
+  display: block;
+}
+.playerPlaylistItem_textAndImg {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.playerPlaylistItem_imageBlock {
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: 5px;
+  position: relative;
+}
+.playerPlaylistItem_imageBlock:hover .linearMusicItem_overlay {
+  opacity: 1;
+}
+.playerPlaylistItem_image {
+  border-radius: 5px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+.playerPlaylistItem_overlay {
+  opacity: 0;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+  border-radius: 5px;
+  position: absolute;
+  z-index: 30;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.505);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.playerPlaylistItem_overlay_shown {
+  opacity: 1;
+}
+.playerPlaylistItem_play {
+  color: white;
+}
+.playerPlaylistItem_textBlock {
+  padding: 10px 0px;
+}
+.playerPlaylistItem_title {
+  color: var(--third-text-color);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.playerPlaylistItem_timer {
+  display: block;
+}
+.playerPlaylistItem_settings {
+  display: none;
+}
+.playerPlaylistItem_rightBlock {
+  position: relative;
+  color: var(--secondary-text-color);
+  width: 70px;
+  height: 35px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.playerPlaylistItem_authorAndViews {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 50px;
+  color: var(--main-text-color);
+}
+.playerPlaylistItem_author {
+  color: var(--main-text-color);
+}
+.playerPlaylistItem_selected {
+  background-color: var(--secondary-bg-color);
+  -webkit-box-shadow: 0px 0px 4px 1px var(--secondary-bg-shadow-color);
+          box-shadow: 0px 0px 4px 1px var(--secondary-bg-shadow-color);
+}

@@ -1,0 +1,58 @@
+.postCreateForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+}
+.postCreateForm_field {
+  padding: 10px 20px;
+}
+.postCreateForm_labelText {
+  padding: 0px 10px;
+  display: block;
+  margin-bottom: 10px;
+}
+.postCreateForm_button {
+  position: relative;
+  background-color: var(--profile-text-color);
+  width: 100%;
+  padding: 15px 20px;
+  color: #fff;
+  font-size: 18px;
+  height: 50px;
+}
+.postCreateForm_button:disabled {
+  cursor: default;
+  opacity: 0.7;
+}
+.postCreateForm_form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  height: 100%;
+}
+.postCreateForm_error {
+  padding: 5px 10px;
+  color: var(--secondary-text-color);
+}
+.postCreateForm_btnLoading {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}

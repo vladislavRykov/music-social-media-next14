@@ -126,7 +126,7 @@ const EventList = ({ isOnlyFreeEvents }: Props) => {
         {isLoading &&
           Array(9)
             .fill(0)
-            .map((_) => <EventItemLoader />)}
+            .map((_) => <EventItemLoader style={{flexGrow: 1}} />)}
       </div>
       {/* {isLoading && <div>
           <Image style={{display: 'block',margin: '0 auto'}} src={cicleTube} alt='loading...' height={60} width={60} /></div>} */}

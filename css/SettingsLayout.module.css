@@ -1,0 +1,23 @@
+.wrapper {
+  padding-top: 68px;
+  min-height: 100vh;
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+}
+
+.container {
+  width: 70%;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 30px;
+  gap: 10px;
+}
+
+.page {
+  width: 100%;
+  border-radius: 5px;
+  padding: 24px;
+  background-color: var(--secondary-bg-color);
+}

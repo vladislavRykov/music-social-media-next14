@@ -7,6 +7,7 @@ import NextTopLoader from 'nextjs-toploader';
 import { ThemeProvider } from 'next-themes'
 import {Roboto} from 'next/font/google'
 import {TextColorProvider} from '@/context/TextColorProvider'
+import NextTopLoaderWithColor from '@/components/NextTopLoaderWrapper/NextTopLoaderWithColor';
 
 
 const geistSans = localFont({
@@ -33,7 +34,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <NextTopLoader showSpinner={false} />
+        {/* <NextTopLoader showSpinner={false} /> */}
+        <NextTopLoaderWithColor />
         <StoreProvider>
         <ThemeProvider>
           <TextColorProvider>

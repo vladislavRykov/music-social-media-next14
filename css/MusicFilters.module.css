@@ -1,0 +1,32 @@
+.wrapper {
+  margin-bottom: 50px;
+}
+
+.filters {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 15px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+}
+.filters_wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  gap: 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+}
+.filters_item {
+  width: 150px;
+}

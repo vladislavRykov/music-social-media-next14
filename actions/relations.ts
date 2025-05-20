@@ -1,6 +1,7 @@
 'use server';
 import {
   createRelation,
+  deleteRelation,
   getUsersRelation,
   isUserBlocked,
   updateRelationStatus,
@@ -45,6 +46,58 @@ export const blockUser = async (targetId: string) => {
       return { ok: false, data: null, message: error.message };
     }
     return { ok: false, data: null, message: 'Неизвестная ошибка.' };
+  }
+};
+export const unblockUser = async (targetId: string) => {
+  try {
+    const session = await verifySession();
+    if (!session) {
+      return { ok: false, message: 'Вы не авторизированы' };
+    }
+    if (targetId === session.userId)
+      return { ok: false, message: 'Нельзя разблокировать самого себя.' };
+    const existingRelation = await getUsersRelation({
+      currentUserId: session.userId,
+      otherUserId: targetId,
+    });
+    if (!existingRelation)
+      return { ok: false, message: 'Пользователь не заблокирован.' };
+    if (existingRelation.status === RelationStatus.Friends)
+      return { ok: false, message: 'Нельзя разблокировать друга.' };
+
+    await deleteRelation({ currentUserId: session.userId, otherUserId: targetId });
+    return { ok: true, message: 'Пользователь разблокирован.' };
+  } catch (error) {
+    if (error instanceof Error) {
+      return { ok: false, message: error.message };
+    }
+    return { ok: false, message: 'Неизвестная ошибка.' };
+  }
+};
+export const deleteFriend = async (friendId: string) => {
+  try {
+    const session = await verifySession();
+    if (!session) {
+      return { ok: false, message: 'Вы не авторизированы' };
+    }
+    if (friendId === session.userId)
+      return { ok: false, message: 'Нельзя удалить из друзей самого себя.' };
+    const existingRelation = await getUsersRelation({
+      currentUserId: session.userId,
+      otherUserId: friendId,
+    });
+    if (!existingRelation)
+      return { ok: false, message: 'Пользователя нет в ваших друзьях.' };
+    if (existingRelation.status === RelationStatus.Blocked)
+      return { ok: false, message: 'Пользователя нет в ваших друзьях.' };
+
+    await deleteRelation({ currentUserId: session.userId, otherUserId: friendId });
+    return { ok: true, message: 'Пользователь удален из друзей.' };
+  } catch (error) {
+    if (error instanceof Error) {
+      return { ok: false, message: error.message };
+    }
+    return { ok: false, message: 'Неизвестная ошибка.' };
   }
 };
 export const isCurrentUserBlocked = async (blockerUsername: string) => {

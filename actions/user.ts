@@ -48,7 +48,7 @@ export const sendFriendRequest = async (to: string) => {
     }
     const isHaveRelation = await isUsersHaveRelation({currentUserId: session.userId,otherUserId:to })
     if(isHaveRelation) return { ok: false, message: 'Вы либо заблокированы либо уже друг пользователя.' };
-    const isExist = await checkIfRequestExists(to, session.userId);
+    const isExist = await checkIfRequestExists(to, session.userId,FriendRequestStatus.Pending);
     if (isExist) return { ok: false, message: 'Запрос уже отправлен.' };
     await pushNewFriendRequest(to, { from: session.userId });
     return { ok: true, message: 'Запрос дружбы успешно отправлен.' };
@@ -104,6 +104,7 @@ export const changeFriendRequestStatusA = async (
         otherUserId: from,
         status: RelationStatus.Friends,
       });
+  
       return { ok: true, message: 'Пользователь был добавлен в друзья.' };
     } else {
       const oldFriendRequest = await changeFriendRequestStatus(session.userId, from, status);

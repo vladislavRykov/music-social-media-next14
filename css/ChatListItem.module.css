@@ -1,0 +1,96 @@
+.chatListItem {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 5px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+  white-space: nowrap;
+  overflow: hidden;
+  background-color: transparent;
+  color: var(--third-text-color);
+}
+.chatListItem:hover {
+  background-color: var(--secondary-bg-color);
+  -webkit-box-shadow: 0px 0px 15px 3px var(--secondary-bg-shadow-color);
+          box-shadow: 0px 0px 15px 3px var(--secondary-bg-shadow-color);
+}
+.chatListItem_selected {
+  background-color: var(--profile-text-color);
+  color: #fafafa;
+}
+.chatListItem_selected:hover {
+  background-color: var(--profile-text-color);
+}
+.chatListItem .chatListItem_img {
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+.chatListItem_rightBlock {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  overflow: hidden;
+}
+.chatListItem_nameAndTime {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 9px;
+}
+.chatListItem_chatname {
+  font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.chatListItem_time {
+  font-size: 12px;
+}
+.chatListItem_lastMessageAndUnread {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+.chatListItem_lastMessage {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding-right: 5px;
+}
+.chatListItem_unRead {
+  padding: 5px;
+  border-radius: 50%;
+  background-color: var(--third-text-color);
+  color: var(--secondary-text-color);
+}
+.chatListItem_friendStatus {
+  color: rgb(3, 27, 3);
+}
+.chatListItem_blockedStatus {
+  color: rgb(65, 6, 6);
+}

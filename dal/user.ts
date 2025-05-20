@@ -303,9 +303,9 @@ export const pushNewFriendRequest = async (to: string, requestData: addFriendReq
     { new: true },
   );
 };
-export const checkIfRequestExists = async (to: string, from: string) => {
+export const checkIfRequestExists = async (to: string, from: string,status: FriendRequestStatus) => {
   await mongooseConnect();
-  const isExists = await Models.User.exists({ _id: to, 'friendRequests.from': from });
+  const isExists = await Models.User.exists({ _id: to, 'friendRequests.from': from,'friendRequests.status': status });
   return isExists;
 };
 // export const getFriendReqByFromAndStatus =  async (

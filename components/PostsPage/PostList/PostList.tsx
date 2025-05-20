@@ -6,7 +6,7 @@ import s from './PostList.module.scss';
 import { useAsync, useLoading } from '@/hooks/useFetching';
 import { useParams } from 'next/navigation';
 import { findAllPostsByUsername } from '@/actions/post';
-import { MongoosePost } from '@/types/postTypes';
+import { MongoosePost, MongoosePostReactionT } from '@/types/postTypes';
 import useScrollPagination from '@/hooks/useScrollPagination';
 import Image from 'next/image';
 import cicleTube from '@/public/circleTube.svg';
@@ -23,9 +23,9 @@ type Props = {
 const PostList = ({ selectedSortOrder, isPostsAuthor }: Props) => {
   const params: { nickname: string } | null = useParams();
   const loadMoreItems = useRef(true);
-  const [posts, setPosts] = useState<MongoosePost[]>([]);
+  const [posts, setPosts] = useState<MongoosePostReactionT[]>([]);
 
-  const getPostsByUsername = async (sortType: string, posts: MongoosePost[]) => {
+  const getPostsByUsername = async (sortType: string, posts: MongoosePostReactionT[]) => {
     const postLimit = 4;
     if (!loadMoreItems.current) return;
     const lastPostId = posts.length > 0 ? posts[posts.length - 1]._id : null;
@@ -56,7 +56,6 @@ const PostList = ({ selectedSortOrder, isPostsAuthor }: Props) => {
   const refObserver = useScrollPagination({
     loadMoreCallback: () => getPostsByUsernameLoading(selectedSortOrder.value, posts),
     threshold: 100, // подгружаем, когда расстояние до конца страницы меньше 100 пикселей
-    commonDeps: [selectedSortOrder.value],
     scrollDeps: [posts, selectedSortOrder.value],
   });
 

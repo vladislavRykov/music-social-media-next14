@@ -1,10 +1,10 @@
-import { MongoosePost } from '@/types/postTypes';
+import { MongoosePost, MongoosePostReactionT } from '@/types/postTypes';
 import Image from 'next/image';
 import React from 'react';
 import s from './PostBody.module.scss';
 
 type Props = {
-  post: MongoosePost;
+  post: MongoosePostReactionT;
 };
 
 const PostBody = ({ post }: Props) => {

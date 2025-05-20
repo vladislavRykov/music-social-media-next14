@@ -1,18 +1,29 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-export function useCssVariable(variableNames:string[]) {
-  const [valuesArray, setValuesArray] = useState<string[]>([]);
-  const documentEl =  document.documentElement
+export const useCSSVariable = (targetElement:string = ":root") => {
+    const [
+        cssRootStyles,
+        setCssRootStyles
+    ] = useState<CSSStyleDeclaration | null>(null);
+    const [rootElement, setRootElement] = useState<Element | null>(null);
 
-  useEffect(() => {
-    const variableValueArray = variableNames.map(variable=>{
-        const style = getComputedStyle(documentEl);
-        const variableValue = style.getPropertyValue(variable).trim()
-        return variableValue
+    const getCssVariable = (variable: string) => {
+        const value = cssRootStyles?.getPropertyValue(variable);
+        return value;
+    };
 
-    })
-    setValuesArray(variableValueArray);
-  }, [...variableNames]);
+    const setCssVariable = (variable: string, value: string) => {
+        //@ts-ignore
+        rootElement?.style.setProperty(variable, value);
+    };
+    useEffect(() => {
+        if (document) {
+            const rootElement = document.querySelector(targetElement) as Element;
+            const rootStyles = getComputedStyle(rootElement);
+            setRootElement(rootElement);
+            setCssRootStyles(rootStyles);
+        }
+    }, [targetElement])
 
-  return valuesArray;
-}
+    return {getCssVariable, setCssVariable};
+};

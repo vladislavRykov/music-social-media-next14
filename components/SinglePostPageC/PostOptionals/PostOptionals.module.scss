@@ -7,7 +7,7 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    align-items: center;
+    align-items: flex-start;
   }
   &_edit {
     a {
@@ -31,12 +31,32 @@
       background-color: var(--secondary-bg-color);
     }
   }
+  &_like {
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 6px;
+      border-radius: 8px;
+      color: var(--secondary-text-color);
+      background-color: var(--secondary-bg-color);
+    }
+  }
+  &_likeCount {
+    padding: 6px;
+    border-radius: 8px;
+    color: var(--secondary-text-color);
+    background-color: var(--secondary-bg-color);
+  }
   &_option {
     position: relative;
     transition: 0.3s;
     &:hover {
       transform: scale(1.1);
     }
+  }
+  &_likedIcon {
+    color: red;
   }
   .postDescription {
     position: absolute;

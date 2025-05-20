@@ -1,0 +1,42 @@
+.iconBtn {
+  padding: 5px;
+  background-color: transparent;
+  position: relative;
+  z-index: 12;
+}
+.iconBtn_iconWrap {
+  pointer-events: none;
+  z-index: 10;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.iconBtn_circle {
+  pointer-events: none;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  z-index: 1;
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background-color: rgb(184, 184, 184);
+  opacity: 0;
+  border-radius: 50%;
+}
+.iconBtn:hover .iconBtn_circle {
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+}

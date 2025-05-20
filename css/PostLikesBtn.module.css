@@ -1,0 +1,20 @@
+.postLikesBtn {
+  grid-column: 3;
+  justify-items: end;
+}
+.postLikesBtn_btn {
+  padding: 10px 12px;
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  gap: 4px;
+  color: #fff;
+  background-color: rgb(244, 172, 172);
+}
+.postLikesBtn_liked {
+  background-color: rgb(243, 77, 77);
+}

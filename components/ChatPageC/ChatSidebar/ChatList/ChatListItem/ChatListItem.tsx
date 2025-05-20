@@ -13,6 +13,8 @@ import dynamic from 'next/dynamic';
 import GoToProfile from '@/components/shared/Popups/ChatPopup/GoToProfile/GoToProfile';
 import { RelationStatus } from '@/types/relationT';
 const ChatPopup = dynamic(() => import('@/components/shared/Popups/ChatPopup/ChatPopup'));
+import { FaUserFriends } from 'react-icons/fa';
+import { ImBlocked } from "react-icons/im";
 
 type Props = {
   lastMessage: {
@@ -105,20 +107,17 @@ const ChatListItem = ({
         />
         <div className={s.chatListItem_rightBlock}>
           <div className={s.chatListItem_nameAndTime}>
-            <h2
-              className={s.chatListItem_chatname}
-              style={selectedChat === chatId ? { color: '#fafafa' } : {}}>
-              {chatName}
-            </h2>
-            {relationStatus && (
-              <div
-                className={cn({
-                  [s.chatListItem_blockedStatus]: relationStatus === RelationStatus.Blocked,
-                  [s.chatListItem_friendStatus]: relationStatus === RelationStatus.Friends,
-                })}>
-                {relationStatus}
-              </div>
-            )}
+            <div className={s.chatListItem_nameAndStatus}>
+              <h2
+                className={cn(s.chatListItem_chatname)}
+                // style={selectedChat === chatId ? { color: '#fafafa' } : {}}
+              >
+                {chatName}
+              </h2>
+              {relationStatus && relationStatus === RelationStatus.Blocked && (
+                <div className={s.chatListItem_blockedStatus}>-{relationStatus}-</div>
+              )}
+            </div>
             <span className={s.chatListItem_time}>{formattedTime || ''}</span>
           </div>
           {lastMessage && (
@@ -148,6 +147,16 @@ const ChatListItem = ({
           }/> */}
           <GoToProfile userName={chatName} closePopup={() => setIsPopupOpen(false)} />
         </ChatPopup>
+      )}
+      {relationStatus && relationStatus === RelationStatus.Friends && (
+        <div className={s.chatListItem_relationStatusPin}>
+          <FaUserFriends className={s.chatListItem_friendIcon} size={14} />
+        </div>
+      )}
+      {relationStatus && relationStatus === RelationStatus.Blocked && (
+        <div className={s.chatListItem_relationStatusPin}>
+          <ImBlocked className={s.chatListItem_blockedIcon} size={14} />
+        </div>
       )}
     </div>
   );

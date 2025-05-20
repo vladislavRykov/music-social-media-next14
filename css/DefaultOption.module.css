@@ -1,0 +1,23 @@
+.defaultOption {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 8px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px 8px;
+  cursor: pointer;
+  -webkit-transition: 0.1s;
+  transition: 0.1s;
+  border-radius: 10px;
+}
+.defaultOption:hover {
+  background-color: rgb(205, 205, 205);
+}
+.defaultOption_icon {
+  color: gray;
+}
+.defaultOption_title {
+  color: black;
+}

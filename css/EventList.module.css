@@ -1,0 +1,17 @@
+.eventList_wrapper {
+  max-width: 70%;
+  margin: 0 auto;
+  padding: 40px 30px;
+}
+.eventList_items {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 10px;
+}
+
+.eventItemLoader {
+  background-color: var(--main-bg-color);
+}

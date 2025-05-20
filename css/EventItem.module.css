@@ -1,0 +1,89 @@
+@charset "UTF-8";
+.eventItem {
+  width: 300px;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+  padding: 8px;
+  border-radius: 2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.eventItem:hover {
+  background-color: var(--secondary-bg-color);
+  -webkit-box-shadow: 0px 0px 4px 1px var(--secondary-bg-shadow-color);
+          box-shadow: 0px 0px 4px 1px var(--secondary-bg-shadow-color);
+}
+.eventItem:active {
+  background-color: color-mix(in srgb, var(--secondary-bg-color), white 5%);
+  -webkit-box-shadow: 0px 0px 4px 1px var(--secondary-bg-shadow-color);
+          box-shadow: 0px 0px 4px 1px var(--secondary-bg-shadow-color);
+}
+.eventItem_info {
+  padding: 10px 5px;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.eventItem_title {
+  margin-bottom: 4px;
+  font-size: 14px;
+  color: var(--third-text-color);
+}
+.eventItem_title:hover {
+  text-decoration: underline;
+}
+.eventItem_title::first-letter {
+  text-transform: capitalize;
+}
+.eventItem_title a {
+  color: var(--third-text-color);
+}
+.eventItem_desc {
+  color: var(--secondary-text-color);
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: 3; /* Ограничивает количество строк */
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+.eventItem_price {
+  margin-top: auto;
+  color: var(--secondary-text-color);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.eventItem_price_sign {
+  width: 30px;
+  display: block;
+}
+.eventItem_image {
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+.eventItem_imageWrap {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}

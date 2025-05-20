@@ -1,0 +1,52 @@
+.searchUserPopup_wrapper {
+  padding: 10px;
+  background-color: transparent;
+  -webkit-animation: fadeInOverlay 0.3s ease forwards;
+          animation: fadeInOverlay 0.3s ease forwards;
+  position: absolute;
+  -webkit-transition: 0.15s;
+  transition: 0.15s;
+  z-index: 130;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+  top: 100%;
+}
+.searchUserPopup_content {
+  width: 330px;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 14px 10px;
+}
+.searchUserPopup_triangle {
+  line-height: 0;
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  color: #fff;
+  -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+.searchUserPopup_hiddenTopDiv {
+  position: relative;
+}
+
+@-webkit-keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

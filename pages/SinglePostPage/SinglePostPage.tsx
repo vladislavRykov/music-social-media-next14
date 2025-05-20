@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import s from './SinglePostPage.module.scss';
-import { MongoosePost } from '@/types/postTypes';
+import { MongoosePost, MongoosePostReactionT } from '@/types/postTypes';
 import Image from 'next/image';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import PostBody from '@/components/SinglePostPageC/PostBody/PostBody';
@@ -10,7 +10,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { useRouter } from 'nextjs-toploader/app';
 
 type Props = {
-  postData: { ok: boolean; data: MongoosePost | null; message: string };
+  postData: { ok: boolean; data: MongoosePostReactionT | null; message: string };
 };
 
 const SinglePostPage = ({ postData: { data: post, message } }: Props) => {
@@ -26,7 +26,7 @@ const SinglePostPage = ({ postData: { data: post, message } }: Props) => {
         <span>К постам</span>
       </div>
       <PostBody post={post} />
-      <PostOptionals postId={post._id} authorId={post.author} />
+      <PostOptionals likes={post.likes} reactionStatus={post.reactionStatus} postId={post._id} authorId={post.author} />
     </div>
   );
 };

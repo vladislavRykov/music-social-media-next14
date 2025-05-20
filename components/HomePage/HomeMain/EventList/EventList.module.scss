@@ -1,19 +1,16 @@
-.eventList{
-&_wrapper{
-
-    width: 70%;
+.eventList {
+  &_wrapper {
+    max-width: 70%;
     margin: 0 auto;
-    // justify-content: center;
     padding: 40px 30px;
 }
-&_items{
+&_items {
     display: flex;
-    gap: 10px;
     flex-wrap: wrap;
+    gap: 10px;
 
+  }
 }
-    
-}
-.eventItemLoader{
-    background-color: var(--main-bg-color);
+.eventItemLoader {
+  background-color: var(--main-bg-color);
 }

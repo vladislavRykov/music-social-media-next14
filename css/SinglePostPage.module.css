@@ -1,0 +1,30 @@
+.singlePostPage {
+  display: grid;
+  grid-template-columns: 1fr 60% 1fr;
+  padding-top: 10px;
+}
+.singlePostPage_back {
+  align-self: self-start;
+  justify-self: end;
+  margin-right: 10px;
+  grid-column: 1;
+  font-size: 14px;
+  font-weight: 400;
+  background-color: var(--profile-text-color);
+  border-radius: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 5px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px 10px;
+  color: #fff;
+  cursor: pointer;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+.singlePostPage_back:hover {
+  opacity: 0.8;
+}

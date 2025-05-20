@@ -33,7 +33,7 @@ const RelationShipBlock = ({ profileUserId, currentUserId }: ProfileButtonsProps
     //   return;
     // }
   };
-  const { status, data: userRelation, error } = useAsync(getProfileRelation);
+  const { status, data: userRelation, error,execute,helpers } = useAsync(getProfileRelation);
   const onChatBtnClick = async () => {
     const res = await createDialogAction(profileUserId);
     if (!res.ok && res.data) {
@@ -49,6 +49,9 @@ const RelationShipBlock = ({ profileUserId, currentUserId }: ProfileButtonsProps
     if (!res.ok) return toast.error(res.message);
     toast.success(res.message);
   };
+  if(status==='pending'){
+    return <></>
+  }
   return (
     <div className={s.profileButtons}>
       {!userRelation && (
@@ -74,7 +77,7 @@ const RelationShipBlock = ({ profileUserId, currentUserId }: ProfileButtonsProps
           size={18}
         />
         {isHiddenBtnOpen && (
-          <HiddenBtns userRelation={userRelation} closePopup={() => setIsHiddenBtnOpen(false)} />
+          <HiddenBtns profileUserId={profileUserId} reloadRelation={()=>execute()} setUserRelation={helpers.setData} userRelation={userRelation} closePopup={() => setIsHiddenBtnOpen(false)} />
         )}
       </div>
     </div>

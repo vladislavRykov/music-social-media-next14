@@ -9,8 +9,10 @@ import File from './File'
 import Reaction from './Reaction'
 import Post from './Post'
 import Relationship from './RelationshipSchema'
+import EventAttendance from './EventAttendance'
 
 export const Models = {
+  EventAttendance,
   Reaction,
   Post,
   File,

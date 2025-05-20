@@ -1,0 +1,17 @@
+.playerLikeDislike {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.playerLikeDislike_like {
+  font-size: 25px;
+  color: #fafafa;
+}
+.playerLikeDislike_dislike {
+  color: #fafafa;
+  font-size: 25px;
+}

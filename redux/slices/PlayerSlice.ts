@@ -9,6 +9,9 @@ import { PlaylistData } from '@/types/playlistTypes';
 import { shuffleArray } from '@/utils/ArrayFunctions';
 import { getMusicByIdA } from '@/actions/music';
 import { ItemReactionStatus } from '@/types/likeAndDislikes';
+import { getFromLocalStorage, saveToLocalStorage } from '@/utils/localStorageHelper';
+
+const initialVolume = getFromLocalStorage('player-volume');
 
 export const setMusicData = createAsyncThunk(
   'player/getMusicData',
@@ -51,7 +54,7 @@ const initialState: MusicFiltersFields = {
     type: null,
   },
   currentTime: 0,
-  volume: 0.05,
+  volume: initialVolume !== null ? Number(initialVolume) : 0.05,
   loop: false,
   isPlaying: true,
   selectedAudio: null,
@@ -77,6 +80,7 @@ export const playerSlice = createSlice({
     },
     setVolume: (state, action: PayloadAction<number>) => {
       state.volume = action.payload;
+      saveToLocalStorage('player-volume', action.payload);
     },
     setPlaylist: (
       state,

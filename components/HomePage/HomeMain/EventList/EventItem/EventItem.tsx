@@ -30,7 +30,7 @@ const EventItem = (props: Event) => {
         <p className={s.eventItem_desc} dangerouslySetInnerHTML={{ __html: props.description }} />
         {props.price && (
           <div className={s.eventItem_price}>
-            <FaRubleSign size={22} />
+            <FaRubleSign className={s.eventItem_price_sign} size={22} />
             <span>{props.price}</span>
           </div>
         )}
