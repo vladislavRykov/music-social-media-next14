@@ -1,0 +1,33 @@
+.eventStatusMark {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  &_content {
+    position: relative;
+  }
+  &_selectedStatus {
+    font-size: 12px;
+    padding: 5px 6px;
+    border-radius: 10px;
+    background-color: var(--secondary-bg-color);
+    color: var(--third-text-color);
+  }
+  &_list {
+     font-size: 12px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    background-color: var(--secondary-bg-color);
+    border-radius: 5px;
+  }
+  &_itemStatus {
+     padding: 5px 6px;
+    &:hover {
+      background-color: var(--main-bg-color);
+    }
+  }
+  &_itemSelected{
+    background-color: var(--main-bg-color);
+  }
+}

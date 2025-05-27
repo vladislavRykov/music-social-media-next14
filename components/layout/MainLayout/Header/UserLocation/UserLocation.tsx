@@ -35,7 +35,6 @@ const UserLocation = () => {
        if(!user || !user.location){
             dispatch(setLocation(allLocations[0]))
           }else{
-            console.log( `http://localhost:3000/api/locations/${user.location}`)
             const res = await fetch(
               `http://localhost:3000/api/locations/${user.location}`
             )
@@ -50,7 +49,6 @@ const UserLocation = () => {
           dispatch(setLocation(location))
         }else{
           const res = await setUserLocationA(location.slug)
-          console.log(res)
           if(!res.ok) return
           dispatch(setLocation(location))
      }

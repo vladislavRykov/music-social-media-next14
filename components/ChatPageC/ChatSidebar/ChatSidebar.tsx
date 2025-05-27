@@ -60,7 +60,6 @@ const ChatSidebar = ({chats}:Props) => {
 }
   }, []);
 
-console.log(isSearchPopupOpen)
 
   return (
     <div ref={sideBarRef} className={s.chatSidebar} >

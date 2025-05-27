@@ -22,6 +22,7 @@ import OpenPlaylistPlayer from '@/components/shared/SettingsBtnPopUp/OpenPlaylis
 import DeletePlaylist from '@/components/shared/SettingsBtnPopUp/DeletePlaylist/DeletePlaylist';
 import ShufflePlaylist from '@/components/shared/SettingsBtnPopUp/ShufflePlaylist/ShufflePlaylist';
 import { useRouter } from 'nextjs-toploader/app';
+import CopyPlaylist from '@/components/shared/SettingsBtnPopUp/CopyPlaylist/CopyPlaylist';
 
 interface LibPlaylistProps {
   playlistImg: StaticImageData | string;
@@ -32,7 +33,8 @@ interface LibPlaylistProps {
   desc?: string;
   allItems: string[];
   nickname?: string | undefined;
-  type:string;
+  type: string;
+  isCurrentUserAuthor: boolean;
 }
 
 const LibPlaylist: React.FC<LibPlaylistProps> = ({
@@ -43,16 +45,17 @@ const LibPlaylist: React.FC<LibPlaylistProps> = ({
   playlistId,
   desc,
   allItems,
+  isCurrentUserAuthor,
   nickname,
-  type
+  type,
 }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { musicData, playlist, isPlayerLoading, isPlaying } = useAppSelector(selectPlayerPlaylist);
   const [musicItemLoading, setMusicItemLoading] = useState(false);
   const [isBtnShown, setIsBtnShown] = useState(false);
-   const [blockPosition, setBlockPosition] = useState<{ x: string; y: string }>({ x: '0', y: '0' });
-   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [blockPosition, setBlockPosition] = useState<{ x: string; y: string }>({ x: '0', y: '0' });
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const playSong: React.MouseEventHandler<HTMLDivElement> = async (e) => {
     e.preventDefault();
@@ -83,7 +86,7 @@ const LibPlaylist: React.FC<LibPlaylistProps> = ({
   }, [playlistId]);
   return (
     <div className={s.libPlaylist}>
-      <Link href={ `/playlist?list=${playlistId}`} className={s.libPlaylist_imgBlock}>
+      <Link href={`/playlist?list=${playlistId}`} className={s.libPlaylist_imgBlock}>
         <Image
           className={s.libPlaylist_img}
           src={playlistImg}
@@ -122,34 +125,44 @@ const LibPlaylist: React.FC<LibPlaylistProps> = ({
             )}
           </div>
         )}
-     
+
         <div className={s.libPlaylist_topShadow}></div>
         <div className={s.libPlaylist_settings}>
-
-      <LibPlaylistSettings setIsPopupOpen={setIsPopupOpen} setBlockPosition={setBlockPosition} />
+          <LibPlaylistSettings
+            setIsPopupOpen={setIsPopupOpen}
+            setBlockPosition={setBlockPosition}
+          />
         </div>
       </Link>
-           {isPopupOpen && (
-                <SettingsBtnPopUp
-                styles={{
-                  left: blockPosition.x,
-                  top: blockPosition.y,
-                  position: 'fixed',
-                  zIndex: 1000,
-                }}
-                  closePopup={() => setIsPopupOpen(false)}>
-                      <ShufflePlaylist playlistId={playlistId}/>
-                      <DeletePlaylist playlistId={playlistId} closePopup={() => setIsPopupOpen(false)}/>
-                      <OpenPlaylistPlayer openPlayer={()=>{
-        if (musicItemLoading) return;
-        setMusicItemLoading(true);
-        router.push(`/player/playlist?m=${allItems[0]}&list=${playlistId}`);
-      }}/>
-                  </SettingsBtnPopUp>
-              )}
+      {isPopupOpen && (
+        <SettingsBtnPopUp
+          styles={{
+            left: blockPosition.x,
+            top: blockPosition.y,
+            position: 'fixed',
+            zIndex: 1000,
+          }}
+          closePopup={() => setIsPopupOpen(false)}>
+          <ShufflePlaylist playlistId={playlistId} />
+          <DeletePlaylist playlistId={playlistId} closePopup={() => setIsPopupOpen(false)} />
+          {!isCurrentUserAuthor && (
+            <CopyPlaylist playlistId={playlistId} closePopup={() => setIsPopupOpen(false)} />
+          )}
+          <OpenPlaylistPlayer
+            openPlayer={() => {
+              if (musicItemLoading) return;
+              setMusicItemLoading(true);
+              router.push(`/player/playlist?m=${allItems[0]}&list=${playlistId}`);
+            }}
+          />
+        </SettingsBtnPopUp>
+      )}
       <div className={s.libPlaylist_info}>
         <span className={s.libPlaylist_title}>{title}</span>
-        <span className={s.libPlaylist_author}>{playlistId==='LM' ?'':`Плейлист • `}{author}</span>
+        <span className={s.libPlaylist_author}>
+          {playlistId === 'LM' ? '' : `Плейлист • `}
+          {author}
+        </span>
         <span className={s.libPlaylist_trackCount}>&bull; {trackCount} трека</span>
       </div>
     </div>

@@ -29,8 +29,6 @@ const PostList = ({ selectedSortOrder, isPostsAuthor }: Props) => {
     const postLimit = 4;
     if (!loadMoreItems.current) return;
     const lastPostId = posts.length > 0 ? posts[posts.length - 1]._id : null;
-    console.log(params);
-    console.log(posts);
     if (!params) return;
     const res = await findAllPostsByUsername({
       username: params?.nickname,
@@ -60,7 +58,7 @@ const PostList = ({ selectedSortOrder, isPostsAuthor }: Props) => {
   });
 
   return (
-    <div className={s.postList} style={isLoading ? { height: '100vh' } : {}}>
+    <div className={s.postList}>
       {posts.length === 0 && !isLoading && <div className={s.noPosts}>Пусто</div>}
       {posts.map((post) => (
         <PostItem key={post._id} {...post} isPostsAuthor={isPostsAuthor} />

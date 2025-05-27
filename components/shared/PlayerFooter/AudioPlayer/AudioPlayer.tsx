@@ -34,7 +34,6 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
   useEffect(() => {
     if (!audioRef.current) return;
     if (isPlaying) {
-      console.log(audioRef.current);
       audioRef.current.play();
     } else {
       audioRef.current.pause();

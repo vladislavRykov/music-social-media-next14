@@ -1,0 +1,30 @@
+.playlistGenresBlock {
+    width: 80%;
+  &_container {
+    position: relative;
+  }
+  &_button {
+    background-color: rgb(44, 44, 44);
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 6px 8px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  &_list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+.playlistGenreItem {
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 10px;
+  color: #fff;
+  background-color: var(--profile-text-color);
+  transition: 0.1s;
+  &:hover {
+    transform: scale(1.02);
+  }
+}

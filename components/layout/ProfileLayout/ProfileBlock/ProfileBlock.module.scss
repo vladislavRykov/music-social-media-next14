@@ -1,0 +1,13 @@
+.profileBlock {
+  color: var(--third-text-color);
+
+  &_title {
+    font-size: 20px;
+    padding: 0px 10px 10px;
+  }
+  &_children {
+    border-radius: 5px;
+    padding: 15px;
+    background-color: var(--secondary-bg-color);
+  }
+}

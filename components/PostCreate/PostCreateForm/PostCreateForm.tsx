@@ -90,7 +90,6 @@ const PostCreateForm = () => {
       ...values,
     };
     if(image_url) createPostData.image_url = image_url;
-    console.log(createPostData)
     const res = await createNewPost(createPostData);
     if (!res.ok) {
       return toast.error(res.message);

@@ -72,7 +72,7 @@ const InnerPlaylistItems = ({
               _id={item._id}
               selectedItems={selectedItems}
               key={item._id}
-              img={MockImg}
+              img={item.playlistImg || MockImg}
               title={item.title}
               trackCount={item.items.length}
             />

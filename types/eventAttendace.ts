@@ -1,15 +1,18 @@
 export enum EventAttendanceStatus {
   Going = 'going',
-  ItemsPlaylistDatanterested = 'interested',
+  Interested = 'interested',
   Not_going = 'not_going',
 }
-export interface EventAttendanceT {
-  event: string;
-  user: { type: Schema.Types.ObjectId; ref: 'User'; required: true };
-  status: {
-    type: String;
-    enum: ['going', 'interested', 'not_going'];
-    default: 'interested';
-  };
-  createdAt: { type: Date; default: Date.now };
+export interface EventAttendanceMongooseT {
+  _id: string;
+  eventId: string;
+  user: string;
+  status: EventAttendanceStatus;
+  createdAt: Date;
+  updatedAt: Date;
+}
+export interface CreateEventAttendanceT {
+  eventId: string;
+  user: string;
+  status: EventAttendanceStatus;
 }

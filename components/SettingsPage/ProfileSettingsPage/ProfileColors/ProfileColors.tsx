@@ -9,7 +9,6 @@ const colorsList = ['#3DB4F2', '#C063FF', '#4CCA51', '#EF881A', '#E13333', '#FC9
 
 const ProfileColors = () => {
   const { textColor,setTextColor } = useTextColor();
-  console.log(textColor)
   const onColorClick= (colorHex:string)=>{
     setTextColor(colorHex)
     toast.success('Цвет профиля изменился',{

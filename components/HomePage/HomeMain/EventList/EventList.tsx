@@ -1,5 +1,11 @@
 'use client';
-import { Event, GetEventDataT, Location } from '@/types/kudaGo';
+import {
+  Event,
+  EventWithATStatus,
+  GetEventDataT,
+  GetEventDataTWithAT,
+  Location,
+} from '@/types/kudaGo';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import s from './EventList.module.scss';
 import EventItem from './EventItem/EventItem';
@@ -9,7 +15,7 @@ import useScrollPagination from '@/hooks/useScrollPagination';
 import Image from 'next/image';
 import cicleTube from '@/public/circleTube.svg';
 import EventItemLoader from '@/components/UI/Loaders/EventItemLoader';
-import { useCssVariable } from '@/hooks/useCSSVariables';
+import { getEventsAByArrayIdsA } from '@/actions/events';
 
 type Props = {
   isOnlyFreeEvents: boolean;
@@ -17,55 +23,15 @@ type Props = {
 
 const EventList = ({ isOnlyFreeEvents }: Props) => {
   const [eventData, setEventData] = useState<GetEventDataT | null>(null);
-  const [events, setEvents] = useState<Event[]>([]);
+  const [events, setEvents] = useState<EventWithATStatus[]>([]);
   const location = useAppSelector((state) => state.userReducer.location);
   const loadMoreItems = useRef(true); // индикатор окончания загрузки
-
-  // const getEvents = async () =>
-  //   // locationData: Location | null,
-  //   // isOnlyFree: boolean,
-  //   // nextPageUrl?: string | null,
-  //   {
-  //     console.log(eventData?.next);
-  //     let page = null;
-  //     let actual_since = null;
-  //     if (eventData?.next) {
-  //       const searchParams = new URLSearchParams(eventData?.next);
-  //       page = searchParams.get('page');
-  //       actual_since = searchParams.get('actual_since');
-  //     }
-  //     console.log(page, actual_since);
-  //     if (!loadMoreItems.current) return;
-  //     const date = new Date();
-  //     if (!location?.slug) return;
-  //     console.log(456);
-  //     console.log(
-  //       `http://localhost:3000/api/events?is_free=${isOnlyFreeEvents}&location=${
-  //         location.slug
-  //       }&actual_since=${actual_since || date.toISOString()}&page=${page || 1}`,
-  //     );
-
-  //     const res = await fetch(
-  //       `http://localhost:3000/api/events?is_free=${isOnlyFreeEvents}&location=${
-  //         location.slug
-  //       }&actual_since=${actual_since || date.toISOString()}&page=${page || 1}`,
-  //     );
-
-  //     const data: GetEventDataT = await res.json();
-  //     console.log(data);
-  //     setEvents((prev) => [...prev, ...data.results]);
-  //     setEventData(data);
-  //     if (data.next === null) {
-  //       loadMoreItems.current = false;
-  //     }
-  //   };
 
   const getEvents = async (
     locationData: Location | null,
     isOnlyFree: boolean,
     nextPageUrl?: string | null,
   ) => {
-    console.log(nextPageUrl);
     let page = null;
     let actual_since = null;
     if (nextPageUrl) {
@@ -73,16 +39,10 @@ const EventList = ({ isOnlyFreeEvents }: Props) => {
       page = searchParams.get('page');
       actual_since = searchParams.get('actual_since');
     }
-    console.log(page, actual_since);
     if (!loadMoreItems.current) return;
     const date = new Date();
     if (!locationData?.slug) return;
-    console.log(456);
-    console.log(
-      `http://localhost:3000/api/events?is_free=${isOnlyFree}&location=${
-        locationData.slug
-      }&actual_since=${actual_since || date.toISOString()}&page=${page || 1}`,
-    );
+   
 
     const res = await fetch(
       `http://localhost:3000/api/events?is_free=${isOnlyFree}&location=${
@@ -91,8 +51,20 @@ const EventList = ({ isOnlyFreeEvents }: Props) => {
     );
 
     const data: GetEventDataT = await res.json();
-    console.log(data);
-    setEvents((prev) => [...prev, ...data.results]);
+    const eventsIds = data.results.map((event) => event.id.toString());
+    const eventsAT = await getEventsAByArrayIdsA(eventsIds);
+    const eventsWithATStatus: EventWithATStatus[] = data.results.map((eventItem) => {
+      const eventById =
+        eventsAT.data &&
+        eventsAT.data.find((eventAT) => eventAT.eventId.toString() === eventItem.id.toString());
+      return {
+        ...eventItem,
+        currentUserATStatus: eventById ? eventById.status : null,
+      };
+    });
+    // .filter((music) => !!music); // Удаляем undefined (если какие-то ID не найдены)
+    // console.log(eventsWithATStatus);
+    setEvents((prev) => [...prev, ...eventsWithATStatus]);
     setEventData(data);
     if (data.next === null) {
       loadMoreItems.current = false;
@@ -104,8 +76,7 @@ const EventList = ({ isOnlyFreeEvents }: Props) => {
     const firstLoad = async () => {
       loadMoreItems.current = true;
       setEventData(null);
-      setEvents([])
-      console.log( eventData?.next)
+      setEvents([]);
       await getEventWithLoading(location, isOnlyFreeEvents);
     };
     firstLoad();
@@ -126,7 +97,7 @@ const EventList = ({ isOnlyFreeEvents }: Props) => {
         {isLoading &&
           Array(9)
             .fill(0)
-            .map((_) => <EventItemLoader style={{flexGrow: 1}} />)}
+            .map((_) => <EventItemLoader style={{ flexGrow: 1 }} />)}
       </div>
       {/* {isLoading && <div>
           <Image style={{display: 'block',margin: '0 auto'}} src={cicleTube} alt='loading...' height={60} width={60} /></div>} */}

@@ -1,0 +1,18 @@
+.favMusicGenres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: fit-content;
+}
+
+.favGenreItem {
+  cursor: pointer;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: #fff;
+  background-color: var(--profile-text-color);
+  transition: 0.1s;
+  &:hover {
+    transform: scale(1.02);
+  }
+}

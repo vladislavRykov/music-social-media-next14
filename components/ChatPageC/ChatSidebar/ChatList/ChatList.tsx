@@ -30,7 +30,6 @@ type Props = {
 const ChatList = ({ chats }: Props) => {
   const currentUserId = useAppSelector((state) => state.userReducer.user?._id);
   const params: { slug?: string[] } | null = useParams();
-  console.log('chatlist');
 
   // const {execute,status,data:responseData,error}=useAsync(fetchChats)
 

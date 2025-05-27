@@ -22,7 +22,6 @@ RelationshipSchema.pre('save', async function (next) {
       type: 'dialog',
       members: { $all: members },
     });
-    console.log(7878787878,chat);
     if (chat) {
       chat.relation = this._id;
       await chat.save();

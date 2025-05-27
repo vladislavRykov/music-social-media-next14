@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import s from './PlaylistItemsBlock.module.scss';
-import { MusicData, MusicDataWithReactionT, UserDataMongoose, UserMainFields } from '@/types/types';
+import { Genre, MusicData, MusicDataWithReactionT, UserDataMongoose, UserMainFields } from '@/types/types';
 import PlaylistItem from './PlaylistItem/PlaylistItem';
 import { Overwrite } from '@/types/common';
 import { PlaylistData } from '@/types/playlistTypes';
@@ -12,6 +12,7 @@ import SelectedPopup from '@/components/shared/Popups/SelectedPopup/SelectedPopu
 import Link from 'next/link';
 import { areArraysEqual } from '@/utils/ArrayFunctions';
 import { useSearchParams } from 'next/navigation';
+import PlaylistGenresBlock from './PlaylistGenresBlock/PlaylistGenresBlock';
 
 type PlaylistItemsBlockProps = {
   playlistItems: MusicDataWithReactionT[];
@@ -20,6 +21,7 @@ type PlaylistItemsBlockProps = {
   updatePlaylist: () => void;
   isAuthor: boolean;
   isPlaylistEmpty: boolean;
+  playlistGenres: Genre[];
 };
 
 const PlaylistItemsBlock: React.FC<PlaylistItemsBlockProps> = ({
@@ -29,15 +31,14 @@ const PlaylistItemsBlock: React.FC<PlaylistItemsBlockProps> = ({
   isAuthor,
   isPlaylistEmpty,
   type,
+  playlistGenres,
 }) => {
   const dispatch = useAppDispatch();
-  console.log(12312313, playlistItems);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [playlistItemsState, setPlaylistItemsState] = useState(playlistItems);
   const playlist = useAppSelector((state) => state.playerReducer.playlist);
 
   const handleOnChange = async (newList: MusicDataWithReactionT[]) => {
-    // console.log('handleOnChange')
     const oldListIds = sortedPlaylistItem.map((item) => item._id);
     const newListIds = newList.map((item) => item._id);
     if (areArraysEqual(oldListIds, newListIds)) return;
@@ -60,9 +61,9 @@ const PlaylistItemsBlock: React.FC<PlaylistItemsBlockProps> = ({
     //     }) as (MusicData & { id: string })[])
     // :
     playlistItemsState.map((item) => ({ id: item._id, ...item }));
-  console.log(222222, sortedPlaylistItem);
   return (
     <div className={s.playlistItemsBlock}>
+      <PlaylistGenresBlock playlistGenres={playlistGenres}/>
       {!isPlaylistEmpty ? (
         <>
           <ReactSortable

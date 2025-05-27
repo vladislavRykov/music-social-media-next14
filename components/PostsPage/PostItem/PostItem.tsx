@@ -10,6 +10,7 @@ import { MdOutlineKeyboardDoubleArrowDown } from 'react-icons/md';
 import { BsThreeDotsVertical } from 'react-icons/bs';
 import PostSettings from './PostSettings/PostSettings';
 import FullImageModal from './FullImageModal/FullImageModal';
+import { FaHeart } from 'react-icons/fa';
 import PostLikesBtn from './PostLikesBtn/PostLikesBtn';
 
 interface Props extends MongoosePostReactionT {
@@ -28,7 +29,6 @@ const PostItem = ({
   const pathname = usePathname();
   const [isFullContent, setIsFullContent] = useState(false);
   const [isFullImgModalOpen, setIsFullImgModalOpen] = useState(false);
-  console.log(pathname);
   return (
     <>
       <div className={s.postItem}>
@@ -42,9 +42,17 @@ const PostItem = ({
               alt="post image"
             />
             {isPostsAuthor && (
-              <div className={s.postItem_settings}>
-                <PostSettings postId={_id} />
-              </div>
+              <>
+                <div className={s.postItem_settings}>
+                  <PostSettings postId={_id} />
+                </div>
+                {!!likes && (
+                  <div className={s.postItem_likesCount}>
+                    <span>{likes}</span>
+                    <FaHeart size={12} />
+                  </div>
+                )}
+              </>
             )}
           </div>
         )}
@@ -52,8 +60,7 @@ const PostItem = ({
           <h2 className={s.postItem_title}>{title}</h2>
         </Link>
         <p className={cn(s.postItem_text, { [s.postItem_hiddenContent]: !isFullContent })}>
-          {content +
-            't is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using , making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for  will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).'}
+          {content}
         </p>
         <div className={s.postItem_grid}>
           {!isFullContent ? (
@@ -67,11 +74,13 @@ const PostItem = ({
               <span>Скрыть</span>
             </button>
           )}
-         {!isPostsAuthor && <PostLikesBtn postId={_id} likes={likes} reactionStatus={reactionStatus} />}
+          {!isPostsAuthor && (
+            <PostLikesBtn postId={_id} likes={likes} reactionStatus={reactionStatus} />
+          )}
         </div>
       </div>
       {isFullImgModalOpen && image_url && (
-        <FullImageModal  imgSrc={image_url} closeModal={() => setIsFullImgModalOpen(false)} />
+        <FullImageModal imgSrc={image_url} closeModal={() => setIsFullImgModalOpen(false)} />
       )}
     </>
   );

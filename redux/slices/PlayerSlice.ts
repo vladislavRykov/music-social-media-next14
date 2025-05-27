@@ -17,7 +17,6 @@ export const setMusicData = createAsyncThunk(
   'player/getMusicData',
   async (musicId: string, thunkAPI) => {
     const res = await getMusicByIdA(musicId);
-    console.log(res.data);
     return res.data;
   },
 );

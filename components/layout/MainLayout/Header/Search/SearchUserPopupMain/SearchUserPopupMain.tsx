@@ -26,7 +26,6 @@ const SearchUserPopupMain = () => {
   };
 
   const [searchUsersLoading, isLoading] = useLoading(searchUsers);
-  console.log(users);
   useEffect(() => {
     const firstLoad = async () => {
       loadMoreItems.current = true;

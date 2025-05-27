@@ -9,7 +9,7 @@ type Props = {
 const ChatSearchPopupNav = ({searchTarget,setSearchTarget}:Props) => {
     const targets:{label: string,value:SearchTargets}[] = [
         {value:SearchTargets.Chats,label: 'Чаты'} ,
-        {value:SearchTargets.Users,label: 'Пользователи'},
+        {value:SearchTargets.Users,label: 'Друзья'},
     ]
         
   return (

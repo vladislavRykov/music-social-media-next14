@@ -77,6 +77,21 @@ export const getUsersRelation = async ({
   }).lean<RelationMongooseT>();
   return realtion;
 };
+export const getUserFriends = async ({
+  currentUserId,
+}: {
+  currentUserId: string;
+}) => {
+  await mongooseConnect();
+  const realtions = await Models.Relationship.find({
+    $or: [
+      { userA: currentUserId },
+      { userB: currentUserId },
+    ],
+    status: RelationStatus.Friends
+  }).lean<RelationMongooseT[]>();
+  return realtions;
+};
 export const isUsersHaveRelation = async ({
   currentUserId,
   otherUserId,

@@ -14,11 +14,11 @@ import SelectInput from './Filters/SelectInput/SelectInput';
 import SearchInput from './Filters/SearchInput/SearchInput';
 import FiltersHamburger from './FiltersHamburger/FiltersHamburger';
 import s from './MusicFilters.module.scss';
-import { getAllGenres } from '@/dal/music';
 import { Genre, MusicData } from '@/types/types';
 import { createSelector } from 'reselect';
 import { filtersSelectedData } from '@/redux/selectors/musicFiltersSelectors';
 import SelectedFiltersBlock from './SelectedFiltersBlock/SelectedFiltersBlock';
+import { getAllGenres } from '@/dal/genres';
 
 const genres = [
   {

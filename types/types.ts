@@ -25,13 +25,14 @@ export interface UserMainFields {
   avatar?: string;
   banner?: string;
   aboutMe?: string;
-  location: string|null,
+  location: string | null;
 }
 export interface UserProfileData {
   _id: string;
   username: string;
   avatar?: string;
   banner?: string;
+  aboutMe?: string;
 }
 export interface UserDataMongoose {
   _id: string;
@@ -49,12 +50,12 @@ export interface UserDataMongoose {
   isVerfied: boolean;
   isAdmin: boolean;
   aboutMe?: string;
-  location: string|null,
-  friendRequests:{
+  location: string | null;
+  friendRequests: {
     from: string;
     status: FriendRequestStatus;
     createdAt: Date;
-  }[]
+  }[];
 }
 
 export interface MusicData {
@@ -67,14 +68,12 @@ export interface MusicData {
   duration: number;
   likes: number;
   dislikes: number;
-  // filters: {
-  //   genres: Genre[];
-  //   year: number | null;
-  //   season: string | null;
-  // };
+  genres: string[];
+  year?: number;
+  season?: string;
 }
-export interface MusicDataWithReactionT extends MusicData{
-  reactionStatus: ItemReactionStatus
+export interface MusicDataWithReactionT extends MusicData {
+  reactionStatus: ItemReactionStatus;
 }
 export interface Genre {
   _id: string;

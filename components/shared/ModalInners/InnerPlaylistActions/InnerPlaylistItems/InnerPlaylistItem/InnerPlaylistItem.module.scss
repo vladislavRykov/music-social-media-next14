@@ -10,6 +10,9 @@
     background-color: #4e5178;
   }
   &_image {
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5px;
   }
   &_infoBlock {
     color: #fafafa;

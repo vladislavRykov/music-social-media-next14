@@ -22,7 +22,6 @@ const ChatMain = () => {
   const fetchMessages = async () => {
     if (params?.slug?.[0]) {
       const res = await findMessagesByChatIdAction(params.slug[0]);
-      console.log(res);
       if (!res.ok) throw new Error(res.message);
       return res.data;
     } else {

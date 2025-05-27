@@ -8,6 +8,7 @@ import PlaylistUploadAvatar from './PlaylistUploadAvatar/PlaylistUploadAvatar';
 import Link from 'next/link';
 import SecondaryModal from '@/components/UI/Modals/SecondaryModal/SecondaryModal';
 import FullDescModal from './FullDescModal/FullDescModal';
+import defaultAvatar from '@/public/avatars/default.jpg'
 
 type PlaylistLeftBlockProps = {
   title: string;
@@ -17,7 +18,7 @@ type PlaylistLeftBlockProps = {
   totalDuration: number;
   access_type: AccessType;
   createdAt: string;
-  author: { username: string; avatar: string };
+  author: { username: string; avatar?: string };
   playlistId: string;
   firstSongId: string;
   isAuthor: boolean;
@@ -83,7 +84,7 @@ const PlaylistLeftBlock: React.FC<PlaylistLeftBlockProps> = ({
             <Link href={`/user/${author.username}`}>
               <Image
                 className={s.playlistLeftBlock_avatar}
-                src={author.avatar}
+                src={author.avatar || defaultAvatar}
                 height={20}
                 width={20}
                 alt="Аватарка автора"

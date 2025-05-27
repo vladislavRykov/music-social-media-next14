@@ -28,7 +28,6 @@ const useScrollPagination = ({
       const viewportHeight = document.documentElement.clientHeight;
 
       // Проверяем, достигнута ли позиция ниже порога
-      console.log(targetRect.top <= viewportHeight + threshold);
       if (targetRect.top <= viewportHeight + threshold) {
         isFetching.current = true;
         loadMoreCallback()

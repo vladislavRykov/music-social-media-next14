@@ -18,7 +18,6 @@ type Props = {
 };
 
 const PlayerLikeDislike: React.FC<Props> = ({ songId, reactionType }) => {
-  console.log(reactionType);
   const toastSettings: ToastOptions = {
     position: 'bottom-left',
     autoClose: 2000,

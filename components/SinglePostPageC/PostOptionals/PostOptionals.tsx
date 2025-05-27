@@ -13,6 +13,8 @@ import { useRouter } from 'nextjs-toploader/app';
 import { FaHeart } from 'react-icons/fa';
 import { ItemReactionStatus, LikeOrDislike, TargetTypes } from '@/types/likeAndDislikes';
 import { setReactionToTargetA } from '@/actions/reaction';
+import { usePathname } from 'next/navigation';
+import { deleteOneImg } from '@/actions/files';
 
 type Props = {
   reactionStatus: ItemReactionStatus;
@@ -24,6 +26,7 @@ type Props = {
 const PostOptionals = ({ authorId, postId, reactionStatus, likes }: Props) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const router = useRouter();
+  const pathname = usePathname();
   const currentUserId = useAppSelector((state) => state.userReducer.user?._id);
   const isCurrentUserAuthor = authorId === currentUserId;
   const deletePostOnClick = async () => {
@@ -34,6 +37,7 @@ const PostOptionals = ({ authorId, postId, reactionStatus, likes }: Props) => {
     if (!res.ok) {
       toast.error(res.message);
     } else {
+      res.data?.image_url && (await deleteOneImg(res.data.image_url));
       toast.success(res.message);
       const segments = pathname?.split('/');
 
@@ -48,7 +52,6 @@ const PostOptionals = ({ authorId, postId, reactionStatus, likes }: Props) => {
     setIsDeleteModalOpen(false);
   };
   const [reaction, setReaction] = useState(reactionStatus);
-  console.log(reactionStatus);
   const [likeCount, setLikeCount] = useState(likes);
   const setLike = async () => {
     setReaction(ItemReactionStatus.Liked);
@@ -108,10 +111,8 @@ const PostOptionals = ({ authorId, postId, reactionStatus, likes }: Props) => {
           )}
           {isCurrentUserAuthor && !!likeCount && (
             <li className={cn(s.postOptionals_likeCount, s.postOptionals_option)}>
-              {likeCount+' лайков'}
-              <p className={s.postDescription}>
-                Количество лайков
-              </p>
+              {likeCount + ' лайков'}
+              <p className={s.postDescription}>Количество лайков</p>
             </li>
           )}
         </ul>

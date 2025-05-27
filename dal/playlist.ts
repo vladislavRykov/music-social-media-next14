@@ -17,18 +17,6 @@ export const getPlaylistById = async <T>(playlistId: string, populate?: string[]
 
   return playlist;
 };
-// export const getPlaylistByIdWithReaction = async (
-//   playlistId: string,
-//   currentUserId?: string,
-//   populate?: string[],
-// ) => {
-//   await mongooseConnect();
-
-//    const query = await Models.Playlist.findById(playlistId);
-
-//   // return playlist[0];
-//   return null
-// };
 export const addItemsToPlaylist = async (playlistId: string, items: string[]) => {
   await mongooseConnect();
   const playlist = await Models.Playlist.findOneAndUpdate(
@@ -54,7 +42,6 @@ export const setNewPlaylistOrder = async (playlistId: string, items: string[]) =
     { $set: { items: items } }, // Обновляем поле musicIds с массивом id в нужном порядке
     { returnDocument: 'after' }, // Возвращает обновленный документ
   );
-  console.log('то что надо', result);
   return result;
 };
 export const getAllUserPlaylists = async <T>(
@@ -84,10 +71,15 @@ export const getPlaylistsByUserName = async <T>(
 
   return playlists;
 };
-export const getPlaylistByType = async <T>({ userId, type }: { type: string; userId: string }) => {
+export const getPlaylistByType = async <T>({ userId, type }: { type: string; userId: string }, populate?: { path: string; select?: string }[],) => {
   await mongooseConnect();
-  const playlist = await Models.Playlist.findOne({ type, userId }).lean<T>();
+  const query = Models.Playlist.findOne({ type, userId }).lean<T>();
+  if (populate) {
+    query.populate(populate);
+  }
+  const playlist = await query.lean<T>().exec();
   return playlist;
+
 };
 export const getUserLikesAndDislikes = async ({ userId }: { userId: string }) => {
   await mongooseConnect();

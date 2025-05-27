@@ -1,5 +1,13 @@
 .profilePage {
   min-height: 100vh;
   &_main {
+    width: 80%;
+    margin: 0 auto;
+    padding-top: 10px;
+  }
+  &_grid{
+    grid-template-columns: 40% 50%;
+    gap: 10%;
+    display: grid;
   }
 }

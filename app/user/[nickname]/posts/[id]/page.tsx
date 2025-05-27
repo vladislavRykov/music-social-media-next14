@@ -6,7 +6,6 @@ const page =async (props: {
   params: { id: string }
 }) => {
     const postData=await getPostsByIdA(props.params.id)
-    console.log(postData)
   return (
     <SinglePostPage postData={postData}/>
   )

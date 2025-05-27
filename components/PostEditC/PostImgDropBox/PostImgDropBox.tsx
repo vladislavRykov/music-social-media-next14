@@ -15,7 +15,6 @@ type Props = {
 
 const PostImgDropBox = ({ postImgFile,setPostImgFile }: Props) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-  console.log(postImgFile)
   useEffect(()=>{
     if(!postImgFile)setPreviewUrl(null)
     if(typeof postImgFile==='string' ){

@@ -54,7 +54,6 @@ const LibraryMain = () => {
     playlists?.data || [],
     findPlaylistById('favorites'),
   );
-
   return (
     <div className={s.librarymain}>
       {status === 'success' && newPlaylists.length === 0 && (
@@ -70,6 +69,7 @@ const LibraryMain = () => {
               return null;
             return (
               <LibPlaylist
+              isCurrentUserAuthor={playlist.userId._id === currentUserId}
                 type={playlist.type}
                 key={playlist._id}
                 playlistImg={playlist.playlistImg || playlist.items[0]?.image || musicImg}

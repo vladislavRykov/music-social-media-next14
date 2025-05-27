@@ -27,8 +27,6 @@ export const getArrayPostByIdWithIsLiked = async (
   currentUserId?: string,
 ) => {
   await mongooseConnect();
-  console.log(33333, postIds);
-  // const music = await Models.Music.findById(musicId).lean<MusicData>();
   const posts: MongoosePostReactionT[] = await Models.Post.aggregate([
     // Начало агрегационного запроса для модели Post
     // Этап 1: Выборка всех постов (можно дополнительно наложить фильтры)

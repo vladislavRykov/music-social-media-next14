@@ -7,7 +7,7 @@ import { getPlaylistById } from '@/dal/playlist';
 import { useSearchParams } from 'next/navigation';
 import { AccessType, Overwrite } from '@/types/common';
 import { useAsync } from '@/hooks/useFetching';
-import { PlaylistData, UserPlaylistData } from '@/types/playlistTypes';
+import mockPlaylistAva from '@/public/musicImg.jpg'
 import { MusicData, UserDataMongoose, UserMainFields } from '@/types/types';
 import Image from 'next/image';
 import { useAppSelector } from '@/hooks/reduxHooks';
@@ -15,6 +15,7 @@ import { selectUser } from '@/redux/selectors/userSelectors';
 import circleTube from '@/public/circleTube.svg';
 import { getPlayerPlaylistsData } from '@/actions/playlist';
 import { getUserMainFieldsById } from '@/dal/user';
+import { getSortedGenres } from '@/helpers/actions/genres';
 
 const PlaylistPage = () => {
   const searchParams = useSearchParams();
@@ -28,8 +29,13 @@ const PlaylistPage = () => {
     if (!playlistData.ok || !playlistData.data) return null;
     const userData: UserMainFields | null = await getUserMainFieldsById(playlistData.data.userId);
     if (!userData) return null;
-    console.log(playlistData.data.items.map((id) => id));
-    return { playlist: playlistData.data, userData };
+    const genreIds = playlistData.data.items.reduce<string[]>((acc, music) => {
+      acc.push(...music.genres);
+      return acc;
+    }, []);
+    const sortedGenres = await getSortedGenres(genreIds);
+    console.log(sortedGenres)
+    return { playlist: playlistData.data, userData, playlistGenres: sortedGenres };
   };
   const { execute, data, error, status } = useAsync(asyncFunction, [list, currentUser?._id]);
   const isAuthor = currentUser?._id === data?.userData._id;
@@ -69,7 +75,7 @@ const PlaylistPage = () => {
             playlistId={data?.playlist._id}
             author={{
               username: data?.userData.username,
-              avatar: data?.userData.avatar || '',
+              avatar: data?.userData.avatar,
             }}
             type={data?.playlist.type}
             title={data?.playlist.title}
@@ -84,6 +90,7 @@ const PlaylistPage = () => {
             updatePlaylistData={() => execute()}
           />
           <PlaylistItemsBlock
+            playlistGenres={data.playlistGenres}
             type={data?.playlist.type}
             isPlaylistEmpty={isPlaylistEmpty}
             isAuthor={isAuthor}

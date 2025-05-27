@@ -3,6 +3,7 @@ import DefaultPostOption from '../DefaultPostOption/DefaultPostOption';
 import { MdDelete } from 'react-icons/md';
 import { toast } from 'react-toastify';
 import { deletePostByIdA } from '@/actions/post';
+import { deleteOneImg } from '@/actions/files';
 
 interface Props {
   closePopup: () => void;
@@ -16,6 +17,7 @@ const DeletePostOption = ({ closePopup, postId }: Props) => {
     if (!res.ok) {
       toast.error(res.message);
     } else {
+       res.data?.image_url &&  await deleteOneImg(res.data.image_url);
       toast.success(res.message);
     }
 

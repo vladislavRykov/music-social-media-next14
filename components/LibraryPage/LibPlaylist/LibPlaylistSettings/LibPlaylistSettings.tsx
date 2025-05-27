@@ -22,9 +22,7 @@ const LibPlaylistSettings = ({setBlockPosition,setIsPopupOpen}:Props) => {
   const containerRef = useRef<HTMLDivElement|null>(null)
   const onSettingsBtnClick:React.MouseEventHandler<HTMLDivElement> = (e)=>{
     e.preventDefault()
-    console.log(123)
     if (!containerRef.current) return;
-    console.log(12323123)
         const containerRect = containerRef.current.getBoundingClientRect();
     
         setBlockPosition({

@@ -64,7 +64,6 @@ export const findAllPostsByUsername = async ({
     const sortedPosts = postsIdsArray
       .map((id) => postsWithLike.find((p) => p._id.toString() === id.toString()))
       .filter((post) => !!post); // Удаляем undefined (если какие-то ID не найдены)
-    console.log(111, postsWithLike);
     return { ok: true, data: sortedPosts, message: 'Посты по имени пользователя получены.' };
   } catch (error) {
     if (error instanceof Error) {

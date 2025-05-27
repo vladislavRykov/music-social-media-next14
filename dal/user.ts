@@ -61,7 +61,6 @@ export const getUserMainFields = cache(async () => {
       return redirect('/login');
     }
     const user = await Models.User.findById(session.userId);
-    console.log(user);
     if (!user) {
       return null;
     }
@@ -96,7 +95,6 @@ export const getUserMainFields = cache(async () => {
 export const getUserMainFieldsById = cache(async (userId: string) => {
   try {
     const user = await Models.User.findById(userId);
-    console.log(user);
     if (!user) {
       return null;
     }
@@ -191,16 +189,24 @@ export const getUserProfByUserName = async (userName: string) => {
     if (!user) {
       return null;
     }
-    const { _id, username, avatar, banner }: UserProfileData = user._doc;
+    const { _id, username, avatar, banner, aboutMe }: UserProfileData = user._doc;
     return {
       _id: _id.toString(),
       banner,
       username,
       avatar,
+      aboutMe,
     };
   } catch (error) {
     return null;
   }
+};
+export const getUsersByIdArray = async (userIds: string[]) => {
+  console.log(userIds);
+  const users = await Models.User.find({ _id: { $in: userIds } })
+    .select('_id banner username avatar aboutMe')
+    .lean<UserProfileData[]>();
+  return users;
 };
 
 //Account changes
@@ -230,7 +236,6 @@ export const searchUsersByUsername = async (
   selectedFields: string[] = ['username', 'avatar', '_id'],
 ) => {
   const skipCount = (currentPage - 1) * pageSize;
-  console.log(selectedFields.join(' '));
   const users = await Models.User.find({
     username: { $regex: searchString, $options: 'i' }, // Поиск по регулярному выражению с игнорированием регистра
   })
@@ -277,6 +282,50 @@ export const searchUsersByUsernameScroll = async <T>(
   const users = await query.lean<T>().exec();
   return users;
 };
+export const searchUsersByUsernameScrollArray = async <T>(
+  {
+    searchString,
+    currentUserId,
+    lastPostId,
+    limit = 10,
+    selectedFields = ['username', 'avatar', '_id'],
+    friendsList,
+  }: {
+    searchString: string;
+    lastPostId: string | null;
+    currentUserId?: string;
+    limit?: number;
+    selectedFields: string[];
+    friendsList: string[];
+  },
+
+  populate?: { path: string; select?: string }[],
+) => {
+  await mongooseConnect();
+  const idSortFilter = { _id: { $lt: lastPostId } };
+  // { _id: { $gt: lastPostId } }
+  let filters: any = lastPostId
+    ? {
+        ...idSortFilter,
+        _id: { $in: friendsList },
+        username: { $regex: searchString, $options: 'i' },
+      }
+    : { _id: { $in: friendsList }, username: { $regex: searchString, $options: 'i' } };
+  if (currentUserId) {
+    filters = { ...filters, _id: { ...filters._id, $ne: currentUserId } };
+  }
+  console.log(filters);
+  const query = Models.User.find(filters)
+    .select(selectedFields)
+    .sort({ createdAt: -1 }) // сортируем по убыванию _id
+    .limit(limit);
+
+  if (populate) {
+    query.populate(populate);
+  }
+  const users = await query.lean<T>().exec();
+  return users;
+};
 export const getUserLocation = async (userId: string) => {
   await mongooseConnect();
   const user = await Models.User.findById(userId).lean<UserDataMongoose>();
@@ -303,44 +352,19 @@ export const pushNewFriendRequest = async (to: string, requestData: addFriendReq
     { new: true },
   );
 };
-export const checkIfRequestExists = async (to: string, from: string,status: FriendRequestStatus) => {
+export const checkIfRequestExists = async (
+  to: string,
+  from: string,
+  status: FriendRequestStatus,
+) => {
   await mongooseConnect();
-  const isExists = await Models.User.exists({ _id: to, 'friendRequests.from': from,'friendRequests.status': status });
+  const isExists = await Models.User.exists({
+    _id: to,
+    'friendRequests.from': from,
+    'friendRequests.status': status,
+  });
   return isExists;
 };
-// export const getFriendReqByFromAndStatus =  async (
-//   currentUserId: string,
-//   status: FriendRequestStatus = FriendRequestStatus.Pending,
-// ): Promise<FriendRequestMongoosePopulatedT[] | null> => {
-//   await mongooseConnect();
-//   const requests: FriendRequestMongoosePopulatedT[] | null = await Models.User.aggregate([
-//     { $match: { _id: new ObjectId(currentUserId) } },
-//     { $unwind: '$friendRequests' },
-//     { $match: { 'friendRequests.status': status } },
-//     {
-//       $lookup: {
-//         from: 'users',
-//         localField: 'friendRequests.from',
-//         foreignField: '_id',
-//         as: 'fromUser',
-//       },
-//     },
-//     { $unwind: '$fromUser' },
-//     {
-//       $project: {
-//         _id: '$friendRequests._id',
-//         from: {
-//           _id: '$fromUser._id',
-//           username: '$fromUser.username',
-//           avatar: '$fromUser.avatar',
-//         },
-//         status: '$friendRequests.status',
-//         createdAt: '$friendRequests.createdAt',
-//       },
-//     },
-//   ]);
-//   return requests;
-// };
 export const changeFriendRequestStatus = async (
   to: string,
   requestId: string,

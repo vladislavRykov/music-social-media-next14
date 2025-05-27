@@ -64,7 +64,6 @@ export const findMessagesByChatIdAction = async (chatId: string) => {
     >(chatId, [{ path: 'relation' }]);
 
     if (!chat) return { ok: false, data: null, message: 'Такого чата не существует' };
-    console.log(222, chat.members.includes(session.userId));
     if (chat.members.filter((member) => member.toString() === session.userId).length === 0)
       return { ok: false, data: null, message: 'Вы не участник этого чата' };
     if (chat.relation?.status === RelationStatus.Blocked) {
@@ -78,7 +77,6 @@ export const findMessagesByChatIdAction = async (chatId: string) => {
     const messages = await findMessagesByChatId<
       Overwrite<MessageMongoose, { author: UserProfileData }>[]
     >(chatId, [{ path: 'author', select: '_id username avatar banner' }]);
-    console.log(messages);
     const formattedChars = messages.map((message) => {
       return {
         ...message,

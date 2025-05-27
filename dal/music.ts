@@ -80,8 +80,6 @@ export const getMusicByIdWithIsLiked = async (musicId: string, currentUserId?: s
 };
 export const getArrayMusicByIdWithIsLiked = async (musicIds: string[]|ObjectId[], currentUserId?: string) => {
   await mongooseConnect();
-  console.log(33333, musicIds);
-  // const music = await Models.Music.findById(musicId).lean<MusicData>();
   const musics: MusicDataWithReactionT[] = await Models.Music.aggregate([
     // Начало агрегационного запроса для модели Post
     // Этап 1: Выборка всех постов (можно дополнительно наложить фильтры)
@@ -187,19 +185,7 @@ export const getMusicsByIds = async ({ musicIds }: { musicIds: string[] }) => {
   }
 };
 
-export const getAllGenres = async () => {
-  try {
-    await mongooseConnect();
-    const genres = await Models.Genre.find().lean<Genre[]>();
-    if (!genres) {
-      return null;
-    }
 
-    return JSON.stringify(genres);
-  } catch (error) {
-    return null;
-  }
-};
 
 type Fields = {
   dislikes?: number;

@@ -1,15 +1,16 @@
-import { Event } from '@/types/kudaGo';
+import { Event, EventWithATStatus } from '@/types/kudaGo';
 import React from 'react';
 import s from './EventItem.module.scss';
 import Image from 'next/image';
 import { FaRubleSign } from 'react-icons/fa';
 import Link from 'next/link';
+import EventStatusMark from '../EventStatusMark/EventStatusMark';
 
-const EventItem = (props: Event) => {
+const EventItem = (props: EventWithATStatus) => {
   return (
     <div className={s.eventItem}>
-      <a target="_blank" href={props.site_url} rel="noopener noreferrer">
-        <div className={s.eventItem_imageWrap}>
+      <div className={s.eventItem_imageWrap}>
+        <a target="_blank" href={props.site_url} rel="noopener noreferrer">
           <Image
             className={s.eventItem_image}
             fill
@@ -18,8 +19,9 @@ const EventItem = (props: Event) => {
             src={props.images[0].image}
             alt="event img"
           />
-        </div>
-      </a>
+        </a>
+        <EventStatusMark currentUserEventStatus={props.currentUserATStatus} eventId={props.id.toString()} />
+      </div>
 
       <div className={s.eventItem_info}>
         <h2 className={s.eventItem_title}>

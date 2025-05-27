@@ -40,7 +40,7 @@ const InnerPlaylistItem: React.FC<InnerPlaylistItem> = ({
   };
   return (
     <div className={s.innerPlaylistItem} onClick={addToPlaylist}>
-      <Image className={s.innerPlaylistItem_image} src={img} alt="img" height={50} width={50} />
+      <Image className={s.innerPlaylistItem_image} src={img} alt="img" height={50} width={50} placeholder='blur' blurDataURL='/circleTube.svg' />
       <div className={s.innerPlaylistItem_infoBlock}>
         <h2 className={s.innerPlaylistItem_title}>{title}</h2>
         <p className={s.innerPlaylistItem_trackCount}>{trackCount} треков</p>

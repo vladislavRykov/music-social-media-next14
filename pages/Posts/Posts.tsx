@@ -5,6 +5,7 @@ import PostList from '@/components/PostsPage/PostList/PostList';
 import { useAppSelector } from '@/hooks/reduxHooks';
 import { useParams, usePathname } from 'next/navigation';
 import React, { useState } from 'react';
+import s from './Posts.module.scss'
 
 const Posts = () => {
   const [selectedOrder, setSelectedOrder] = useState(orderFilters[0]);
@@ -20,7 +21,7 @@ const Posts = () => {
     }
   };
   return (
-    <div>
+    <div className={s.wrapper}>
       <PostFilters isPostsAuthor={isPostsAuthor} selectedOrder={selectedOrder} setSelectedOrder={selectOrderFunction} />
       <PostList isPostsAuthor={isPostsAuthor} selectedSortOrder={selectedOrder} />
     </div>

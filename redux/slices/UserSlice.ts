@@ -6,7 +6,6 @@ import { Location } from '@/types/kudaGo';
 
 export const getUserProfile = createAsyncThunk('user/getUserProfile', async (userId, thunkAPI) => {
   const res = await getUserMainFields();
-  console.log(res)
 
   const data = res
     ? {

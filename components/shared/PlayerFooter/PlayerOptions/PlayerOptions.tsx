@@ -10,6 +10,7 @@ import { BsShuffle } from 'react-icons/bs';
 import { useAppDispatch } from '@/hooks/reduxHooks';
 import { setLoop, setVolume } from '@/redux/slices/PlayerSlice';
 import cn from 'classnames';
+import SecondaryIconBtn from '@/components/UI/Buttons/SecondaryIconBtn/SecondaryIconBtn';
 
 const PlayerOptions = ({
   audioVolume,

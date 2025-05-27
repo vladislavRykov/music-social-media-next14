@@ -1,23 +1,55 @@
-.chatUserItem{
+.chatUserItem {
+  overflow: hidden;
+  //   display: flex;
+  //   gap: 5px;
+  //   align-items: center;
+  padding: 10px;
+  color: var(--secondary-text-color);
+  border-radius: 8px;
+  transition: 0.25s;
+  background-color: transparent;
+  position: relative;
+  &:hover {
+  }
+  &_content {
     display: flex;
     gap: 5px;
     align-items: center;
-    padding: 10px;
-    color: var(--secondary-text-color);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.25s;
-    background-color: transparent;
+    // z-index: 10;
+    position: relative;
+  }
+  &_ava {
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    // z-index: 10;
+    // position: relative;
+  }
+  &_username {
+    // position: relative;
+    // z-index: 10;
+    color: #fff;
+    text-shadow: 2px 2px 3px black;
+  }
+  &_background {
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+  }
+  &_shadow {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  &_dialogBtn {
+    padding: 5px 7px;
+    background-color: #fff;
+    border-radius: 10px;
+    color: black;
+    transition: 0.1s;
+    box-shadow: 0px 0px 10px 1px rgb(64, 64, 64);
     &:hover {
-        background-color: var(--secondary-bg-color);
-        box-shadow: 0px 0px 15px 3px var(--secondary-bg-shadow-color);
-      }
-    &_ava{
-        border-radius: 50%;
-        object-fit: cover;
-        object-position: center;
+      background-color: #cdcdcd;
     }
-    &_username{
-
-    }
+  }
 }

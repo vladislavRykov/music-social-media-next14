@@ -14,9 +14,7 @@ import Link from 'next/link';
 
 const PlayerPlaylistContent = () => {
   const { playlist } = useAppSelector(selectPlayerPlaylist);
-  console.log(playlist);
   const getPlaylistData = async () => {
-    console.log(playlist);
     if (playlist._id) {
       const res = await getPlayerPlaylistsData(playlist._id);
       console.log('player', res.data?.items);
@@ -42,7 +40,6 @@ const PlayerPlaylistContent = () => {
     data: playlistData,
     error,
   } = useAsync(getPlaylistData, [playlist._id, playlist.items.length]);
-  console.log(playlistData);
   return (
     <div className={s.playerPlaylistContent}>
       {status === 'success' && playlistData && playlistData.items && (

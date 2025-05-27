@@ -88,11 +88,9 @@ const PlayerPlaylistItems: React.FC<PropsT> = ({ playlistItems }) => {
     const oldListIds = prevListRef.current.map((item) => item._id);
     const newListIds = newList.map((item) => item._id);
     if (areArraysEqual(oldListIds, newListIds)) return;
-    console.log('i am changing', oldListIds, newListIds);
     try {
       // const newListIds = newList.map((item) => item._id);
       dispatch(setPlaylistItemsRedux(newListIds)); // Обновляем состояние в Redux
-      console.log(playlist._id, newListIds);
       playlist._id && (await setNewPlaylistOrderAction(playlist._id, newListIds));
     } catch (error) {
       console.error('Ошибка при сохранении порядка плейлиста:', error);
@@ -103,7 +101,6 @@ const PlayerPlaylistItems: React.FC<PropsT> = ({ playlistItems }) => {
     const playlistItem = playlistItems.find((playlistItem) => playlistItem._id === item);
     return { id: playlistItem?._id, ...playlistItem };
   }) as (MusicDataWithReactionT & { id: string })[];
-  console.log(3333, sortedPlaylistItem);
   useEffect(() => {
     prevListRef.current = sortedPlaylistItem;
   }, [sortedPlaylistItem]);

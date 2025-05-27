@@ -12,8 +12,6 @@ type Props = {
 };
 
 const HomeMain = ({ mainContentRef }: Props) => {
-  const {getCssVariable}= useCSSVariable()
-  console.log(getCssVariable('--profile-text-color'))
 
   const [isOnlyFreeEvents,setIsOnlyFreeEvents] = useState<boolean>(false)
   return (

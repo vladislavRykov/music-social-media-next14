@@ -46,7 +46,6 @@ const MessageSchema = new Schema(
 );
 MessageSchema.pre('save', async function (next) {
   try {
-    console.log(123, this);
     const chat = await findChatById(this.chat.toString());
     if (chat?.type === 'dialog') {
       const otherMember = chat.members.filter((user) => user.toString() !== this.author.toString());

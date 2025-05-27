@@ -15,6 +15,7 @@ import {
   setNewPlaylistOrder,
   updatePlaylist,
 } from '@/dal/playlist';
+import { getSortedGenres } from '@/helpers/actions/genres';
 import { verifySession } from '@/lib/sessions';
 import { AccessType, Overwrite } from '@/types/common';
 import { ItemsPlaylistData, PlaylistData, UserPlaylistData } from '@/types/playlistTypes';
@@ -99,6 +100,28 @@ export const createNewPlaylist = async ({
     return { message: 'Не удалось создать плейлист.', ok: false };
   }
 };
+export const savePlaylistToCurrentUserLibrary = async (playlistId:string) => {
+  try {
+    const session = await verifySession();
+    if (!session) {
+      return { ok: false, message: 'Вы не авторизированы' };
+    }
+    const data = await getPlaylistById<PlaylistData>(playlistId);
+    if (!data) return { ok: false, message: 'Не удалось найти плейлист.' };
+    if(data.userId.toString() === session.userId.toString())return { ok: false, message: 'Нельзя скопировать ваш же плейлист.' };
+    const playlist = await createPlaylist({
+      userId: session.userId,
+      title: data.title +' - copied playlist',
+      description: data.description,
+      access_type : data.access_type as AccessType,
+      items: data.items,
+      playlistImg: data.playlistImg,
+    });
+    return { message: 'Копия плейлиста создана.', data: playlist._doc, ok: true };
+  } catch (error) {
+    return { message: 'Не удалось создать плейлист.', ok: false };
+  }
+};
 export const getAllUserPlaylist = async <T>(
   populate?: {
     path: string;
@@ -172,7 +195,6 @@ export const deletePlaylistAction = async (playlistId: string) => {
       return { ok: false, message: 'Вы не авторизированы' };
     }
     const playlistToDelete = await getPlaylistById<PlaylistData>(playlistId);
-    console.log(playlistToDelete?.userId, session.userId);
     if (playlistToDelete?.userId.toString() !== session.userId)
       return { ok: false, message: 'У вас нет прав на это действие.' };
     const playlist = await deletePlaylist(playlistId);
@@ -191,7 +213,6 @@ export const updatePlaylistAction = async (
       return { ok: false, message: 'Вы не авторизированы' };
     }
     const playlistToDelete = await getPlaylistById<PlaylistData>(playlistId);
-    console.log(playlistToDelete?.userId, session.userId);
     if (playlistToDelete?.userId.toString() !== session.userId)
       return { ok: false, message: 'У вас нет прав на это действие.' };
     const playlist = await updatePlaylist(playlistId, newData);

@@ -27,7 +27,6 @@ const onBackArrowClick = ()=>{
       <div className={s.sidebarHeader_searchInput}>
       <IoIosSearch size={25} className={s.sidebarHeader_icon}/>
       <input placeholder='Поиск...' onClick={()=>{
-        console.log(123)
         setIsPopupOpen(true)
 
       }

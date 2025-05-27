@@ -14,7 +14,7 @@ import GoToProfile from '@/components/shared/Popups/ChatPopup/GoToProfile/GoToPr
 import { RelationStatus } from '@/types/relationT';
 const ChatPopup = dynamic(() => import('@/components/shared/Popups/ChatPopup/ChatPopup'));
 import { FaUserFriends } from 'react-icons/fa';
-import { ImBlocked } from "react-icons/im";
+import { ImBlocked } from 'react-icons/im';
 
 type Props = {
   lastMessage: {
@@ -50,12 +50,9 @@ const ChatListItem = ({
 
   const onRightMouseClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
-    console.log(e.target);
     setBlockPosition({
       y: `${e.clientY}px`,
       x: `${e.clientX}px`,
-      // y: `${e.nativeEvent.offsetY}px`,
-      // x: `${e.nativeEvent.offsetX}px`,
     });
     setIsPopupOpen(true);
   };

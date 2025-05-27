@@ -22,16 +22,8 @@ const RelationShipBlock = ({ profileUserId, currentUserId }: ProfileButtonsProps
 
   const getProfileRelation = async () => {
     const usersRelationship = await getUsersRelation({ currentUserId, otherUserId: profileUserId });
-    console.log(usersRelationship);
     return usersRelationship;
-    // if (
-    //   usersRelationship &&
-    //   usersRelationship.status === RelationStatus.Blocked &&
-    //   usersRelationship.userB === currentUserId
-    // ) {
-    //   router.back();
-    //   return;
-    // }
+  
   };
   const { status, data: userRelation, error,execute,helpers } = useAsync(getProfileRelation);
   const onChatBtnClick = async () => {

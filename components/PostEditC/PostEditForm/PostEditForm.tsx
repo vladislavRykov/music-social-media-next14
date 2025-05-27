@@ -103,7 +103,6 @@ const PostEditForm = ({ post }: { post: MongoosePost }) => {
       ...values,
     };
     if (image_url) editPostData.image_url = image_url;
-    console.log(editPostData);
     const res = await editPostByIdA(post._id, editPostData);
     if (!res.ok) {
       return toast.error(res.message);
