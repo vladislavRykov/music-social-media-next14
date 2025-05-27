@@ -9,7 +9,7 @@
   }
   &_tag {
     cursor: pointer;
-    background-color: #3db4f2;
+    background-color: var(--profile-text-color);
     color: #fffffe;
     padding: 5px 10px;
     border-radius: 5px;

@@ -3,16 +3,23 @@ import { orderFilters } from '@/components/PostsPage/PostFilters/orderFilters';
 import PostFilters from '@/components/PostsPage/PostFilters/PostFilters';
 import PostList from '@/components/PostsPage/PostList/PostList';
 import { useAppSelector } from '@/hooks/reduxHooks';
-import { useParams, usePathname } from 'next/navigation';
-import React, { useState } from 'react';
-import s from './Posts.module.scss'
+import { useParams, usePathname, useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import s from './Posts.module.scss';
 
 const Posts = () => {
+  const searchParams = useSearchParams();
+  const sortF = searchParams?.get('sort');
   const [selectedOrder, setSelectedOrder] = useState(orderFilters[0]);
-  const params:{nickname: string}|null
- = useParams()
-  const currentUsername = useAppSelector(state=>state.userReducer.user?.username)
-  const isPostsAuthor = currentUsername === params?.nickname
+  const params: { nickname: string } | null = useParams();
+  useEffect(() => {
+    const findSort = orderFilters.find((filter) => filter.value === sortF);
+    if (sortF && findSort) {
+      setSelectedOrder(findSort);
+    }
+  }, [searchParams]);
+  const currentUsername = useAppSelector((state) => state.userReducer.user?.username);
+  const isPostsAuthor = currentUsername === params?.nickname;
   const selectOrderFunction = (filter: { title: string; value: string }) => {
     setSelectedOrder(filter);
     const targetElement = document.getElementById('profile-nav');
@@ -22,7 +29,11 @@ const Posts = () => {
   };
   return (
     <div className={s.wrapper}>
-      <PostFilters isPostsAuthor={isPostsAuthor} selectedOrder={selectedOrder} setSelectedOrder={selectOrderFunction} />
+      <PostFilters
+        isPostsAuthor={isPostsAuthor}
+        selectedOrder={selectedOrder}
+        setSelectedOrder={selectOrderFunction}
+      />
       <PostList isPostsAuthor={isPostsAuthor} selectedSortOrder={selectedOrder} />
     </div>
   );

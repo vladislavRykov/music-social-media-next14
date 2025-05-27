@@ -53,7 +53,7 @@ const EventStatusMark = ({
         <button
           onClick={() => setIsPopupOpen(true)}
           className={s.eventStatusMark_selectedStatus}
-          style={selectedMark ? { backgroundColor: getSelectedColor(selectedMark) } : {}}>
+          style={selectedMark ? { backgroundColor: getSelectedColor(selectedMark),color: '#fff' } : {}}>
           {getSelectedTitle(selectedMark)}
         </button>
         {isPopupOpen && (

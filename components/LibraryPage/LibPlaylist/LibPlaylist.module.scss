@@ -1,5 +1,5 @@
 .libPlaylist {
-  cursor: pointer;
+  // cursor: pointer;
   padding: 6px;
   width: 162px;
   border-radius: 4px;
@@ -97,7 +97,8 @@
     font-size: 14px;
   }
   &_trackCount{
-    color: var(--profile-text-color);
+    color: var(--secondary-text-color);
+    // color: var(--profile-text-color);
 
   }
 }

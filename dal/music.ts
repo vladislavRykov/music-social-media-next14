@@ -146,7 +146,8 @@ export const getArrayMusicByIdWithIsLiked = async (musicIds: string[]|ObjectId[]
 
   return musics;
 };
-export const getAllMusic = async ({ genres, search }: { genres: string[]; search: string }) => {
+export const getAllMusic = async ({ genres, search,year ,lastPostId,
+    limit = 10}: { genres: string[]; search: string,year: number|null,lastPostId: string|null,limit?:number}) => {
   let query: any = {}; // Инициализируем пустой объект запроса
 
   if (search) {
@@ -159,9 +160,17 @@ export const getAllMusic = async ({ genres, search }: { genres: string[]; search
   if (genres.length > 0) {
     query.genres = { $all: genres };
   }
+  if(year){
+      query.year = year;
+  }
+  if(lastPostId){
+    // query._id = { $lt: lastPostId }
+    query._id = { $gt: lastPostId }
+  }
+  console.log(query)
   try {
     await mongooseConnect();
-    const musics = await Models.Music.find(query).lean<MusicData[]>();
+    const musics = await Models.Music.find(query).limit(limit).lean<MusicData[]>();
     if (!musics) {
       return null;
     }

@@ -49,7 +49,7 @@ const BrowseMusicItem: React.FC<BrowseMusicItemProps> = ({
       if (musicItemLoading) return;
       setMusicItemLoading(true);
       await dispatch(setMusicData(_id));
-      dispatch(setPlaylist({ _id: null, items: playlist,type: null }));
+      dispatch(setPlaylist({ _id: null, items: playlist, type: null }));
     }
   };
   useEffect(() => {
@@ -69,12 +69,17 @@ const BrowseMusicItem: React.FC<BrowseMusicItemProps> = ({
 
   return (
     <div
-      onClick={(e) => {
-        dispatch(setPlaylistItems(playlist));
-        router.push(`/player/playlist?m=${_id}`);
-      }}
+      // onClick={(e) => {
+      //   dispatch(setPlaylistItems(playlist));
+      //   router.push(`/player/playlist?m=${_id}`);
+      // }}
       className={s.browseMusicItem}>
-      <div className={s.browseMusicItem_imageBlock}>
+      <div
+        onClick={(e) => {
+          dispatch(setPlaylistItems(playlist));
+          router.push(`/player/playlist?m=${_id}`);
+        }}
+        className={s.browseMusicItem_imageBlock}>
         <Image
           className={s.browseMusicItem_image}
           src={image}
@@ -97,7 +102,7 @@ const BrowseMusicItem: React.FC<BrowseMusicItemProps> = ({
               {musicItemLoading ? (
                 <Image src={LoadingSvg} alt="loading..." height={15} width={15} />
               ) : isBtnShown ? (
-                <GrVolume size={15} />
+                <GrVolume className={s.browseMusicItem_playing} size={15} />
               ) : (
                 <FaPause size={15} />
               )}

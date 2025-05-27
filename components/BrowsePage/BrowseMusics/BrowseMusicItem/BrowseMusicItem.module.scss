@@ -1,24 +1,28 @@
 .browseMusicItem {
-  cursor: pointer;
   width: 200px;
   display: block;
   &_image {
     border-radius: 5px;
     object-fit: cover;
     object-position: center;
-
+    
   }
   &_title {
     color: var(--third-text-color);
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 500;
   }
   &_author {
+    font-size: 13px;
+    line-height: 16px;
     color: var(--secondary-text-color);
     // word-break: break-all;
     // word-wrap: break-word;
   }
   &_imageBlock {
     border-radius: 5px;
+    cursor: pointer;
     margin-bottom: 10px;
     position: relative;
     &:hover .browseMusicItem_play {
@@ -53,6 +57,9 @@
       opacity: 1;
     }
   }
+  &_playing{
+      // animation: pulse 1s infinite alternate ease-in-out; /* Применение анимации */
+  }
   &_play {
     transform: scale(0);
     padding: 10px;
@@ -70,5 +77,15 @@
     &_shown {
       transform: scale(1);
     }
+  }
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0.8;
   }
 }

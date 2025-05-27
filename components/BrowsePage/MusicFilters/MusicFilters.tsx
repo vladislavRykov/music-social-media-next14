@@ -20,52 +20,10 @@ import { filtersSelectedData } from '@/redux/selectors/musicFiltersSelectors';
 import SelectedFiltersBlock from './SelectedFiltersBlock/SelectedFiltersBlock';
 import { getAllGenres } from '@/dal/genres';
 
-const genres = [
-  {
-    label: 'ПОП',
-    value: 'pop',
-  },
-  {
-    label: 'РОК',
-    value: 'rock',
-  },
-  {
-    label: 'ДЖАЗ',
-    value: 'jazz',
-  },
-];
-const years = [
-  {
-    label: '2001',
-    value: '2001',
-  },
-  {
-    label: '2003',
-    value: '2003',
-  },
-  {
-    label: '2007',
-    value: '2007',
-  },
-];
-const seasons = [
-  {
-    label: 'Зима',
-    value: 'winter',
-  },
-  {
-    label: 'Весна',
-    value: 'spring',
-  },
-  {
-    label: 'Лето',
-    value: 'summer',
-  },
-  {
-    label: 'Осень',
-    value: 'fall',
-  },
-];
+const years = Array.from({ length: 2025 - 1960 + 1 }, (_, i) => ({
+  label: (1960 + i).toString(),
+  value: (1960 + i).toString(),
+}));
 
 const MusicFilters = () => {
   const { selectedGenres, year, search, season } = useAppSelector(filtersSelectedData);
@@ -88,7 +46,7 @@ const MusicFilters = () => {
             setSearch={(value) => dispatch(setSearch(value))}
             search={search}
             Icon={FaSearch}
-            wrapperClassname={s.filters_item}
+            wrapperClassname={s.filters_search}
           />
           <SelectInput
             selectedOption={selectedGenres}
@@ -99,7 +57,6 @@ const MusicFilters = () => {
             placeholder="Жанр"
             title="Жанр"
             multiple
-            wrapperClassname={s.filters_item}
           />
           <SelectInput
             selectedOption={year}
@@ -107,10 +64,10 @@ const MusicFilters = () => {
             clearAllOptions={() => dispatch(setYear([]))}
             options={years}
             placeholder="Год"
-            wrapperClassname={s.filters_item}
+            wrapperClassname={s.filters_year}
             title="Год"
           />
-          <SelectInput
+          {/* <SelectInput
             selectedOption={season}
             selectOption={(value) => dispatch(setSeason([value]))}
             clearAllOptions={() => dispatch(setSeason([]))}
@@ -119,9 +76,9 @@ const MusicFilters = () => {
             title="Сезон"
             showInput={false}
             wrapperClassname={s.filters_item}
-          />
+          /> */}
         </div>
-        <FiltersHamburger />
+        {/* <FiltersHamburger /> */}
       </div>
       {isAnyTagSelected && <SelectedFiltersBlock genres={selectedGenres} search={search} />}
     </div>

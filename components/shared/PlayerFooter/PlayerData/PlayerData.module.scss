@@ -4,6 +4,8 @@
   align-items: center;
   &_image {
     border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
   }
   &_infoBlock {
     font-weight: 500;

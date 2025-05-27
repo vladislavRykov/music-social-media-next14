@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { MusicData } from '@/types/types';
 import cn from 'classnames';
 import { selectMusicitemData } from '@/redux/selectors/playerSelectors';
+import { viewsFormat } from '@/utils/formatNumber';
 
 interface LinearMusicItemProps {
   _id: string;
@@ -22,6 +23,7 @@ interface LinearMusicItemProps {
   title: string;
   image: string;
   viewsCount: number;
+  likesCount: number;
   playlist: string[];
 }
 
@@ -31,6 +33,7 @@ const LinearMusicItem: React.FC<LinearMusicItemProps> = ({
   title,
   image,
   viewsCount,
+  likesCount,
   playlist,
 }) => {
   const dispatch = useAppDispatch();
@@ -100,10 +103,13 @@ const LinearMusicItem: React.FC<LinearMusicItemProps> = ({
         </div>
       </div>
       <div className={s.linearMusicItem_infoBlock}>
-        <h2 className={s.linearMusicItem_title}>{title}</h2>
-        <div className={s.linearMusicItem_authorAndViews}>
+        <div className={s.linearMusicItem_titleAndAuthor}>
+          <h2 className={s.linearMusicItem_title}>{title}</h2>
           <span className={s.linearMusicItem_author}>{author}</span>
-          <span className={s.linearMusicItem_viewsCount}>{viewsCount} просмотров</span>
+        </div>
+        <div className={s.linearMusicItem_likesAndViews}>
+          <span className={s.linearMusicItem_viewsCount}>{viewsFormat(viewsCount)} просмотров</span>
+          <span className={s.linearMusicItem_likesCount}>{viewsFormat(likesCount)} лайков</span>
         </div>
       </div>
     </div>

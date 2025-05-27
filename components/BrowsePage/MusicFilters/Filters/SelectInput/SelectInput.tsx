@@ -142,6 +142,7 @@ const SelectInput: React.FC<SelectInputProps> = ({
                   } else {
                     selectOption?.(option);
                   }
+                  setSearchOption('')
                   !multiple && setOpenOptions(false);
                 }}>
                 <span>{option.label}</span>

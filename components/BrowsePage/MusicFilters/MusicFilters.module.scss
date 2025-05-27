@@ -14,7 +14,10 @@
     flex-flow: wrap;
     
   }
-  &_item {
+  &_year {
+    width: 130px;
+  }
+  &_search {
     width: 150px;
   }
 }

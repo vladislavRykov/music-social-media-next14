@@ -23,6 +23,8 @@
   }
   &_itemStatus {
      padding: 5px 6px;
+     cursor: pointer;
+    //  color: #fff;
     &:hover {
       background-color: var(--main-bg-color);
     }

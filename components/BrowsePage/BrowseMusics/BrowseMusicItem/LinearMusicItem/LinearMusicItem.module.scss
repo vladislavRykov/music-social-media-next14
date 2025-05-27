@@ -2,12 +2,13 @@
   display: flex;
   gap: 10px;
   border-bottom: 1px solid #adc0d2;
+  padding-bottom: 10px;
 
   &_imageBlock {
     cursor: pointer;
     overflow: hidden;
     border-radius: 5px;
-    margin-bottom: 10px;
+    // margin-bottom: 10px;
     position: relative;
     &:hover .linearMusicItem_overlay {
       opacity: 1;
@@ -39,18 +40,29 @@
     color: white;
   }
   &_infoBlock {
-    padding: 10px 0px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   &_title {
     color: var(--third-text-color);
-    margin-bottom: 10px;
-  }
-  &_authorAndViews {
-    display: flex;
-    gap: 50px;
-    color: var(--secondary-text-color)
+    font-weight: 500;
   }
   &_author {
+    // color: var(--main-text-color);
+    color: var(--secondary-text-color);
+  }
+  &_titleAndAuthor {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  &_likesAndViews {
+    font-size: 13px;
+    display: flex;
+    gap: 50px;
+    color: var(--secondary-text-color);
   }
   &_viewsCount {
   }

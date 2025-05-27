@@ -1,5 +1,5 @@
 .filterInput {
-  width: 100px;
+  width: 160px;
   &_input {
     width: 100%;
     background-color: var(--secondary-bg-color);
@@ -60,6 +60,8 @@
     padding: 15px;
     border-radius: 5px;
     background-color: var(--secondary-bg-color);
+    max-height: 350px;
+    overflow: auto;
   }
   &_option {
     display: flex;
@@ -87,7 +89,7 @@
       margin-bottom: 0;
     }
     &:hover {
-      color: #42bfef;
+      color:  var(--profile-text-color);
       background-color: var(--main-bg-color);
     }
     // &_selected {
@@ -95,14 +97,15 @@
     // }
   }
   &_selectedMark {
-    color: #6fc8ff;
+    // color: #6fc8ff;
+    color: var(--profile-text-color);
     transform: scale(1.5);
     &_wrapper {
       width: 20%;
     }
   }
   &_lastSelectedGendre {
-    background-color:  #6fc8ff;
+    background-color: var(--profile-text-color);
     color: white;
     padding: 10px 12px;
     width: 60px;
@@ -113,11 +116,12 @@
     border-radius: 5px;
   }
   &_selectedGenresCount {
+    color: white;
     border-radius: 5px;
     width: 40px;
     padding: 10px 12px;
     border-radius: 5px;
-    background-color:  #6fc8ff;
+    background-color:  var(--profile-text-color);
     cursor: pointer;
   }
   &_selectedGenres {
@@ -126,14 +130,15 @@
     display: flex;
     gap: 10px;
     position: absolute;
-    left: 10%;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
   }
   &_selectedGenre {
     color: var(--secondary-text-color);
     &_selected{
-      color: #3db4f3;
+      // color: #3db4f3;
+      color: var(--profile-text-color);
 
     }
   }

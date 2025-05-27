@@ -86,54 +86,58 @@ const LibPlaylist: React.FC<LibPlaylistProps> = ({
   }, [playlistId]);
   return (
     <div className={s.libPlaylist}>
-      <Link href={`/playlist?list=${playlistId}`} className={s.libPlaylist_imgBlock}>
-        <Image
-          className={s.libPlaylist_img}
-          src={playlistImg}
-          width={150}
-          height={150}
-          alt="music img"
-        />
-        {/* <div className={cn(s.libPlaylist_play)}>
+      {/* <div href={`/playlist?list=${playlistId}`} className={s.libPlaylist_imgBlock}> */}
+      <div className={s.libPlaylist_imgBlock}>
+        <Link href={`/playlist?list=${playlistId}`} style={{ position: 'relative',display: 'block' }}>
+          <Image
+            className={s.libPlaylist_img}
+            src={playlistImg}
+            width={150}
+            height={150}
+            alt="music img"
+          />
+
+          {/* <div className={cn(s.libPlaylist_play)}>
           <FaPlay size={15} />
         </div> */}
 
-        {playlist?._id === playlistId && isPlaying ? (
-          <div
-            onMouseOut={() => setIsBtnShown(true)}
-            onMouseOver={() => setIsBtnShown(false)}
-            className={cn(s.libPlaylist_play, {
-              [s.libPlaylist_play_shown]: playlist?._id === playlistId || isBtnShown,
-            })}
-            onClick={pauseSong}>
-            {musicItemLoading ? (
-              <Image src={LoadingSvg} alt="loading..." height={15} width={15} />
-            ) : isBtnShown ? (
-              <GrVolume size={15} />
-            ) : (
-              <FaPause size={15} />
-            )}
-          </div>
-        ) : (
-          <div
-            className={cn(s.libPlaylist_play, { [s.libPlaylist_play_shown]: isBtnShown })}
-            onClick={playSong}>
-            {musicItemLoading ? (
-              <Image src={LoadingSvg} alt="loading..." height={15} width={15} />
-            ) : (
-              <FaPlay size={15} />
-            )}
-          </div>
-        )}
+          {playlist?._id === playlistId && isPlaying ? (
+            <div
+              onMouseOut={() => setIsBtnShown(true)}
+              onMouseOver={() => setIsBtnShown(false)}
+              className={cn(s.libPlaylist_play, {
+                [s.libPlaylist_play_shown]: playlist?._id === playlistId || isBtnShown,
+              })}
+              onClick={pauseSong}>
+              {musicItemLoading ? (
+                <Image src={LoadingSvg} alt="loading..." height={15} width={15} />
+              ) : isBtnShown ? (
+                <GrVolume size={15} />
+              ) : (
+                <FaPause size={15} />
+              )}
+            </div>
+          ) : (
+            <div
+              className={cn(s.libPlaylist_play, { [s.libPlaylist_play_shown]: isBtnShown })}
+              onClick={playSong}>
+              {musicItemLoading ? (
+                <Image src={LoadingSvg} alt="loading..." height={15} width={15} />
+              ) : (
+                <FaPlay size={15} />
+              )}
+            </div>
+          )}
 
-        <div className={s.libPlaylist_topShadow}></div>
+          <div className={s.libPlaylist_topShadow}></div>
+        </Link>
         <div className={s.libPlaylist_settings}>
           <LibPlaylistSettings
             setIsPopupOpen={setIsPopupOpen}
             setBlockPosition={setBlockPosition}
           />
         </div>
-      </Link>
+      </div>
       {isPopupOpen && (
         <SettingsBtnPopUp
           styles={{

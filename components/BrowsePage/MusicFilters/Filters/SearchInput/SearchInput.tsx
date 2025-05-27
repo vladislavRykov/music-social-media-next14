@@ -52,7 +52,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
         </div>
 
         {search && (
-          <IoClose size={22} className={s.searchInput_cross} onClick={() => setSearch('')} />
+          <div className={s.searchIfnput_crossWrap}>
+            <IoClose size={22} className={s.searchInput_cross} onClick={() => setSearch('')} />
+          </div>
         )}
       </div>
     </div>
