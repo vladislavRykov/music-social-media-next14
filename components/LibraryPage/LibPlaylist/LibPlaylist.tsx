@@ -23,6 +23,7 @@ import DeletePlaylist from '@/components/shared/SettingsBtnPopUp/DeletePlaylist/
 import ShufflePlaylist from '@/components/shared/SettingsBtnPopUp/ShufflePlaylist/ShufflePlaylist';
 import { useRouter } from 'nextjs-toploader/app';
 import CopyPlaylist from '@/components/shared/SettingsBtnPopUp/CopyPlaylist/CopyPlaylist';
+import { toast } from 'react-toastify';
 
 interface LibPlaylistProps {
   playlistImg: StaticImageData | string;
@@ -64,6 +65,7 @@ const LibPlaylist: React.FC<LibPlaylistProps> = ({
       dispatch(setIsPlaying(true));
     } else {
       if (musicItemLoading) return;
+      if(allItems.length===0) return toast.info('Плейлист пуст')
       setMusicItemLoading(true);
       // await dispatch(setMusicData(allItems[0]));
       // dispatch(setPlaylist({ _id: playlistId, items: allItems }));
@@ -101,6 +103,9 @@ const LibPlaylist: React.FC<LibPlaylistProps> = ({
           <FaPlay size={15} />
         </div> */}
 
+
+          <div className={s.libPlaylist_topShadow}></div>
+        </Link>
           {playlist?._id === playlistId && isPlaying ? (
             <div
               onMouseOut={() => setIsBtnShown(true)}
@@ -128,9 +133,6 @@ const LibPlaylist: React.FC<LibPlaylistProps> = ({
               )}
             </div>
           )}
-
-          <div className={s.libPlaylist_topShadow}></div>
-        </Link>
         <div className={s.libPlaylist_settings}>
           <LibPlaylistSettings
             setIsPopupOpen={setIsPopupOpen}

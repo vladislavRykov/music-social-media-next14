@@ -50,7 +50,7 @@ const PlayerPlaylistContent = () => {
           <PlayerPlaylistItems playlistItems={playlistData.items} />
         </>
       )}
-      {status === 'error' && <div>Не удалось получить плейлист</div>}
+      {(status === 'error') && <div>Не удалось получить плейлист</div>}
       {status === 'pending' && <Image src={LoadingSvg} alt="loading..." height={50} width={50} />}
     </div>
   );

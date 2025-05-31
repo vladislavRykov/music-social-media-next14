@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import s from './PlaylistItemsBlock.module.scss';
-import { Genre, MusicData, MusicDataWithReactionT, UserDataMongoose, UserMainFields } from '@/types/types';
+import {
+  Genre,
+  MusicData,
+  MusicDataWithReactionT,
+  UserDataMongoose,
+  UserMainFields,
+} from '@/types/types';
 import PlaylistItem from './PlaylistItem/PlaylistItem';
 import { Overwrite } from '@/types/common';
 import { PlaylistData } from '@/types/playlistTypes';
@@ -63,7 +69,7 @@ const PlaylistItemsBlock: React.FC<PlaylistItemsBlockProps> = ({
     playlistItemsState.map((item) => ({ id: item._id, ...item }));
   return (
     <div className={s.playlistItemsBlock}>
-      <PlaylistGenresBlock playlistGenres={playlistGenres}/>
+      {playlistGenres.length !== 0 && <PlaylistGenresBlock playlistGenres={playlistGenres} />}
       {!isPlaylistEmpty ? (
         <>
           <ReactSortable

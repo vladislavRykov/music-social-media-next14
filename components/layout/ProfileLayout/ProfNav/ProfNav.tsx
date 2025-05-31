@@ -6,7 +6,7 @@ import { useParams, usePathname } from 'next/navigation';
 import cn from 'classnames';
 import { useAppSelector } from '@/hooks/reduxHooks';
 
-const routesWithScroll = ['/library', '/posts', '/posts/*','/friends'];
+const routesWithScroll = ['/library', '/posts', '/posts/*','/friends','/events'];
 const ProfNav = () => {
   // const userName = useAppSelector((state) => state.userReducer.user?.username);
   const pathname = usePathname();
@@ -25,6 +25,10 @@ const ProfNav = () => {
     {
       title: 'Библиотека',
       href: `/user/${params?.nickname}/library`,
+    },
+    {
+      title: 'События',
+      href: `/user/${params?.nickname}/events`,
     },
     {
       title: 'Посты',

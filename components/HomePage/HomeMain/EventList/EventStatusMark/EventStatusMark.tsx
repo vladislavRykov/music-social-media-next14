@@ -4,6 +4,7 @@ import { EventAttendanceStatus } from '@/types/eventAttendace';
 import PopupWrapper from '@/components/shared/Popups/PopupWrapper';
 import { setEventAttendanceA } from '@/actions/eventAttendance';
 import { toast } from 'react-toastify';
+import { getSelectedColor } from '@/helpers/eventAttendanceHelpers';
 
 const getSelectedTitle = (status: EventAttendanceStatus | null) => {
   switch (status) {
@@ -15,16 +16,6 @@ const getSelectedTitle = (status: EventAttendanceStatus | null) => {
       return 'Не пойду';
     default:
       return 'Установить статус';
-  }
-};
-const getSelectedColor = (status: EventAttendanceStatus | null) => {
-  switch (status) {
-    case EventAttendanceStatus.Going:
-      return 'green';
-    case EventAttendanceStatus.Interested:
-      return 'blue';
-    case EventAttendanceStatus.Not_going:
-      return 'red';
   }
 };
 

@@ -28,6 +28,7 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({
 
   const onSongEnded = async () => {
     const nextSongId = getNextSongId(playlist, musicData._id);
+    if(nextSongId===musicData._id) return
     await dispatch(setMusicData(nextSongId));
   };
 

@@ -92,10 +92,12 @@
     display: flex;
     gap: 50px;
     // color: #858585;
-    color: var(--main-text-color);
-  }
-  &_author {
-    color: var(--main-text-color);
+    // color: var(--main-text-color);
+     color: var(--secondary-text-color);
+    }
+    &_author {
+    color: var(--secondary-text-color);
+    // color: var(--main-text-color);
   }
   &_viewsCount {
   }

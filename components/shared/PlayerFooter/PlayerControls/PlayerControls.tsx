@@ -22,11 +22,13 @@ const PlayerControls = ({
 
   const onNext = async () => {
     const nextSongId = getNextSongId(playlist, currentSongId);
+    if(nextSongId===currentSongId)return
     await dispatch(setMusicData(nextSongId));
   };
   const onPrev = async () => {
-    const nextSongId = getPrevSongId(playlist, currentSongId);
-    await dispatch(setMusicData(nextSongId));
+    const prevSongId = getPrevSongId(playlist, currentSongId);
+    if(prevSongId===currentSongId)return
+    await dispatch(setMusicData(prevSongId));
   };
   return (
     <div className={s.playerControls}>

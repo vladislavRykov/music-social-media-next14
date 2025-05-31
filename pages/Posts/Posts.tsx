@@ -1,5 +1,5 @@
 'use client';
-import { orderFilters } from '@/components/PostsPage/PostFilters/orderFilters';
+import { orderFilters, whosPostsOptions } from '@/components/PostsPage/PostFilters/filtersOptions';
 import PostFilters from '@/components/PostsPage/PostFilters/PostFilters';
 import PostList from '@/components/PostsPage/PostList/PostList';
 import { useAppSelector } from '@/hooks/reduxHooks';
@@ -10,7 +10,11 @@ import s from './Posts.module.scss';
 const Posts = () => {
   const searchParams = useSearchParams();
   const sortF = searchParams?.get('sort');
+
   const [selectedOrder, setSelectedOrder] = useState(orderFilters[0]);
+  const [selectedWhichPosts, setSelectedWhichPosts] = useState(whosPostsOptions[0]);
+  const [searchString, setSearchString] = useState('');
+
   const params: { nickname: string } | null = useParams();
   useEffect(() => {
     const findSort = orderFilters.find((filter) => filter.value === sortF);
@@ -27,14 +31,25 @@ const Posts = () => {
       targetElement.scrollIntoView({ behavior: 'smooth' });
     }
   };
+  const selectWhosPostsFunction = (filter: { title: string; value: string }) => {
+    setSelectedWhichPosts(filter);
+    const targetElement = document.getElementById('profile-nav');
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
   return (
     <div className={s.wrapper}>
       <PostFilters
+      setSearchString={(value:string)=>setSearchString(value)}
+      searchString={searchString}
         isPostsAuthor={isPostsAuthor}
         selectedOrder={selectedOrder}
         setSelectedOrder={selectOrderFunction}
+        setSelectedWhosPosts={selectWhosPostsFunction}
+        selectedWhichPosts={selectedWhichPosts}
       />
-      <PostList isPostsAuthor={isPostsAuthor} selectedSortOrder={selectedOrder} />
+      <PostList searchString={searchString} isPostsAuthor={isPostsAuthor} selectedSortOrder={selectedOrder} />
     </div>
   );
 };

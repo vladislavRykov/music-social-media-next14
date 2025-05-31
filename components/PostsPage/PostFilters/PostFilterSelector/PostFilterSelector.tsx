@@ -1,11 +1,14 @@
 'use client'
 import React, { useState } from 'react'
-import s from './OldestNewestSelector.module.scss'
+import s from './PostFilterSelector.module.scss'
 import PopupWrapper from '@/components/shared/Popups/PopupWrapper'
 import cn from 'classnames'
-import { orderFilters } from '../orderFilters'
 
 type Props = {
+    orderFilters:{
+    title: string;
+    value: string;
+}[]
        selectedOrder: {
     title: string;
     value: string;
@@ -16,8 +19,7 @@ setSelectedOrder: (filter: {
 })=>void
 }
 
-const OldestNewestSelector = ({selectedOrder,setSelectedOrder}:Props) => {
-    
+const PostFilterSelector = ({selectedOrder,setSelectedOrder,orderFilters}:Props) => {
     const [isFilterSelectOpen,setIsFilterSelectOpen] = useState(false)
 
         const onOptionClick= (filter:{
@@ -46,4 +48,4 @@ const OldestNewestSelector = ({selectedOrder,setSelectedOrder}:Props) => {
   )
 }
 
-export default OldestNewestSelector
+export default PostFilterSelector

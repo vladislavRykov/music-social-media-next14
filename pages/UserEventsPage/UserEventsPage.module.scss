@@ -1,0 +1,8 @@
+.userEventsPage {
+  min-height: calc(100vh - 58px);
+  padding: 20px 30px;
+  &_content {
+    width: 70%;
+    margin: 0 auto;
+  }
+}

@@ -18,12 +18,33 @@ export const getEventAttendance = async (currentUserId: string, eventId: string)
 
   return eventAttendance;
 };
+export const getAllUserEventAttendances = async (userId: string) => {
+  await mongooseConnect();
+  const eventAttendances = await Models.EventAttendance.find({
+    user: userId,
+  }).lean<EventAttendanceMongooseT[]>();
+
+  return eventAttendances;
+};
 export const getArrayEventAttendancesByIds = async (currentUserId: string, eventIds: string[]) => {
   await mongooseConnect();
   const eventAttendances = await Models.EventAttendance.find({
     user: currentUserId,
     eventId: { $in: eventIds },
   }).lean<EventAttendanceMongooseT[]>();
+
+  return eventAttendances;
+};
+export const getEAWithUserArrayByEventId = async <T>(eventId: string, userIds: string[],  populate?: { path: string; select?: string }[],) => {
+  await mongooseConnect();
+  const query =  Models.EventAttendance.find({
+    eventId: eventId,
+    user: { $in: userIds },
+  })
+  if(populate){
+    query.populate(populate)
+  }
+  const eventAttendances = await query.lean<T>().exec();
 
   return eventAttendances;
 };

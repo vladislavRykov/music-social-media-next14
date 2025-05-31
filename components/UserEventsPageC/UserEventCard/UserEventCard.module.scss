@@ -1,0 +1,36 @@
+.userEventCard {
+  &_title {
+    color: var(--third-text-color);
+    flex-shrink: 0;
+  }
+  &_header{
+    font-size: 18px;
+    font-weight: 300;
+    padding-left: 5px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+  }
+  &_arrow{
+    flex-shrink: 0;
+font-size: 20px;
+  }
+  &_line{
+    height: 1px;
+    border-radius: 3px;
+    width: 100%;
+  }
+  &_content {
+    // background-color: var(--secondary-bg-color);
+    // box-shadow: 0px 0px 2px 1px var(--secondary-bg-shadow-color);
+    border-radius: 5px;
+    // padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    // width: fit-content;
+  }
+}

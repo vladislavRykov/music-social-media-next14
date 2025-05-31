@@ -47,7 +47,7 @@ const EventList = ({ isOnlyFreeEvents }: Props) => {
     const res = await fetch(
       `http://localhost:3000/api/events?is_free=${isOnlyFree}&location=${
         locationData.slug
-      }&actual_since=${actual_since || date.toISOString()}&page=${page || 1}`,
+      }&actual_since=${actual_since || date.toISOString()}&page=${page || 1}&page_size=${20}`
     );
 
     const data: GetEventDataT = await res.json();

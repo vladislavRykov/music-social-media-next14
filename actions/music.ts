@@ -13,7 +13,7 @@ export const getMusicByIdA = async (musicId: string) => {
   
     if (!music) return { ok: false, data: null, message: 'Не удалось найти музыку.' };
 
-    return { ok: false, data: music, message: 'Удалось получить музыку.' };
+    return { ok: true, data: music, message: 'Удалось получить музыку.' };
   } catch (error) {
     return { ok: false, data: null, message: 'Не удалось провести это действие.' };
   }

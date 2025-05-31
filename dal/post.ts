@@ -116,6 +116,76 @@ export const getPostsByUserName = async <T>(
   const posts = await query.lean<T>().exec();
   return posts;
 };
+export const searchPostsByUserName = async <T>(
+  {
+    searchString,
+    username,
+    lastPostId,
+    limit = 10,
+    sort = 1,
+  }: { username: string; lastPostId: string | null; limit?: number; sort: 1 | -1 ,searchString: string},
+  populate?: { path: string; select?: string }[],
+) => {
+  await mongooseConnect();
+  const user = await Models.User.findOne({ username: username });
+  const idSortFilter = sort === -1 ? { _id: { $lt: lastPostId } } : { _id: { $gt: lastPostId } };
+  const filters = lastPostId ? { ...idSortFilter, author: user._id,  title: { $regex: searchString, $options: 'i' }, } : { author: user._id ,  title: { $regex: searchString, $options: 'i' },};
+  const query = Models.Post.find(filters)
+    .sort({ createdAt: sort }) // сортируем по убыванию _id
+    .limit(limit);
+
+  if (populate) {
+    query.populate(populate);
+  }
+  const posts = await query.lean<T>().exec();
+  return posts;
+};
+export const searchPostsInArray = async <T>(
+  {
+    searchString,
+    postIdsArray,
+    lastPostId,
+    limit = 10,
+    sort = 1,
+  }: { postIdsArray: string[]; lastPostId: string | null; limit?: number; sort: 1 | -1 ,searchString: string},
+  populate?: { path: string; select?: string }[],
+) => {
+  await mongooseConnect();
+  const idSortFilter = sort === -1 ? { _id: { $lt: lastPostId, $in: postIdsArray } } : { _id: { $gt: lastPostId , $in: postIdsArray } };
+  const filters = lastPostId ? { ...idSortFilter,  title: { $regex: searchString, $options: 'i' } } : { title: { $regex: searchString, $options: 'i' }, _id: {  $in: postIdsArray }};
+  const query = Models.Post.find(filters)
+    .sort({ createdAt: sort }) // сортируем по убыванию _id
+    .limit(limit);
+
+  if (populate) {
+    query.populate(populate);
+  }
+  const posts = await query.lean<T>().exec();
+  return posts;
+};
+export const searchPostsByAuthors = async <T>(
+  {
+    searchString,
+    authorsIdsArray,
+    lastPostId,
+    limit = 10,
+    sort = 1,
+  }: { authorsIdsArray: string[]; lastPostId: string | null; limit?: number; sort: 1 | -1 ,searchString: string},
+  populate?: { path: string; select?: string }[],
+) => {
+  await mongooseConnect();
+  const idSortFilter = sort === -1 ? { _id: { $lt: lastPostId } } : { _id: { $gt: lastPostId} };
+  const filters = lastPostId ? { ...idSortFilter, author: {$in: authorsIdsArray}, title: { $regex: searchString, $options: 'i' } } : { title: { $regex: searchString, $options: 'i' },author: {$in: authorsIdsArray},};
+  const query = Models.Post.find(filters)
+    .sort({ createdAt: sort }) // сортируем по убыванию _id
+    .limit(limit);
+
+  if (populate) {
+    query.populate(populate);
+  }
+  const posts = await query.lean<T>().exec();
+  return posts;
+};
 export const getPostById = async <T>(
   postId: string,
   populate?: { path: string; select?: string }[],

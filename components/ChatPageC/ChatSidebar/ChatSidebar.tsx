@@ -25,6 +25,11 @@ const ChatSidebar = ({chats}:Props) => {
   const rightResizer = useRef<HTMLDivElement|null>(null);
   const [isSearchPopupOpen,setIsSearchPopupOpen] = useState(false)
   const [searchValue,setSearchValue] = useState('')
+   const sortedChats =  chats && chats.sort((a, b) => {
+    const lastMsgTimeA = a.lastMessage?.createdAt 
+    const lastMsgTimeB = b.lastMessage?.createdAt
+    return new Date(lastMsgTimeB) - new Date(lastMsgTimeA);
+  });
   
 
   useEffect(() => {
@@ -65,7 +70,7 @@ const ChatSidebar = ({chats}:Props) => {
     <div ref={sideBarRef} className={s.chatSidebar} >
       <SidebarHeader searchValue={searchValue} setSearchValue={(value:string)=>setSearchValue(value)}  isPopupOpen={isSearchPopupOpen} setIsPopupOpen={(value:boolean)=>setIsSearchPopupOpen(value)}/>
       <div className={s.chatSidebar_main}>
-      {!isSearchPopupOpen && <ChatList chats={chats}/>}
+      {!isSearchPopupOpen && <ChatList chats={sortedChats}/>}
       {isSearchPopupOpen && <ChatSearchPopup closePopup={()=>setIsSearchPopupOpen(false)} searchValue={searchValue}/>}
       </div>
       <div ref={rightResizer}  className={s.chatSidebar_resize}></div>

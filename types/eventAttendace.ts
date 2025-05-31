@@ -3,6 +3,11 @@ export enum EventAttendanceStatus {
   Interested = 'interested',
   Not_going = 'not_going',
 }
+export type GroupedEventsT = {
+  [EventAttendanceStatus.Going]: string[];
+  [EventAttendanceStatus.Interested]: string[];
+  [EventAttendanceStatus.Not_going]: string[];
+};
 export interface EventAttendanceMongooseT {
   _id: string;
   eventId: string;

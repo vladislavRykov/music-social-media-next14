@@ -20,6 +20,7 @@ import { useAppSelector } from '@/hooks/reduxHooks';
 import Image from 'next/image';
 import { moveToFront } from '@/utils/MoveToFront';
 import LibraryItemLoader from '@/components/UI/Loaders/LibraryItemLoader';
+import { selectUserProfileData } from '@/redux/selectors/userSelectors';
 
 type PlaylistType = Overwrite<
   PlaylistData,
@@ -28,7 +29,11 @@ type PlaylistType = Overwrite<
 
 const LibraryMain = () => {
   const params: { nickname: string } | null = useParams();
-  const currentUserId = useAppSelector((state) => state.userReducer.user?._id);
+  const { userId: currentUserId, userName: currentUserName } =
+    useAppSelector(selectUserProfileData);
+  const isCurrentUserProfile = Boolean(
+    currentUserName && params && params.nickname === currentUserName,
+  );
   const asyncFunction = async () => {
     if (params) {
       return getPlaylistsByUsernameAction<PlaylistType[]>(params.nickname, [
@@ -57,7 +62,11 @@ const LibraryMain = () => {
   return (
     <div className={s.librarymain}>
       {status === 'success' && newPlaylists.length === 0 && (
-        <div className={s.noPosts}>Тут отображаются ваши плейлисты</div>
+        <div className={s.noPosts}>
+          {isCurrentUserProfile
+            ? 'Тут отображаются ваши плейлисты'
+            : 'Тут отображаются плейлисты пользователя'}
+        </div>
       )}
       <div className={s.itemList}>
         {status === 'success' &&
@@ -69,7 +78,7 @@ const LibraryMain = () => {
               return null;
             return (
               <LibPlaylist
-              isCurrentUserAuthor={playlist.userId._id === currentUserId}
+                isCurrentUserAuthor={playlist.userId._id === currentUserId}
                 type={playlist.type}
                 key={playlist._id}
                 playlistImg={playlist.playlistImg || playlist.items[0]?.image || musicImg}
@@ -82,9 +91,10 @@ const LibraryMain = () => {
               />
             );
           })}
-        {status === 'pending' && (
-          Array(10).fill(0).map((_,idx)=><LibraryItemLoader key={idx}/>)
-        )}
+        {status === 'pending' &&
+          Array(10)
+            .fill(0)
+            .map((_, idx) => <LibraryItemLoader key={idx} />)}
       </div>
     </div>
   );

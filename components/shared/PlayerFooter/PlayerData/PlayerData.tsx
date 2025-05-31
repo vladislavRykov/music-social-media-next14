@@ -18,9 +18,9 @@ const PlayerData: React.FC<PlayerDataProps> = ({ author, title, image, viewsCoun
       <div className={s.playerData_infoBlock}>
         <h2 className={s.playerData_title}>{title}</h2>
         <div className={s.playerData_bottomInfo}>
-          <span className={s.playerData_author}>{author}</span> &bull;{' '}
-          <span className={s.playerData_viewsCount}>{viewsFormat(viewsCount)} просмотров</span>{' '}
-          &bull; <span className={s.playerData_likes}>Нравиться: {viewsFormat(likes)}</span>
+          <span className={s.playerData_author}>{author} &bull; </span>
+          <span className={s.playerData_viewsCount}>{viewsFormat(viewsCount)} просмотров &bull; </span>
+          <span className={s.playerData_likes}>Нравиться: {viewsFormat(likes)}</span>
         </div>
       </div>
     </div>

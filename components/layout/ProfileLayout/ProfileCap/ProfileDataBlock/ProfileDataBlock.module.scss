@@ -12,6 +12,8 @@
     max-height: 230px;
     max-width: 160px;
     width: 100%;
+    object-fit: cover;
+    object-position: center;
   }
   &_nickname {
     // display: inline-block;

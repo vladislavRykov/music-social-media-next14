@@ -1,0 +1,39 @@
+.userEventItemOptions {
+
+
+  &_cross {
+    margin-bottom: 20px;
+  }
+  &_options {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  &_friends {
+   padding: 4px;
+  }
+  &_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    font-size: 18px;
+ color: var(--profile-text-color);
+    background-color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .1s;
+    &_selected{
+
+        background-color: var(--profile-text-color);
+        color: #fff;
+    }
+    &:hover{
+        transform: scale(1.1);
+    }
+    &:active{
+        background-color: var(--profile-text-color);
+        color: #fff;
+    }
+  }
+}

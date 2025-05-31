@@ -17,6 +17,10 @@ export const setMusicData = createAsyncThunk(
   'player/getMusicData',
   async (musicId: string, thunkAPI) => {
     const res = await getMusicByIdA(musicId);
+    if (!res.ok) {
+      // Отклоняем обещание с сообщением об ошибке
+      return thunkAPI.rejectWithValue(res.message || 'Unknown error');
+    }
     return res.data;
   },
 );
@@ -135,6 +139,9 @@ export const playerSlice = createSlice({
     });
     builder.addCase(setPlaylistData.fulfilled, (state, action) => {
       state.playlist = action.payload;
+      if(action.payload.items.length===1){
+         state.loop = true;
+      }
     }),
       builder.addCase(setPlaylistData.pending, (state, action) => {
         // state.isLoading = true;

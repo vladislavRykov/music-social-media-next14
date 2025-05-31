@@ -50,7 +50,7 @@ const ChatList = ({ chats }: Props) => {
               isChatBlocked={chat.relation?.status === RelationStatus.Blocked}
               chatId={chat._id}
               selectedChat={params?.slug?.[0] || null}
-              key={idx}
+              key={chat._id}
               chatName={chat.chatName}
               type={chat.type}
               chatImg={chat.chatImg || null}

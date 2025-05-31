@@ -1,8 +1,20 @@
 'use server';
 import { mongooseConnect } from '@/lib/mongoose';
 import { Models } from '@/models/models';
-import { ReactionT, TargetTypes } from '@/types/likeAndDislikes';
+import { LikeOrDislike, ReactionT, TargetTypes } from '@/types/likeAndDislikes';
 
+export const getLikedPostReaction = async ({
+  userId,
+}: {
+  userId: string;
+}) => {
+  await mongooseConnect();
+  const updatedReaction = await Models.Reaction.find(
+    { userId, targetType: TargetTypes.Post , reactionType: LikeOrDislike.Like }
+  ).lean<ReactionT[]>(); // Возвращает обновленный документ);
+
+  return updatedReaction;
+};
 export const updateReaction = async ({
   userId,
   targetId,

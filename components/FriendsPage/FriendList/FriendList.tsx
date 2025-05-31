@@ -11,15 +11,14 @@ import FriendListItem from './FriendListItem/FriendListItem';
 import circleLoader from '@/public/circleTube.svg';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
+import { useAppSelector } from '@/hooks/reduxHooks';
 
-type Props = {
-  friends: UserProfileData[] | null;
-  isOk: boolean;
-  message: string;
-};
-
-const FriendList = ({ friends, isOk, message }: Props) => {
-  const params : { nickname: string } | null = useParams()
+const FriendList = () => {
+  const params: { nickname: string } | null = useParams();
+  const currentUserName = useAppSelector((state) => state.userReducer.user?.username);
+  const isCurrentUserProfile = Boolean(
+    currentUserName && params && params.nickname === currentUserName,
+  );
   const loadMoreItems = useRef(true);
   const [users, setUsers] = useState<UserProfileData[]>([]);
   const [searchValue, setSearchValue] = useState('');
@@ -29,8 +28,13 @@ const FriendList = ({ friends, isOk, message }: Props) => {
     try {
       if (!loadMoreItems.current) return;
       const lastUserId = users.length > 0 ? users[users.length - 1]._id : null;
-      if(!params) return
-      const result = await searchUserFriendsByUsername(searchString,params.nickname, lastUserId, userLimit);
+      if (!params) return;
+      const result = await searchUserFriendsByUsername(
+        searchString,
+        params.nickname,
+        lastUserId,
+        userLimit,
+      );
       // const result = await searchCurrentUserFriends(searchString, lastUserId, userLimit);
 
       if (!result.ok || !result.data) {
@@ -59,6 +63,18 @@ const FriendList = ({ friends, isOk, message }: Props) => {
     scrollDeps: [users, debouncedValue],
     elementWithScroll,
   });
+  if (!isLoading && users.length === 0) {
+    return (
+      <div className={s.friendList}>
+        <p className={s.friendList_empty}>
+          {isCurrentUserProfile
+            ? 'Вы пока еще никого не добавили в друзья'
+            : 'Пользователь еще никого не добавил в друзья'}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className={s.friendList}>
       <div className={s.friendList_inputWrapper}>
@@ -74,7 +90,7 @@ const FriendList = ({ friends, isOk, message }: Props) => {
           <FriendListItem friend={user} />
         ))}
         {isLoading && (
-          <div style={{ display: 'flex', alignItems: 'center' ,justifyContent: 'center'}}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Image src={circleLoader} alt="loading" height={40} width={40} />
           </div>
         )}
