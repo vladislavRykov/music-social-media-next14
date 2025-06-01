@@ -1,9 +1,16 @@
 .postFilters{
+     max-width: 700px;
+  margin: 0 auto;
     padding: 20px 10px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
+    &_filters{
+        display: flex;
+        gap: 15px;
+        align-items: center;
+    }
     &_createNewPost{
         padding: 10px;
         background-color: var(--profile-text-color);

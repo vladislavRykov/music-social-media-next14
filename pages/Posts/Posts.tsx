@@ -24,32 +24,15 @@ const Posts = () => {
   }, [searchParams]);
   const currentUsername = useAppSelector((state) => state.userReducer.user?.username);
   const isPostsAuthor = currentUsername === params?.nickname;
-  const selectOrderFunction = (filter: { title: string; value: string }) => {
-    setSelectedOrder(filter);
-    const targetElement = document.getElementById('profile-nav');
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-  const selectWhosPostsFunction = (filter: { title: string; value: string }) => {
-    setSelectedWhichPosts(filter);
-    const targetElement = document.getElementById('profile-nav');
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+
   return (
     <div className={s.wrapper}>
       <PostFilters
       setSearchString={(value:string)=>setSearchString(value)}
       searchString={searchString}
         isPostsAuthor={isPostsAuthor}
-        selectedOrder={selectedOrder}
-        setSelectedOrder={selectOrderFunction}
-        setSelectedWhosPosts={selectWhosPostsFunction}
-        selectedWhichPosts={selectedWhichPosts}
       />
-      <PostList searchString={searchString} isPostsAuthor={isPostsAuthor} selectedSortOrder={selectedOrder} />
+      <PostList searchString={searchString} isPostsAuthor={isPostsAuthor}  />
     </div>
   );
 };

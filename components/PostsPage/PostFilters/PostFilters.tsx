@@ -4,44 +4,38 @@ import s from './PostFilters.module.scss';
 import Link from 'next/link';
 import { orderFilters, whosPostsOptions } from './filtersOptions';
 import PostFilterSelector from './PostFilterSelector/PostFilterSelector';
+import SearchPostsInput from './SearchPostsInput/SearchPostsInput';
 
 type Props = {
-  setSearchString: (value: string)=>void;
+  setSearchString: (value: string) => void;
   searchString: string;
-  selectedOrder: {
-    title: string;
-    value: string;
-  };
-  setSelectedOrder: (filter: { title: string; value: string }) => void;
-   setSelectedWhosPosts: (filter: { title: string; value: string }) => void;
-        selectedWhichPosts:{
-    title: string;
-    value: string;
-  };
+
   isPostsAuthor: boolean;
 };
 
-const PostFilters = ({ selectedOrder, setSelectedOrder, isPostsAuthor,setSelectedWhosPosts,selectedWhichPosts,setSearchString,searchString }: Props) => {
+const PostFilters = ({ isPostsAuthor, setSearchString, searchString }: Props) => {
   return (
     <div className={s.postFilters}>
-      <input value={searchString} onChange={(e)=>setSearchString(e.target.value)}/>
+      <div className={s.postFilters_filters}>
+        <SearchPostsInput setSearchString={setSearchString} searchString={searchString} />
+      {isPostsAuthor && (
+        <PostFilterSelector
+        orderFilters={whosPostsOptions}
+        searchParamsName="postsType"
+        defaultFilter={whosPostsOptions[0]}
+        />
+      )}
+      <PostFilterSelector
+        orderFilters={orderFilters}
+        searchParamsName="sort"
+        defaultFilter={orderFilters[0]}
+        />
+        </div>
       {isPostsAuthor && (
         <Link className={s.postFilters_createNewPost} href={'/post/create'}>
           Создать пост
         </Link>
       )}
-       {isPostsAuthor && (
-      <PostFilterSelector
-        orderFilters={whosPostsOptions}
-        selectedOrder={selectedWhichPosts}
-        setSelectedOrder={setSelectedWhosPosts}
-      />
-         )}
-      <PostFilterSelector
-        orderFilters={orderFilters}
-        selectedOrder={selectedOrder}
-        setSelectedOrder={setSelectedOrder}
-      />
     </div>
   );
 };
