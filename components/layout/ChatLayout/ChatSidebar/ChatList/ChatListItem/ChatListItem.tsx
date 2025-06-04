@@ -15,6 +15,9 @@ import { RelationStatus } from '@/types/relationT';
 const ChatPopup = dynamic(() => import('@/components/shared/Popups/ChatPopup/ChatPopup'));
 import { FaUserFriends } from 'react-icons/fa';
 import { ImBlocked } from 'react-icons/im';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import ruLocale from 'date-fns/locale/ru';
+import { format } from 'date-fns';
 
 type Props = {
   lastMessage: {
@@ -47,7 +50,17 @@ const ChatListItem = ({
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [blockPosition, setBlockPosition] = useState({ x: '0', y: '0' });
+const formatLastMessageTime = (date:Date) => {
+  const now = new Date();
 
+  // Если сообщение отправлено сегодня
+  if (format(date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')) {
+    return format(date, 'HH:mm', { locale: ruLocale });
+  }
+
+  // Иначе используем относительное представление времени
+  return formatDistanceToNow(date, { addSuffix: true, locale: ruLocale });
+};
   const onRightMouseClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
     setBlockPosition({
@@ -92,6 +105,7 @@ const ChatListItem = ({
     <div onContextMenu={onRightMouseClick} style={{ position: 'relative' }}>
       <Link
         href={`/chat/${chatId}`}
+        replace
         onClick={handleClick}
         ref={containerRef}
         className={cn(s.chatListItem, { [s.chatListItem_selected]: selectedChat === chatId })}>
@@ -115,7 +129,8 @@ const ChatListItem = ({
                 <div className={s.chatListItem_blockedStatus}>-{relationStatus}-</div>
               )}
             </div>
-            <span className={s.chatListItem_time}>{formattedTime || ''}</span>
+            <span className={s.chatListItem_time}>{lastMessage && formatLastMessageTime(lastMessage.time)}</span>
+            {/* <span className={s.chatListItem_time}>{formattedTime || ''}</span> */}
           </div>
           {lastMessage && (
             <div className={s.chatListItem_lastMessageAndUnread}>

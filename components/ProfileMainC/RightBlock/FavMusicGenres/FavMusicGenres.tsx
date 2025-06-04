@@ -26,7 +26,7 @@ const FavMusicGenres = ({ data, isOk, message }: Props) => {
         <div className={s.favMusicGenres}>
           {data.genres.length === 0 && <div>{message}</div>}
           {data.genres.map((genre) => (
-            <FavGenreItem genreName={genre.label} genreId={genre._id} />
+            <FavGenreItem key={genre._id} genreName={genre.label} genreId={genre._id} />
           ))}
         </div>
       )}

@@ -25,12 +25,12 @@ export const getFavGenresByUsername = async (username: string) => {
         message: `Пользователь ${username} пока не добавлял ничего в "понравившиеся"`,
       };
     const genreIds = favPlaylist.items.reduce<string[]>((acc, music) => {
-      // const
       acc.push(...music.genres);
       return acc;
     }, []);
     const sortedGenres = await getSortedGenres(genreIds);
-    return { ok: true, data: { genres: sortedGenres }, message: 'Любимые жанры получены' };
+    const serializedSortedGenres:Genre[] = sortedGenres.map(genre=>({...genre,_id: genre._id.toString()}))
+    return { ok: true, data: { genres: serializedSortedGenres }, message: 'Любимые жанры получены' };
   } catch (error) {
     if (error instanceof Error) {
       return { ok: false, data: null, message: error.message };

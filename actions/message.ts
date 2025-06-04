@@ -80,6 +80,8 @@ export const findMessagesByChatIdAction = async (chatId: string) => {
     const formattedChars = messages.map((message) => {
       return {
         ...message,
+        _id: message._id.toString(),
+        chat: message.chat.toString(),
         isCurrentUserMessage: message.author._id.toString() === session.userId,
       };
     });

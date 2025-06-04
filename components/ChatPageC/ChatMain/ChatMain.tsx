@@ -17,31 +17,35 @@ import { ChatMessageT } from '@/types/messageT';
 
 const ChatMain = () => {
   const isPlayerShown = useAppSelector((state) => state.playerReducer.showPlayer);
-  const params: { slug?: string[] } | null = useParams();
+  const params: { id: string } | null = useParams();
 
   const fetchMessages = async () => {
-    if (params?.slug?.[0]) {
-      const res = await findMessagesByChatIdAction(params.slug[0]);
+    if (params?.id) {
+      const res = await findMessagesByChatIdAction(params?.id);
       if (!res.ok) throw new Error(res.message);
       return res.data;
     } else {
       return null;
     }
   };
-
-  const { execute, status, data, error, helpers } = useAsync(fetchMessages, [params?.slug?.[0]]);
+  const { execute, status, data, error, helpers } = useAsync(fetchMessages, [params?.id]);
+  useEffect(() => {
+    const getMessages = async () => {
+      if (!data || status === 'pending') return;
+      if (params?.id) {
+        const res = await findMessagesByChatIdAction(params?.id);
+        console.log(res)
+        if (!res.ok) return;
+        helpers.setData(res.data);
+      }
+    };
+    const intervalId = setInterval(getMessages, 5000); // Каждые 5 сек
+    return () => clearInterval(intervalId);
+  }, [params?.id,data,status]);
 
   const backgroundImageStyle: CSSProperties = {
     paddingBottom: isPlayerShown ? '80px' : '0px',
   };
-
-  if (!params?.slug) {
-    return (
-      <div className={s.chatMain} style={backgroundImageStyle}>
-        <div className={s.chatMain_chatNotSelected}>Тут появиться выбранный чат</div>
-      </div>
-    );
-  }
 
   return (
     <div className={s.chatMain} style={backgroundImageStyle}>
@@ -66,7 +70,7 @@ const ChatMain = () => {
           />
         )}
       </div>
-      {status === 'success' && (
+      {status === 'success' && params?.id && (
         <MessageBlock
           isChatLoading={status !== 'success'}
           updateChat={async () => {
@@ -74,7 +78,7 @@ const ChatMain = () => {
             return;
           }}
           addNewMessage={(data: ChatMessageT) => helpers.setData((prev) => prev && [...prev, data])}
-          chatId={params?.slug[0]}
+          chatId={params?.id}
         />
       )}
     </div>

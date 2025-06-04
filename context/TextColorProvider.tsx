@@ -7,16 +7,16 @@ interface TextColorContextProps {
 }
 
 const TextColorContext = createContext<TextColorContextProps>({
-  textColor: '#000000',
+  textColor: '#3DB4F2',
   setTextColor: () => {},
 });
 
 export const TextColorProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [textColor, setTextColor] = useState<string>(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('textColor') || '#000000';
+      return localStorage.getItem('textColor') || '#3DB4F2';
     }
-    return '#000000';
+    return '#3DB4F2';
   });
 
   useEffect(() => {

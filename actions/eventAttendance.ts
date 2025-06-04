@@ -47,7 +47,7 @@ export const setEventAttendanceA = async (
       if (!existingEventAttendance) return { ok: false, message: 'У вас нет статуса у события' };
       await deleteEventAttendance(session.userId, eventId);
     }
-    return { ok: true, message: 'Локация пользователя получена' };
+    return { ok: true, message: 'Статус события успешно изменен.' };
   } catch (error) {
     if (error instanceof Error) {
       return { ok: false, message: error.message };

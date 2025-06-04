@@ -58,11 +58,34 @@ export const findAllCurrentUserChatsAction = async () => {
       const membersWithoutCurrentUser = chat.members.filter(
         (member) => member._id.toString() !== session.userId.toString(),
       );
-
+      const serializedMembers: UserProfileData[] = chat.members.map((member) => ({
+        ...member,
+        _id: member._id.toString(),
+      }));
       const otherMember =
         membersWithoutCurrentUser.length === 0 ? chat.members[0] : membersWithoutCurrentUser[0];
 
-      return { ...chat, chatName: otherMember.username, chatImg: otherMember.avatar };
+      return {
+        ...chat,
+        _id: chat._id.toString(),
+        members: serializedMembers,
+        relation:
+          chat.relation &&
+          ({
+            ...chat.relation,
+            _id: chat.relation._id.toString(),
+            userA: chat.relation.userA.toString(),
+            userB: chat.relation.userB.toString(),
+          } as RelationMongooseT),
+        lastMessage: chat.lastMessage && {
+          ...chat.lastMessage,
+          _id: chat.lastMessage._id.toString(),
+          chat: chat.lastMessage.chat.toString(),
+          author: { ...chat.lastMessage.author, _id: chat.lastMessage.author._id.toString() },
+        },
+        chatName: otherMember.username,
+        chatImg: otherMember.avatar,
+      };
     });
     return { ok: true, data: formattedChars, message: 'Чаты пользователя получены' };
   } catch (error) {

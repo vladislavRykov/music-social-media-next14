@@ -24,7 +24,8 @@
     border: 2px solid var(--secondary-bg-color);
   }
   &_icon {
-    color: #3db4f2;
+    color: var(--profile-text-color);
+    // color: #3db4f2;
   }
   &_input {
     width: 100%;

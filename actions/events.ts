@@ -3,6 +3,7 @@
 import { getArrayEventAttendancesByIds } from '@/dal/eventAttendance';
 import { getUserLocation, setUserLocation } from '@/dal/user';
 import { verifySession } from '@/lib/sessions';
+import { EventAttendanceMongooseT } from '@/types/eventAttendace';
 
 export const getUserLocationA = async () => {
   try {
@@ -48,9 +49,14 @@ export const getEventsAByArrayIdsA = async (eventIds: string[]) => {
     }
 
     const eventAttendaces = await getArrayEventAttendancesByIds(session.userId, eventIds);
+       const cleanEventAttendances:EventAttendanceMongooseT[] = eventAttendaces.map((attendance) => ({
+         ...attendance,
+         _id: attendance._id.toString(),
+         user: attendance.user.toString(),
+    }));
     return {
       ok: true,
-      data: eventAttendaces,
+      data: cleanEventAttendances,
       message: 'Статус событий пользователя получены.',
     };
   } catch (error) {

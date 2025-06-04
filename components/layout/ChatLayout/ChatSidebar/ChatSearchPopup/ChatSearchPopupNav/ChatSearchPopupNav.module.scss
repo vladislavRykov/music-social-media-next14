@@ -20,12 +20,16 @@
         }
     }
     &_platform{
-        background-color: #3DB4F2;
+        background-color: var(--profile-text-color);
+        // background-color: #3DB4F2;
         position: absolute;
         bottom: 0;
         left: 10px;
         right: 10px;
         height: 2px;
         border-radius: 10px 10px 0px 0px;
+    }
+    &_selectedOption{
+        color: var(--profile-text-color);
     }
 }

@@ -16,6 +16,7 @@ import Image from 'next/image';
 import cicleTube from '@/public/circleTube.svg';
 import EventItemLoader from '@/components/UI/Loaders/EventItemLoader';
 import { getEventsAByArrayIdsA } from '@/actions/events';
+import { EventAttendanceMongooseT } from '@/types/eventAttendace';
 
 type Props = {
   isOnlyFreeEvents: boolean;
@@ -42,21 +43,34 @@ const EventList = ({ isOnlyFreeEvents }: Props) => {
     if (!loadMoreItems.current) return;
     const date = new Date();
     if (!locationData?.slug) return;
-   
 
     const res = await fetch(
       `http://localhost:3000/api/events?is_free=${isOnlyFree}&location=${
         locationData.slug
-      }&actual_since=${actual_since || date.toISOString()}&page=${page || 1}&page_size=${20}`
+      }&actual_since=${actual_since || date.toISOString()}&page=${page || 1}&page_size=${20}`,
     );
 
     const data: GetEventDataT = await res.json();
     const eventsIds = data.results.map((event) => event.id.toString());
-    const eventsAT = await getEventsAByArrayIdsA(eventsIds);
+    const eventsATResponse = await getEventsAByArrayIdsA(eventsIds);
+    // const parsedEventsATResponse:
+    //   | {
+    //       ok: boolean;
+    //       data: null;
+    //       message: string;
+    //     }
+    //   | {
+    //       ok: boolean;
+    //       data: EventAttendanceMongooseT[];
+    //       message: string;
+    //     } = JSON.parse(JSON.stringify(eventsATResponse));
+    console.log(eventsATResponse);
     const eventsWithATStatus: EventWithATStatus[] = data.results.map((eventItem) => {
       const eventById =
-        eventsAT.data &&
-        eventsAT.data.find((eventAT) => eventAT.eventId.toString() === eventItem.id.toString());
+        eventsATResponse.data &&
+        eventsATResponse.data.find(
+          (eventAT) => eventAT.eventId.toString() === eventItem.id.toString(),
+        );
       return {
         ...eventItem,
         currentUserATStatus: eventById ? eventById.status : null,
@@ -92,12 +106,12 @@ const EventList = ({ isOnlyFreeEvents }: Props) => {
     <div className={s.eventList_wrapper}>
       <div className={s.eventList_items}>
         {events?.map((event) => (
-          <EventItem key={event.id} {...event} />
+          <EventItem key={event.id} {...event}  />
         ))}
         {isLoading &&
           Array(9)
             .fill(0)
-            .map((_) => <EventItemLoader style={{ flexGrow: 1 }} />)}
+            .map((_,idx) => <EventItemLoader key={idx} style={{ flexGrow: 1 }} />)}
       </div>
       {/* {isLoading && <div>
           <Image style={{display: 'block',margin: '0 auto'}} src={cicleTube} alt='loading...' height={60} width={60} /></div>} */}

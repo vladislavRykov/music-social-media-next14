@@ -1,0 +1,8 @@
+.chat {
+  padding-top: 68px;
+  max-height: 100vh;
+}
+.flex{
+display: flex;
+height: calc(100vh - 68px);
+}

@@ -13,7 +13,7 @@ const EventFilters = ({ isOnlyFreeEvents, setIsOnlyFreeEvents }: Props) => {
         <input
           onChange={() => setIsOnlyFreeEvents((prev) => !prev)}
           checked={isOnlyFreeEvents}
-          defaultChecked={false}
+          // defaultChecked={false}
           type="checkbox"
           value=""
           id="isFreeCheckbox"

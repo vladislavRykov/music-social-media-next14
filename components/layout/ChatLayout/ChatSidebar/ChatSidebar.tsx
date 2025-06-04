@@ -7,30 +7,16 @@ import ChatSearchPopup from './ChatSearchPopup/ChatSearchPopup'
 import { UserProfileData } from '@/types/types'
 import { MessageWithAuthor } from '@/types/chatTypes'
 import { RelationMongooseT } from '@/types/relationT'
+import { findAllCurrentUserChatsAction } from '@/actions/chat'
+import { useAsync } from '@/hooks/useFetching'
 
-type Props= {
-  chats: {
-    chatName: string;
-    chatImg: string | undefined;
-    _id: string;
-    type: string;
-    members: UserProfileData[];
-    lastMessage: MessageWithAuthor | null;
-    relation?: RelationMongooseT;
-}[] | null
-}
 
-const ChatSidebar = ({chats}:Props) => {
+
+const ChatSidebar = () => {
   const sideBarRef = useRef<HTMLDivElement|null>(null);
   const rightResizer = useRef<HTMLDivElement|null>(null);
   const [isSearchPopupOpen,setIsSearchPopupOpen] = useState(false)
   const [searchValue,setSearchValue] = useState('')
-   const sortedChats =  chats && chats.sort((a, b) => {
-    const lastMsgTimeA = a.lastMessage?.createdAt 
-    const lastMsgTimeB = b.lastMessage?.createdAt
-    return new Date(lastMsgTimeB) - new Date(lastMsgTimeA);
-  });
-  
 
   useEffect(() => {
     const resizeableEl = sideBarRef.current
@@ -70,7 +56,7 @@ const ChatSidebar = ({chats}:Props) => {
     <div ref={sideBarRef} className={s.chatSidebar} >
       <SidebarHeader searchValue={searchValue} setSearchValue={(value:string)=>setSearchValue(value)}  isPopupOpen={isSearchPopupOpen} setIsPopupOpen={(value:boolean)=>setIsSearchPopupOpen(value)}/>
       <div className={s.chatSidebar_main}>
-      {!isSearchPopupOpen && <ChatList chats={sortedChats}/>}
+      {!isSearchPopupOpen && <ChatList/>}
       {isSearchPopupOpen && <ChatSearchPopup closePopup={()=>setIsSearchPopupOpen(false)} searchValue={searchValue}/>}
       </div>
       <div ref={rightResizer}  className={s.chatSidebar_resize}></div>

@@ -10,10 +10,11 @@ const EventItem = (props: EventWithATStatus) => {
   return (
     <div className={s.eventItem}>
       <div className={s.eventItem_imageWrap}>
-        <a target="_blank" href={props.site_url} rel="noopener noreferrer">
+        <a style={{position: 'absolute',height: '100%',width: '100%'}} target="_blank" href={props.site_url} rel="noopener noreferrer">
           <Image
             className={s.eventItem_image}
             fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             placeholder="blur"
             blurDataURL="/background/lightModeImgPlaceholder.svg"
             src={props.images[0].image}

@@ -4,11 +4,11 @@ import './globals.css';
 import MainLayout from '@/components/layout/MainLayout/MainLayout';
 import StoreProvider from './StoreProvider';
 import NextTopLoader from 'nextjs-toploader';
-import { ThemeProvider } from 'next-themes'
-import {Roboto} from 'next/font/google'
-import {TextColorProvider} from '@/context/TextColorProvider'
+import { ThemeProvider } from 'next-themes';
+import { Roboto } from 'next/font/google';
+import { TextColorProvider } from '@/context/TextColorProvider';
 import NextTopLoaderWithColor from '@/components/NextTopLoaderWrapper/NextTopLoaderWithColor';
-
+import ClientOnly from '@/components/shared/ClientOnly/ClientOnly';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -37,17 +37,14 @@ export default function RootLayout({
         {/* <NextTopLoader showSpinner={false} /> */}
         <NextTopLoaderWithColor />
         <StoreProvider>
-        <ThemeProvider>
-          <TextColorProvider>
-
-          <MainLayout>
-            {/* <div style={{ backgroundColor: '#EDF1F5' }}>{children}</div> */}
-            {children}
-          </MainLayout>
-
-          </TextColorProvider>
-
-        </ThemeProvider>
+          <ThemeProvider>
+            <TextColorProvider>
+              <MainLayout>
+                {/* <div style={{ backgroundColor: '#EDF1F5' }}>{children}</div> */}
+                {children}
+              </MainLayout>
+            </TextColorProvider>
+          </ThemeProvider>
         </StoreProvider>
       </body>
     </html>

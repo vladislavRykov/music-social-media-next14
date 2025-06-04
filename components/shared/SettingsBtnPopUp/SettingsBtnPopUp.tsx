@@ -17,8 +17,10 @@ const SettingsBtnPopUp: React.FC<SettingsBtnPopUpProps> = ({ styles, closePopup,
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
+    document.body.style.overflow = 'hidden';
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
+      document.body.style.overflow = 'unset';
     };
   }, []);
   return (

@@ -24,8 +24,10 @@ const PopupWrapper: React.FC<SettingsBtnPopUpProps> = ({
 
   useEffect(() => {
     closeOnClickOutSide && document.addEventListener('mousedown', handleClickOutside);
+    document.body.style.overflow = 'hidden';
     return () => {
       closeOnClickOutSide && document.removeEventListener('mousedown', handleClickOutside);
+      document.body.style.overflow = 'unset';
     };
   }, []);
   return (

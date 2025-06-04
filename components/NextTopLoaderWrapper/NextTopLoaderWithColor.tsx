@@ -1,11 +1,21 @@
-'use client'
+'use client';
+import { useTextColor } from '@/context/TextColorProvider';
 import { useCSSVariable } from '@/hooks/useCSSVariables';
 import NextTopLoader, { NextTopLoaderProps } from 'nextjs-toploader';
 import React, { PropsWithChildren } from 'react';
 
 const NextTopLoaderWithColor = () => {
   const { getCssVariable } = useCSSVariable();
-  return <NextTopLoader showSpinner={false} color={getCssVariable('--profile-text-color')} />;
+  // const {
+  //   textColor,
+  // }= useTextColor()
+  return (
+    <NextTopLoader
+      showSpinner={false}
+      // color={textColor}
+      color={getCssVariable('--profile-text-color')}
+    />
+  );
 };
 
 export default NextTopLoaderWithColor;
