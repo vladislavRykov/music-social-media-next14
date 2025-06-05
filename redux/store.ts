@@ -2,10 +2,11 @@ import { configureStore } from '@reduxjs/toolkit';
 import userReducer from './slices/UserSlice';
 import musicFiltersReducer from './slices/MusicFilters';
 import playerReducer from './slices/PlayerSlice';
+import chatsReducer from './slices/ChatsSlice';
 
 export const makeStore = () => {
   return configureStore({
-    reducer: { userReducer: userReducer, musicFiltersReducer, playerReducer },
+    reducer: { userReducer: userReducer, musicFiltersReducer, playerReducer,chatsReducer },
   });
 };
 

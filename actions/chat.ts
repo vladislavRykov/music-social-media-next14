@@ -3,7 +3,7 @@
 import { createChat, findAllCurrentUserChats, findDialogByMembers } from '@/dal/chat';
 import { isUserBlocked } from '@/dal/relation';
 import { verifySession } from '@/lib/sessions';
-import { ChatMongooseT } from '@/types/chatTypes';
+import { ChatItemType, ChatMongooseT } from '@/types/chatTypes';
 import { Overwrite } from '@/types/common';
 import { MessageMongoose } from '@/types/messageT';
 import { RelationMongooseT } from '@/types/relationT';
@@ -54,11 +54,14 @@ export const findAllCurrentUserChatsAction = async () => {
       { path: 'lastMessage', populate: { path: 'author', model: 'User', select: 'username' } },
       { path: 'relation' },
     ]);
-    const formattedChars = chats.map((chat) => {
+    const formattedChars: ChatItemType[]= chats.map((chat) => {
       const membersWithoutCurrentUser = chat.members.filter(
         (member) => member._id.toString() !== session.userId.toString(),
       );
-      const serializedMembers: UserProfileData[] = chat.members.map((member) => ({
+      const serializedMembers: {  _id: string;
+  username: string;
+  avatar?: string;
+  banner?: string;}[] = chat.members.map((member) => ({
         ...member,
         _id: member._id.toString(),
       }));

@@ -27,6 +27,6 @@ export interface RelationMongooseT {
   userA: string;
   userB: string;
   status: RelationStatus;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

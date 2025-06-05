@@ -15,8 +15,8 @@ import { RelationStatus } from '@/types/relationT';
 const ChatPopup = dynamic(() => import('@/components/shared/Popups/ChatPopup/ChatPopup'));
 import { FaUserFriends } from 'react-icons/fa';
 import { ImBlocked } from 'react-icons/im';
-import formatDistanceToNow from 'date-fns/formatDistanceToNow';
-import ruLocale from 'date-fns/locale/ru';
+import {formatDistanceToNow} from 'date-fns/formatDistanceToNow';
+import {ru} from 'date-fns/locale';
 import { format } from 'date-fns';
 
 type Props = {
@@ -24,7 +24,7 @@ type Props = {
     from: { userId: string; username: string };
     type: string;
     message?: string;
-    time: Date;
+    time: string;
   } | null;
   type: string; //'group-chat' 'dialog'
   chatName: string; // либо берем поле chatName либо ник автора диалога (если тип group-chat)
@@ -55,11 +55,11 @@ const formatLastMessageTime = (date:Date) => {
 
   // Если сообщение отправлено сегодня
   if (format(date, 'yyyy-MM-dd') === format(now, 'yyyy-MM-dd')) {
-    return format(date, 'HH:mm', { locale: ruLocale });
+    return format(date, 'HH:mm', { locale: ru });
   }
 
   // Иначе используем относительное представление времени
-  return formatDistanceToNow(date, { addSuffix: true, locale: ruLocale });
+  return formatDistanceToNow(date, { addSuffix: true, locale: ru });
 };
   const onRightMouseClick: React.MouseEventHandler<HTMLDivElement> = (e) => {
     e.preventDefault();
@@ -99,7 +99,7 @@ const formatLastMessageTime = (date:Date) => {
 
     return () => timeoutIds.forEach(clearTimeout);
   }, [circles]);
-  const formattedTime = lastMessage?.time.toTimeString().slice(0, 5);
+  // const formattedTime = lastMessage?.time.toTimeString().slice(0, 5);
   const isLastMessageFromCurrentUser = currentUserId === lastMessage?.from.userId;
   return (
     <div onContextMenu={onRightMouseClick} style={{ position: 'relative' }}>
@@ -129,7 +129,7 @@ const formatLastMessageTime = (date:Date) => {
                 <div className={s.chatListItem_blockedStatus}>-{relationStatus}-</div>
               )}
             </div>
-            <span className={s.chatListItem_time}>{lastMessage && formatLastMessageTime(lastMessage.time)}</span>
+            <span className={s.chatListItem_time}>{lastMessage && formatLastMessageTime(new Date(lastMessage.time))}</span>
             {/* <span className={s.chatListItem_time}>{formattedTime || ''}</span> */}
           </div>
           {lastMessage && (

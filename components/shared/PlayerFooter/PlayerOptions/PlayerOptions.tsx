@@ -98,7 +98,6 @@ const PlayerOptions = ({
         className={s.playerOptions_btn}
         style={loop ? { color: '#fff' } : {}}
       />
-      <BsShuffle className={s.playerOptions_btn} />
     </div>
   );
 };

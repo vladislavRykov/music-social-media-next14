@@ -4,7 +4,7 @@ import IconBtn from '@/components/UI/Buttons/IconBtn';
 import { IoMdSend } from 'react-icons/io';
 import { sendMessageAction } from '@/actions/message';
 import { ChatMessageT, MessageTypes } from '@/types/messageT';
-import { useAppSelector } from '@/hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '@/hooks/reduxHooks';
 import { selectUserProfileData } from '@/redux/selectors/userSelectors';
 import { FaRegSmile } from 'react-icons/fa';
 import { PiMicrophone } from 'react-icons/pi';
@@ -17,6 +17,7 @@ import { secondsToStringTimer } from '@/utils/secondToStringTimer';
 import { RxUpdate } from 'react-icons/rx';
 import { useLoading } from '@/hooks/useFetching';
 import cn from 'classnames';
+import { getCurrentUserChatsNoLoaderThunk } from '@/redux/slices/ChatsSlice';
 
 type Props = {
   chatId: string;
@@ -25,12 +26,11 @@ type Props = {
   isChatLoading: boolean;
 };
 
-const MessageBlock = ({ chatId, addNewMessage, updateChat,isChatLoading }: Props) => {
+const MessageBlock = ({ chatId, addNewMessage, updateChat, isChatLoading }: Props) => {
+  const dispatch = useAppDispatch();
   const currentUserData = useAppSelector((state) => state.userReducer.user);
   const [messageValue, setMessageValue] = useState('');
   const { recordingTime, isTimerActive, startTimer, stopTimer } = useRecordingTimer();
-
-
 
   const onChange = (e: any) => {
     setMessageValue(e.target.value);
@@ -60,14 +60,13 @@ const MessageBlock = ({ chatId, addNewMessage, updateChat,isChatLoading }: Props
     });
     setMessageValue('');
     const res = await sendMessageAction({ text: messageValue, chat: chatId });
+  await dispatch(getCurrentUserChatsNoLoaderThunk());
   };
 
   return (
     <div className={s.messageBlock}>
       <div className={s.messageBlock_content}>
-        <div
-          onClick={updateChat}
-          className={s.messageBlock_defBtn + ' ' + s.messageBlock_update}>
+        <div onClick={updateChat} className={s.messageBlock_defBtn + ' ' + s.messageBlock_update}>
           <RxUpdate
             className={cn(s.messageBlock_iconBtn, { [s.messageBlock_iconUpdate]: isChatLoading })}
             size={11}

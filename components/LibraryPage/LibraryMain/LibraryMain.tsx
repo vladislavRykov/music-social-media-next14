@@ -92,7 +92,7 @@ const LibraryMain = () => {
             );
           })}
         {status === 'pending' &&
-          Array(10)
+          Array(25)
             .fill(0)
             .map((_, idx) => <LibraryItemLoader key={idx} />)}
       </div>

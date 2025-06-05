@@ -41,6 +41,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 9px;
+    gap: 15px;
   }
   &_nameAndStatus {
     display: flex;
@@ -52,6 +53,7 @@
     // color: var(--third-text-color);
     text-overflow: ellipsis;
     overflow: hidden;
+    font-weight: 500;
   }
   &_time {
     font-size: 12px;
@@ -69,6 +71,7 @@
     text-overflow: ellipsis;
     overflow: hidden;
     padding-right: 5px;
+    font-size: 13px;
     // color: var(--third-text-color);
   }
   &_unRead {
