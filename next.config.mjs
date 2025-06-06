@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: false,
   images: {
-    domains: ['lh3.googleusercontent.com', 'firebasestorage.googleapis.com','media.kudago.com'],
+    domains: ['lh3.googleusercontent.com', 'firebasestorage.googleapis.com', 'media.kudago.com'],
   },
   async redirects() {
     return [
@@ -14,12 +14,5 @@ const nextConfig = {
     ];
   },
 };
-// const withBundleAnalyzer = require('@next/bundle-analyzer')({
-//   enabled: process.env.ANALYZE === 'true',
-// });
-// const ff = withBundleAnalyzer2({
-//   enabled: process.env.ANALYZE === 'true',
-// });
 
-// export default ff(nextConfig);
 export default nextConfig;
