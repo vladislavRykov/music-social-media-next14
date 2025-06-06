@@ -1,13 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { decrypt, verifySession } from './lib/sessions';
+import { decrypt } from './lib/sessions';
 import { cookies } from 'next/headers';
 import { SessionPayload } from './types/types';
 import { JWTPayload } from 'jose';
-import { toast } from 'react-toastify';
-import { getTokenObjBySessionToken } from './dal/token';
-import { mongooseConnect } from './lib/mongoose';
-import { verifySession2 } from './actions/verification';
-import API from './services/api/api';
 
 const protectedRoutes = ['/user', '/settings', '/chat'];
 const publicRoutes = [''];
